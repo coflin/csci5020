@@ -9,12 +9,12 @@ import argparse
 
 
 def celsiustofarheinheit(celsius):
-    farheinheit = (int(celsius) * (9 / 5)) + 32
+    farheinheit = (float(celsius) * (9 / 5)) + 32
     print(f"{celsius}C is {round(farheinheit,2)}F")
 
 
 def farheinheittocelsius(farhenheit):
-    celsius = (int(farhenheit) - 32) * (5 / 9)
+    celsius = (float(farhenheit) - 32) * (5 / 9)
     print(f"{farhenheit}F is {round(celsius,2)}C")
 
 
