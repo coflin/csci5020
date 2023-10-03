@@ -9,10 +9,8 @@ import csv
 
 
 def read_file(csvfile):
-    # X-Axis
-    x = []
-    # Y-Axis
-    y = []
+    make = []
+    thefts = []
     try:
         with open(csvfile, "r") as cartheft:
             reader = list(
@@ -30,18 +28,19 @@ def read_file(csvfile):
                 )
             )
             for line in reader[-10:]:
-                x.append(line["Make"])
-                y.append(line["Thefts"])
-        plotgraph(x, y)
+                car = line["Make"]+" "+line["Model"]
+                make.append(car)
+                thefts.append(line["Thefts"])
+        plotgraph(make, thefts)
     except FileNotFoundError:
         print(f"cartheft.csv file does not exist.")
 
 
-def plotgraph(listx, listy):
-    plt.plot(listx, listy)
-    plt.xlabel("Make")
-    plt.ylabel("Thefts")
+def plotgraph(make, thefts):
+    plt.xlabel("Thefts")
+    plt.ylabel("Model")
     plt.title("Car Thefts")
+    plt.barh(make,thefts,color = '#00095B')
     plt.show()
 
 
