@@ -4,3 +4,65 @@
 2023-10-03 11:50:58.087 | INFO     | __main__:task:24 - The price of beans is $6.58 at 10/03/2023 11:50:58
 2023-10-03 11:55:59.178 | INFO     | __main__:task:24 - The price of beans is $5.41 at 10/03/2023 11:55:59
 2023-10-03 12:01:00.105 | INFO     | __main__:task:24 - The price of beans is $6.89 at 10/03/2023 12:01:00
+2023-10-03 18:50:35.759 | ERROR    | __main__:<module>:43 - An error has been caught in function '<module>', process 'MainProcess' (166870), thread 'MainThread' (281473849324736):
+Traceback (most recent call last):
+
+> File "/home/kaliroti/git/csci5020/assignment9/sneha_beansprice.py", line 43, in <module>
+    main()
+    └ <function main at 0xffffbade7100>
+
+  File "/home/kaliroti/git/csci5020/assignment9/sneha_beansprice.py", line 38, in main
+    schedule.run_pending()
+    │        └ <function run_pending at 0xffffbb1d34c0>
+    └ <module 'schedule' from '/home/kaliroti/.local/lib/python3.11/site-packages/schedule/__init__.py'>
+
+  File "/home/kaliroti/.local/lib/python3.11/site-packages/schedule/__init__.py", line 822, in run_pending
+    default_scheduler.run_pending()
+    │                 └ <function Scheduler.run_pending at 0xffffbb1d1bc0>
+    └ <schedule.Scheduler object at 0xffffbb1e5910>
+  File "/home/kaliroti/.local/lib/python3.11/site-packages/schedule/__init__.py", line 100, in run_pending
+    self._run_job(job)
+    │    │        └ Every 1 second do task() (last run: [never], next run: 2023-10-03 18:50:33)
+    │    └ <function Scheduler._run_job at 0xffffbb1d1f80>
+    └ <schedule.Scheduler object at 0xffffbb1e5910>
+  File "/home/kaliroti/.local/lib/python3.11/site-packages/schedule/__init__.py", line 172, in _run_job
+    ret = job.run()
+          │   └ <function Job.run at 0xffffbb1d3240>
+          └ Every 1 second do task() (last run: [never], next run: 2023-10-03 18:50:33)
+  File "/home/kaliroti/.local/lib/python3.11/site-packages/schedule/__init__.py", line 693, in run
+    ret = self.job_func()
+          │    └ functools.partial(<function task at 0xffffbade6fc0>)
+          └ Every 1 second do task() (last run: [never], next run: 2023-10-03 18:50:33)
+
+  File "/home/kaliroti/git/csci5020/assignment9/sneha_beansprice.py", line 25, in task
+    currenttime = datetime.datetime.now().strftime("%H:%M:%S")
+                  └ <class 'datetime.datetime'>
+
+AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
+2023-10-03 18:51:44.685 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:44
+2023-10-03 18:51:46.193 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:46
+2023-10-03 18:51:47.683 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:47
+2023-10-03 18:51:49.159 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:49
+2023-10-03 18:51:50.623 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:50
+2023-10-03 18:51:52.086 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:52
+2023-10-03 18:51:53.594 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:53
+2023-10-03 18:51:55.062 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:55
+2023-10-03 18:51:56.556 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:56
+2023-10-03 18:51:58.056 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:58
+2023-10-03 18:51:59.558 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:51:59
+2023-10-03 18:52:01.058 | INFO     | __main__:task:29 - The price of beans is $5.97 at 10/03/2023 18:52:01
+2023-10-03 18:52:02.562 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:02
+2023-10-03 18:52:04.047 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:04
+2023-10-03 18:52:05.535 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:05
+2023-10-03 18:52:07.036 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:07
+2023-10-03 18:52:08.530 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:08
+2023-10-03 18:52:10.015 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:10
+2023-10-03 18:52:11.502 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:11
+2023-10-03 18:52:12.997 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:12
+2023-10-03 18:52:14.493 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:14
+2023-10-03 18:52:15.980 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:15
+2023-10-03 18:52:17.482 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:17
+2023-10-03 18:52:18.981 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:18
+2023-10-03 18:52:20.449 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:20
+2023-10-03 18:52:21.941 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:21
+2023-10-03 18:52:23.433 | INFO     | __main__:task:29 - The price of beans is $6.42 at 10/03/2023 18:52:23
