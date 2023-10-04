@@ -10,7 +10,7 @@ import plotly.express as px
 
 
 def main():
-    currentdate = datetime.now().strftime("%m/%d/%Y")
+    #currentdate = datetime.now().strftime("%m/%d/%Y")
     beanspricecsv = pd.read_csv(
         "beansprice", header=None, names=["Price of Beans", "Time"]
     )
@@ -18,7 +18,7 @@ def main():
         beanspricecsv,
         x="Time",
         y="Price of Beans",
-        title=f"Prices of Beans on {currentdate}",
+        title=f"Prices of Beans on October 3, 2023",
     )
     linegraph.show()
 
