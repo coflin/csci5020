@@ -17,7 +17,7 @@ def writetofile(data):
 def top100websites(headers,cookies,*verbose):
     response = requests.get("https://moz.com/top500", headers=headers, cookies=cookies)
     soup = BeautifulSoup(response.text,'html.parser')
-    lines = 1
+    snumber = 1
     results = []
     tables = soup.find_all("table")
     """
@@ -29,17 +29,17 @@ def top100websites(headers,cookies,*verbose):
         for atag in table.find_all("a"):
             website = atag.text
             url = atag.nextSibling
-            if website and lines <= 100:
+            if website and snumber <= 100:
                 try:
                     res = BeautifulSoup(requests.get(url['href'],headers=headers).text,'html.parser')
                     title = res.title.string
                     if verbose:
                         logger.debug(f"{lines}: Retrieved {website}")
-                    results.append((website,url['href'],title))
+                    results.append((snumber,website,url['href'],title))
                 except Exception as e:
                     logger.error(f"An error occured retrieving {website}")
-                    results.append((website,url['href'],"ERR"))
-                lines += 1
+                    results.append((snumber,website,url['href'],"ERR"))
+                snumber += 1
     return results
 
 def main():
@@ -80,14 +80,14 @@ def main():
     else:
         results = top100websites(headers,cookies)
     
-    webscraper = PrettyTable(["Website", "URL", "Website Title"])
+    webscraper = PrettyTable(["S.No.", "Website", "URL", "Website Title"])
     webscraper.align["Website Title"] = "l"
     webscraper.align["URL"] = "l"
     webscraper.align["Website"] = "l"
 
     # Add rows to the table from the results
-    for website, url, title in results:
-        webscraper.add_row([website, url, title])
+    for snumber, website, url, title in results:
+        webscraper.add_row([snumber, website, url, title])
 
     writetofile(webscraper)
     logger.info("List of websites saved in 'websites.csv'")
