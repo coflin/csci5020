@@ -34,7 +34,7 @@ def top100websites(headers,cookies,*verbose):
                     res = BeautifulSoup(requests.get(url['href'],headers=headers).text,'html.parser')
                     title = res.title.string
                     if verbose:
-                        logger.debug(f"{lines}: Retrieved {website}")
+                        logger.debug(f"{snumber}: Retrieved {website}")
                     results.append((snumber,website,url['href'],title))
                 except Exception as e:
                     logger.error(f"An error occured retrieving {website}")

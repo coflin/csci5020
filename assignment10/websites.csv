@@ -1,114 +1,114 @@
-+-------+-----------------------+-------------------------------+----------------------------------------------------------------------------------------------+
-| S.No. | Website               | URL                           | Website Title                                                                                |
-+-------+-----------------------+-------------------------------+----------------------------------------------------------------------------------------------+
-|   1   | www.google.com        | https://www.google.com        | Google                                                                                       |
-|   2   | www.blogger.com       | https://www.blogger.com       | Blogger.com - Create a unique and beautiful blog easily.                                     |
-|   3   | youtube.com           | https://youtube.com           | YouTube                                                                                      |
-|   4   | support.google.com    | https://support.google.com    | Google Help                                                                                  |
-|   5   | linkedin.com          | https://linkedin.com          | LinkedIn: Log In or Sign Up                                                                  |
-|   6   | wordpress.org         | https://wordpress.org         | Blog Tool, Publishing Platform, and CMS – WordPress.org                                      |
-|   7   | microsoft.com         | https://microsoft.com         | Microsoft – Cloud, Computers, Apps & Gaming                                                  |
-|   8   | apple.com             | https://apple.com             | Apple                                                                                        |
-|   9   | en.wikipedia.org      | https://en.wikipedia.org      | Wikipedia, the free encyclopedia                                                             |
-|   10  | docs.google.com       | https://docs.google.com       | Sign in - Google Accounts                                                                    |
-|   11  | play.google.com       | https://play.google.com       | Android Apps on Google Play                                                                  |
-|   12  | youtu.be              | https://youtu.be              | YouTube                                                                                      |
-|   13  | maps.google.com       | https://maps.google.com       |   Google Maps                                                                                |
-|   14  | cloudflare.com        | https://cloudflare.com        | Cloudflare - The Web Performance & Security Company | Cloudflare                             |
-|   15  | mozilla.org           | https://mozilla.org           | Internet for people, not profit — Mozilla Global                                             |
-|   16  | europa.eu             | https://europa.eu             | Language selection | European Union                                                          |
-|   17  | plus.google.com       | https://plus.google.com       |                                                                                              |
-|       |                       |                               | Google Workspace Updates: New community features for Google Chat and an update on Currents   |
-|       |                       |                               |                                                                                              |
-|   18  | accounts.google.com   | https://accounts.google.com   | Sign in - Google Accounts                                                                    |
-|   19  | sites.google.com      | https://sites.google.com      | Google Sites: Sign-in                                                                        |
-|   20  | drive.google.com      | https://drive.google.com      |                                                                                              |
-|       |                       |                               |       Personal Cloud Storage & File Sharing Platform - Google                                |
-|       |                       |                               |                                                                                              |
-|   21  | googleusercontent.com | https://googleusercontent.com | ERR                                                                                          |
-|   22  | bp.blogspot.com       | https://bp.blogspot.com       | ERR                                                                                          |
-|   23  | whatsapp.com          | https://whatsapp.com          | Error                                                                                        |
-|   24  | adobe.com             | https://adobe.com             | Adobe: Creative, marketing and document management solutions                                 |
-|   25  | vimeo.com             | https://vimeo.com             | Vimeo Interactive Video Experience Platform                                                  |
-|   26  | vk.com                | https://vk.com                | VK | Welcome!                                                                                |
-|   27  | istockphoto.com       | https://istockphoto.com       | Stock Images, Royalty-Free Images, Illustrations and Videos - iStock                         |
-|   28  | uol.com.br            | https://uol.com.br            | UOL - Seu universo online                                                                    |
-|   29  | t.me                  | https://t.me                  | Telegram Messenger                                                                           |
-|   30  | amazon.com            | https://amazon.com            | Amazon.com                                                                                   |
-|   31  | github.com            | https://github.com            | GitHub: Let’s build from here · GitHub                                                       |
-|   32  | facebook.com          | https://facebook.com          | Facebook                                                                                     |
-|   33  | policies.google.com   | https://policies.google.com   | Privacy & Terms – Google                                                                     |
-|   34  | search.google.com     | https://search.google.com     | Google                                                                                       |
-|   35  | brandbucket.com       | https://brandbucket.com       | BrandBucket | Search and Buy Creative Business Names                                         |
-|   36  | who.int               | https://who.int               |                                                                                               |
-|       |                       |                               | 	World Health Organization (WHO)                                                                                              |
-|       |                       |                               |                                                                                              |
-|   37  | news.google.com       | https://news.google.com       | Google News                                                                                  |
-|   38  | cnn.com               | https://cnn.com               | Breaking News, Latest News and Videos | CNN                                                  |
-|   39  | netvibes.com          | https://netvibes.com          | Your Personal Dashboard | NETVIBES                                                           |
-|   40  | w3.org                | https://w3.org                | W3C                                                                                          |
-|   41  | mail.google.com       | https://mail.google.com       | Gmail                                                                                        |
-|   42  | google.de             | https://google.de             | Google                                                                                       |
-|   43  | medium.com            | https://medium.com            | Medium – Where good ideas find you.                                                          |
-|   44  | jimdofree.com         | https://jimdofree.com         | Bring Your Business Online | Websites & More – Jimdo                                         |
-|   45  | cpanel.net            | https://cpanel.net            | Hosting Platform of Choice                                                                   |
-|   46  | paypal.com            | https://paypal.com            | Digital Wallets, Money Management, and More | PayPal US                                      |
-|   47  | myspace.com           | https://myspace.com           | Featured Content on Myspace                                                                  |
-|   48  | google.co.jp          | https://google.co.jp          | Google                                                                                       |
-|   49  | live.com              | https://live.com              | Microsoft Outlook Personal Email and Calendar | Microsoft 365                                |
-|   50  | imdb.com              | https://imdb.com              | IMDb: Ratings, Reviews, and Where to Watch the Best Movies & TV Shows                        |
-|   51  | feedburner.com        | https://feedburner.com        | Feedburner                                                                                   |
-|   52  | pt.wikipedia.org      | https://pt.wikipedia.org      | Wikipédia, a enciclopédia livre                                                              |
-|   53  | creativecommons.org   | https://creativecommons.org   | Homepage - Creative CommonsCreative Commons                                                  |
-|   54  | fr.wikipedia.org      | https://fr.wikipedia.org      | Wikipédia, l'encyclopédie libre                                                              |
-|   55  | wikimedia.org         | https://wikimedia.org         | Wikimedia                                                                                    |
-|   56  | enable-javascript.com | https://enable-javascript.com | How to enable JavaScript in your browser and why                                             |
-|   57  | www.weebly.com        | https://www.weebly.com        |                                                                                              |
-|       |                       |                               | 				Free Website Builder: Build a Free Website or Online Store | Weebly                                                                                              |
-|       |                       |                               | 		                                                                                              |
-|   58  | wa.me                 | https://wa.me                 | Error                                                                                        |
-|   59  | developers.google.com | https://developers.google.com | Google for Developers - from AI and Cloud to Mobile and Web                                  |
-|   60  | opera.com             | https://opera.com             | Opera Web Browser | Faster, Safer, Smarter | Opera                                           |
-|   61  | files.wordpress.com   | https://files.wordpress.com   | WordPress.com: Build a Site, Sell Your Stuff, Start a Blog & More                            |
-|   62  | dropbox.com           | https://dropbox.com           | Dropbox.com                                                                                  |
-|   63  | ok.ru                 | https://ok.ru                 | Социальная сеть Одноклассники. Общение с друзьями в ОК. Ваше место встречи с одноклассниками |
-|   64  | line.me               | https://line.me               | LINE｜always at your side.                                                                   |
-|   65  | tools.google.com      | https://tools.google.com      | Google Chrome - The Fast & Secure Web Browser Built to be Yours                              |
-|   66  | googleblog.com        | https://googleblog.com        | The Keyword | Google Product and Technology News and Stories                                 |
-|   67  | nytimes.com           | https://nytimes.com           | The New York Times - Breaking News, US News, World News and Videos                           |
-|   68  | gravatar.com          | https://gravatar.com          | Gravatar - Globally Recognized Avatars                                                       |
-|   69  | workspace.google.com  | https://workspace.google.com  |                                                                                              |
-|       |                       |                               |       Google Workspace: Secure Online Productivity & Collaboration Tools                     |
-|       |                       |                               |                                                                                              |
-|   70  | slideshare.net        | https://slideshare.net        | Share & Discover Presentations | SlideShare                                                  |
-|   71  | theguardian.com       | https://theguardian.com       | News, sport and opinion from the Guardian's US edition | The Guardian                        |
-|   72  | globo.com             | https://globo.com             | globo.com - Absolutamente tudo sobre notícias, esportes e entretenimento                     |
-|   73  | google.com.br         | https://google.com.br         | Google                                                                                       |
-|   74  | bbc.co.uk             | https://bbc.co.uk             | BBC - Home                                                                                   |
-|   75  | gstatic.com           | https://gstatic.com           | Error 404 (Not Found)!!1                                                                     |
-|   76  | draft.blogger.com     | https://draft.blogger.com     | Blogger.com - Create a unique and beautiful blog easily.                                     |
-|   77  | tiktok.com            | https://tiktok.com            | Explore - Find your favourite videos on TikTok                                               |
-|   78  | www.yahoo.com         | https://www.yahoo.com         | Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos                      |
-|   79  | google.es             | https://google.es             | Google                                                                                       |
-|   80  | forbes.com            | https://forbes.com            | Forbes                                                                                       |
-|   81  | dailymotion.com       | https://dailymotion.com       | Dailymotion                                                                                  |
-|   82  | es.wikipedia.org      | https://es.wikipedia.org      | Wikipedia, la enciclopedia libre                                                             |
-|   83  | list-manage.com       | https://list-manage.com       | ERR                                                                                          |
-|   84  | amazon.co.jp          | https://amazon.co.jp          | Amazon | 本, ファッション, 家電から食品まで | アマゾン                                       |
-|   85  | amazon.co.uk          | https://amazon.co.uk          | Amazon.co.uk: Low Prices in Electronics, Books, Sports Equipment & more                      |
-|   86  | cdc.gov               | https://cdc.gov               | Centers for Disease Control and Prevention                                                   |
-|   87  | thesun.co.uk          | https://thesun.co.uk          | News, sport, celebrities and gossip | The Sun                                                |
-|   88  | google.co.uk          | https://google.co.uk          | Google                                                                                       |
-|   89  | fandom.com            | https://fandom.com            | Fandom                                                                                       |
-|   90  | namecheap.com         | https://namecheap.com         | Buy a domain name - Register cheap domain names from $0.99 - Namecheap                       |
-|   91  | google.it             | https://google.it             | Google                                                                                       |
-|   92  | picasaweb.google.com  | https://picasaweb.google.com  | Sign in - Google Accounts                                                                    |
-|   93  | un.org                | https://un.org                | Welcome to the United Nations                                                                |
-|   94  | researchgate.net      | https://researchgate.net      | ResearchGate | Find and share research                                                       |
-|   95  | instagram.com         | https://instagram.com         | Instagram                                                                                    |
-|   96  | mail.ru               | https://mail.ru               | Mail.ru: почта, поиск, новости, прогноз погоды, гороскоп, программа передач                  |
-|   97  | hatena.ne.jp          | https://hatena.ne.jp          | はてな                                                                                       |
-|   98  | forms.gle             | https://forms.gle             | Invalid Dynamic Link                                                                         |
-|   99  | office.com            | https://office.com            | Login | Microsoft 365                                                                        |
-|  100  | abril.com.br          | https://abril.com.br          | Revistas da Editora Abril - Assinar Agora! | AssineAbril.com                                 |
-+-------+-----------------------+-------------------------------+----------------------------------------------------------------------------------------------+
++-------+-----------------------+-------------------------------+----------------------------------------------------------------------------------------------------+
+| S.No. | Website               | URL                           | Website Title                                                                                      |
++-------+-----------------------+-------------------------------+----------------------------------------------------------------------------------------------------+
+|   1   | www.google.com        | https://www.google.com        | Google                                                                                             |
+|   2   | www.blogger.com       | https://www.blogger.com       | Blogger.com - Create a unique and beautiful blog easily.                                           |
+|   3   | youtube.com           | https://youtube.com           | YouTube                                                                                            |
+|   4   | support.google.com    | https://support.google.com    | Google Help                                                                                        |
+|   5   | linkedin.com          | https://linkedin.com          | LinkedIn: Log In or Sign Up                                                                        |
+|   6   | apple.com             | https://apple.com             | Apple                                                                                              |
+|   7   | microsoft.com         | https://microsoft.com         | Microsoft – Cloud, Computers, Apps & Gaming                                                        |
+|   8   | wordpress.org         | https://wordpress.org         | Blog Tool, Publishing Platform, and CMS – WordPress.org                                            |
+|   9   | play.google.com       | https://play.google.com       | Android Apps on Google Play                                                                        |
+|   10  | youtu.be              | https://youtu.be              | YouTube                                                                                            |
+|   11  | drive.google.com      | https://drive.google.com      |                                                                                                    |
+|       |                       |                               |       Personal Cloud Storage & File Sharing Platform - Google                                      |
+|       |                       |                               |                                                                                                    |
+|   12  | maps.google.com       | https://maps.google.com       |   Google Maps                                                                                      |
+|   13  | docs.google.com       | https://docs.google.com       | Sign in - Google Accounts                                                                          |
+|   14  | cloudflare.com        | https://cloudflare.com        | Cloudflare - The Web Performance & Security Company | Cloudflare                                   |
+|   15  | en.wikipedia.org      | https://en.wikipedia.org      | Wikipedia, the free encyclopedia                                                                   |
+|   16  | googleusercontent.com | https://googleusercontent.com | ERR                                                                                                |
+|   17  | adobe.com             | https://adobe.com             | Adobe: Creative, marketing and document management solutions                                       |
+|   18  | europa.eu             | https://europa.eu             | Language selection | European Union                                                                |
+|   19  | plus.google.com       | https://plus.google.com       |                                                                                                    |
+|       |                       |                               | Google Workspace Updates: New community features for Google Chat and an update on Currents         |
+|       |                       |                               |                                                                                                    |
+|   20  | bp.blogspot.com       | https://bp.blogspot.com       | ERR                                                                                                |
+|   21  | whatsapp.com          | https://whatsapp.com          | Error                                                                                              |
+|   22  | accounts.google.com   | https://accounts.google.com   | Sign in - Google Accounts                                                                          |
+|   23  | mozilla.org           | https://mozilla.org           | Internet for people, not profit — Mozilla Global                                                   |
+|   24  | sites.google.com      | https://sites.google.com      | Google Sites: Sign-in                                                                              |
+|   25  | uol.com.br            | https://uol.com.br            | UOL - Seu universo online                                                                          |
+|   26  | facebook.com          | https://facebook.com          | Facebook                                                                                           |
+|   27  | policies.google.com   | https://policies.google.com   | Privacy & Terms – Google                                                                           |
+|   28  | vimeo.com             | https://vimeo.com             | Vimeo Interactive Video Experience Platform                                                        |
+|   29  | istockphoto.com       | https://istockphoto.com       | Stock Images, Royalty-Free Images, Illustrations and Videos - iStock                               |
+|   30  | vk.com                | https://vk.com                | VK | Welcome!                                                                                      |
+|   31  | github.com            | https://github.com            | GitHub: Let’s build from here · GitHub                                                             |
+|   32  | t.me                  | https://t.me                  | Telegram Messenger                                                                                 |
+|   33  | amazon.com            | https://amazon.com            | Amazon.com                                                                                         |
+|   34  | cnn.com               | https://cnn.com               | Breaking News, Latest News and Videos | CNN                                                        |
+|   35  | who.int               | https://who.int               |                                                                                                     |
+|       |                       |                               | 	World Health Organization (WHO)                                                                                                    |
+|       |                       |                               |                                                                                                    |
+|   36  | news.google.com       | https://news.google.com       | Google News                                                                                        |
+|   37  | imdb.com              | https://imdb.com              | IMDb: Ratings, Reviews, and Where to Watch the Best Movies & TV Shows                              |
+|   38  | netvibes.com          | https://netvibes.com          | Your Personal Dashboard | NETVIBES                                                                 |
+|   39  | paypal.com            | https://paypal.com            | Digital Wallets, Money Management, and More | PayPal US                                            |
+|   40  | search.google.com     | https://search.google.com     | Google                                                                                             |
+|   41  | slideshare.net        | https://slideshare.net        | Share & Discover Presentations | SlideShare                                                        |
+|   42  | tiktok.com            | https://tiktok.com            | Explore - Find your favourite videos on TikTok                                                     |
+|   43  | line.me               | https://line.me               | LINE｜always at your side.                                                                         |
+|   44  | bbc.co.uk             | https://bbc.co.uk             | BBC - Home                                                                                         |
+|   45  | forbes.com            | https://forbes.com            | Forbes                                                                                             |
+|   46  | globo.com             | https://globo.com             | globo.com - Absolutamente tudo sobre notícias, esportes e entretenimento                           |
+|   47  | gstatic.com           | https://gstatic.com           | Error 404 (Not Found)!!1                                                                           |
+|   48  | google.es             | https://google.es             | Google                                                                                             |
+|   49  | live.com              | https://live.com              | Microsoft Outlook Personal Email and Calendar | Microsoft 365                                      |
+|   50  | dailymotion.com       | https://dailymotion.com       | Dailymotion                                                                                        |
+|   51  | theguardian.com       | https://theguardian.com       | News, sport and opinion from the Guardian's US edition | The Guardian                              |
+|   52  | nytimes.com           | https://nytimes.com           | The New York Times - Breaking News, US News, World News and Videos                                 |
+|   53  | gravatar.com          | https://gravatar.com          | Gravatar - Globally Recognized Avatars                                                             |
+|   54  | ok.ru                 | https://ok.ru                 | Социальная сеть Одноклассники. Общение с друзьями в ОК. Ваше место встречи с одноклассниками       |
+|   55  | www.weebly.com        | https://www.weebly.com        |                                                                                                    |
+|       |                       |                               | 				Free Website Builder: Build a Free Website or Online Store | Weebly                                                                                                    |
+|       |                       |                               | 		                                                                                                    |
+|   56  | dropbox.com           | https://dropbox.com           | Dropbox.com                                                                                        |
+|   57  | feedburner.com        | https://feedburner.com        | Feedburner                                                                                         |
+|   58  | workspace.google.com  | https://workspace.google.com  |                                                                                                    |
+|       |                       |                               |       Google Workspace: Secure Online Productivity & Collaboration Tools                           |
+|       |                       |                               |                                                                                                    |
+|   59  | wa.me                 | https://wa.me                 | Error                                                                                              |
+|   60  | google.co.jp          | https://google.co.jp          | Google                                                                                             |
+|   61  | cpanel.net            | https://cpanel.net            | Hosting Platform of Choice                                                                         |
+|   62  | fr.wikipedia.org      | https://fr.wikipedia.org      | Wikipédia, l'encyclopédie libre                                                                    |
+|   63  | pt.wikipedia.org      | https://pt.wikipedia.org      | Wikipédia, a enciclopédia livre                                                                    |
+|   64  | es.wikipedia.org      | https://es.wikipedia.org      | Wikipedia, la enciclopedia libre                                                                   |
+|   65  | myspace.com           | https://myspace.com           | Featured Content on Myspace                                                                        |
+|   66  | developers.google.com | https://developers.google.com | Google for Developers - from AI and Cloud to Mobile and Web                                        |
+|   67  | google.com.br         | https://google.com.br         | Google                                                                                             |
+|   68  | googleblog.com        | https://googleblog.com        | The Keyword | Google Product and Technology News and Stories                                       |
+|   69  | opera.com             | https://opera.com             | Opera Web Browser | Faster, Safer, Smarter | Opera                                                 |
+|   70  | jimdofree.com         | https://jimdofree.com         | Bring Your Business Online | Websites & More – Jimdo                                               |
+|   71  | brandbucket.com       | https://brandbucket.com       | BrandBucket | Search and Buy Creative Business Names                                               |
+|   72  | medium.com            | https://medium.com            | Medium – Where good ideas find you.                                                                |
+|   73  | tools.google.com      | https://tools.google.com      | Google Chrome - The Fast & Secure Web Browser Built to be Yours                                    |
+|   74  | mail.google.com       | https://mail.google.com       | Gmail                                                                                              |
+|   75  | creativecommons.org   | https://creativecommons.org   | Homepage - Creative CommonsCreative Commons                                                        |
+|   76  | wikimedia.org         | https://wikimedia.org         | Wikimedia                                                                                          |
+|   77  | draft.blogger.com     | https://draft.blogger.com     | Blogger.com - Create a unique and beautiful blog easily.                                           |
+|   78  | files.wordpress.com   | https://files.wordpress.com   | WordPress.com: Build a Site, Sell Your Stuff, Start a Blog & More                                  |
+|   79  | w3.org                | https://w3.org                | W3C                                                                                                |
+|   80  | enable-javascript.com | https://enable-javascript.com | How to enable JavaScript in your browser and why                                                   |
+|   81  | www.yahoo.com         | https://www.yahoo.com         | Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos                            |
+|   82  | google.de             | https://google.de             | Google                                                                                             |
+|   83  | mirror.co.uk          | https://mirror.co.uk          | The Mirror: The Heart of Britain                                                                   |
+|   84  | wsj.com               | https://wsj.com               | The Wall Street Journal - Breaking News, Business, Financial & Economic News, World News and Video |
+|   85  | elpais.com            | https://elpais.com            | EL PAÍS Edición América: el periódico global                                                       |
+|   86  | pinterest.com         | https://pinterest.com         | Pinterest                                                                                          |
+|   87  | telegraph.co.uk       | https://telegraph.co.uk       | The Telegraph US - Breaking news, opinion & analysis                                               |
+|   88  | soundcloud.com        | https://soundcloud.com        | Stream and listen to music online for free with SoundCloud                                         |
+|   89  | shutterstock.com      | https://shutterstock.com      | Stock Images, Photos, Vectors, Video, and Music | Shutterstock                                     |
+|   90  | hatena.ne.jp          | https://hatena.ne.jp          | はてな                                                                                             |
+|   91  | issuu.com             | https://issuu.com             | Issuu | Create Interactive Flipbooks on our Digital Publishing Platform                            |
+|   92  | mail.ru               | https://mail.ru               | Mail.ru: почта, поиск, новости, прогноз погоды, гороскоп, программа передач                        |
+|   93  | ig.com.br             | https://ig.com.br             | iG - Últimas notícias, fotos, vídeos, esportes, entretenimento e mais.                             |
+|   94  | businessinsider.com   | https://businessinsider.com   | Insider                                                                                            |
+|   95  | thesun.co.uk          | https://thesun.co.uk          | News, sport, celebrities and gossip | The Sun                                                      |
+|   96  | 4shared.com           | https://4shared.com           | 4shared.com - free file sharing and storage                                                        |
+|   97  | google.co.uk          | https://google.co.uk          | Google                                                                                             |
+|   98  | estadao.com.br        | https://estadao.com.br        | Estadão | As Últimas Notícias do Brasil e do Mundo - Estadão                                       |
+|   99  | shopify.com           | https://shopify.com           | Start and grow your e-commerce business - 3-Day Free Trial - Shopify USA                           |
+|  100  | usatoday.com          | https://usatoday.com          | USA TODAY - Breaking News and Latest News Today                                                    |
++-------+-----------------------+-------------------------------+----------------------------------------------------------------------------------------------------+
