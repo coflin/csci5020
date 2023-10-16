@@ -28,7 +28,9 @@ def top100websites(headers,cookies,*verbose):
     for table in tables:
         for atag in table.find_all("a"):
             website = atag.text
+            print(website)
             url = atag.nextSibling
+            print(url)
             if website and snumber <= 100:
                 try:
                     res = BeautifulSoup(requests.get(url['href'],headers=headers).text,'html.parser')
