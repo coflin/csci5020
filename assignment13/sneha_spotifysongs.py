@@ -1,46 +1,37 @@
 #!/usr/bin/python
 
 """
-Assignment 13: Spotify songs next and previous.
+Assignment 13: Created a playlist (list) of spotify songs and populate next and
+previous songs. Uses the concept of a doubly linked list. Prints the playlist forward
+and backward.
 """
 
-class Nodes:
-    def __init__(self,value):
-        self.value=value
-        self.next=None
-        self.previous=None
-        
-song1 = Nodes("Spirits")
-song2 = Nodes("Wolves")
-song3 = Nodes("Last Christmas")
-song4 = Nodes("Bilionera")
-song5 = Nodes("Under The Influence")
+class Playlist:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.previous = None
 
-for i in range(1,6):
-    if exec(f"song{i} != song5"):
-        exec(f"song{i}.next = 'song{i+1}'")
+def main():
+    songs = [Playlist("Harleys in Hawaii"), Playlist("Wolves"), Playlist("Last Christmas"), Playlist("Bilionera"), Playlist("Under The Influence")]
 
-"""
-song1.next = song2
-song2.next = song3
-song3.next = song4
-song4.next = song5
+    for i in range(len(songs) - 1):
+        songs[i].next = songs[i + 1]
 
-song5.previous = song4
-song4.previous = song3
-song3.previous = song2
-song2.previous = song1
-"""
+    for i in range(1, len(songs)):
+        songs[i].previous = songs[i - 1]
 
-song = song1
+    print("Print the list forward:")
+    current = songs[0]
+    while current is not None:
+        print(current.value)
+        current = current.next
 
-while song!=song5:
-    print(song.value)
-    song = song.next
-print(song5.value)
+    print("\nPrint the list backward:")
+    current = songs[-1]
+    while current is not None:
+        print(current.value)
+        current = current.previous
 
-while song!=song1:
-    print(song.value)
-    song = song.previous
-print(song1.value)
-
+if __name__ == "__main__":
+    main()
