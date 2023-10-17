@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 """
-Assignment 14: Created a playlist (list) of spotify songs and populate next and
+Assignment 13: Created a playlist (list) of spotify songs and populate next and
 previous songs. Uses the concept of a doubly linked list. Prints the playlist forward
 and backward.
 """
