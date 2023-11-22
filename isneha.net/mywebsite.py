@@ -14,7 +14,7 @@ def resume():
 
 @app.route("/python-projects")
 def python_projects():
-    return render_template("python-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",LinkedinProjectRoute="/linkedin-job-scraper",PnmapProjectRoute="/pnmap")
+    return render_template("python-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",LinkedinProjectRoute="/linkedin-job-scraper",PnmapProjectRoute="/pnmap",WebsiteProjectRoute="/website")
 
 @app.route("/linux-projects")
 def linux_projects():
@@ -31,6 +31,10 @@ def linkedin_job_scraper():
 @app.route("/pnmap")
 def pnmap():
     return render_template("pnmap.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
+@app.route("/website")
+def website():
+    return render_template("website.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
 if __name__ == "__main__":
     app.debug = True
