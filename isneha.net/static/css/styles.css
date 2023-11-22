@@ -11141,7 +11141,7 @@ html {
   line-height: 30px;
   font-family:source-serif-pro;
   font-size:20px;
-  
+  -webkit-font-smoothing:antialiased;
 }
 
 .projects-div h5{
