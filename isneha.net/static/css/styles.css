@@ -11092,15 +11092,21 @@ html {
   color: var(--bs-primary);
   font-size: 2rem;
   padding: 1rem;
+  -webkit-font-smoothing:antialiased;
+
 }
 .portfolio-modal .portfolio-modal-title {
   font-size: 2.25rem;
-  line-height: 2rem;
+  line-height: 2rem;  
+  -webkit-font-smoothing:antialiased;
+
 }
 @media (min-width: 992px) {
   .portfolio-modal .portfolio-modal-title {
     font-size: 3rem;
     line-height: 2.5rem;
+    -webkit-font-smoothing:antialiased;
+
   }
 }
 
@@ -11124,23 +11130,28 @@ html {
   text-align: left;
 }
 
-.projects-div p{
-  max-width: 95%;
-  margin-left: 3%;
+.container p{
   line-height: 30px;
   font-family:source-serif-pro;
-  font-size:16px;
+  font-size:20px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.projects-div p{
+  line-height: 30px;
+  font-family:source-serif-pro;
+  font-size:20px;
+  -webkit-font-smoothing:antialiased;
 }
 
 .projects-div h5{
   max-width: 90%;
-  margin-left: 3%;
   padding-bottom:1%;
+  -webkit-font-smoothing:antialiased;
 }
 
 .projects.div h6{
   max-width: 90%;
-  margin-left: 3%;
   padding-bottom:5%;
   text-align: center;
 }

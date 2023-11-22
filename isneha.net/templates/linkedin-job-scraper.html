@@ -56,7 +56,7 @@
                     <br><br>
                     To build this LinkedIn job search bot, I utilized two Python modules, <i>Requests</i> and <i>BeautifulSoup.</i><br> I also used Burp Suite, which allowed me to analyze response headers.
                     The bot starts by sending a GET request to LinkedIn, initiating a job search based on the user-provided job title. BeautifulSoup library is used to parse and extract information from the retrieved HTML content of LinkedIn job listings. 
-                    <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">
+                    <h6 style="max-width: 90%;padding-bottom:1%;">
                         Leveraging LinkedIn URL Structure
                     </h6>
                     <p>
@@ -68,7 +68,7 @@
                     </p>
 
                 <br/>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">
+                <h6 style="max-width: 90%;padding-bottom:1%;">
                     Problem 1: Detailed Job Information Extraction.
                 </h6>
                 <p>
@@ -86,33 +86,33 @@
                 </p>
 
                 <br/>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">
+                <h6 style="max-width: 90%;padding-bottom:1%;">
                     Problem 2: No mechanism to check if a particular job listing has already been sent to the user.
                 </h6>
                 <p>
                     Another issue arises—overloading users with redundant information. For example, if the user has already been notified about specific job listings, re-notifying them about the same job listings is redundant and spammy. Furthermore, when dealing with potentially hundreds of job listings, repetitive notifications become impractical. There are 3 ways I could approach this:
                 </p>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Data Storage Method #1 -> List of dictionaries</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">Data Storage Method #1 -> List of dictionaries</h6>
                 <p>
                     I could employ a list of dictionaries to store job details. This would allow me to compare previously notified job listings against newly scraped listings, ensuring users receive alerts only for genuinely new job postings. This feature optimizes the user experience by avoiding excessive and repetitive notifications. Nevertheless, a challenge arises. What if unforeseen events occur? A curious cat disrupts my machine accidentally closing my program or my laptop runs out of charge abruptly terminating my program. In such cases, the list of dictionaries, containing the record of sent job listings, would be lost. This scenario would result in a fresh start, meaning users might receive all job listings, including those they were previously alerted to.
                 </p>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Data Storage Method #2 -> CSV</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">Data Storage Method #2 -> CSV</h6>
                 <p>
                     To address this concern, I contemplated the use of data storage methods. One option was to write the data to a CSV file, which is a viable approach. However, a few key considerations guided my decision. In instances where dealing with extensive datasets—potentially hundreds or even thousands of job listings—the data size could exceed the available process memory. Moreover, given my use case involves data modification and additions (as I’ll detail later), CSV might prove less efficient, as it traverses the entire dataset line by line.
                 </p>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Data Storage Method #3 -> SQL Database</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">Data Storage Method #3 -> SQL Database</h6>
                 <p>
                     Considering these aspects, an SQL database came across as the most compelling solution. The choice to employ an SQL database has significant advantages. It is well-suited to manage substantial datasets, enabling efficient data querying and modification. It is scalable as well. Additionally, it combines the ease of use found in CSV with the added flexibility to export data in CSV format if required.
                 </p>
 
                 <br/>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Streamlined Job Comparison</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">Streamlined Job Comparison</h6>
                 <p>
                     With the job listings neatly organized and stored in the <b><i>'job_listing.db'</b></i> SQL database, it becomes easier for me to compare datasets. Each time I scrape LinkedIn for job listings, my script accesses the database. The logic is straightforward: if an entry is found in the database, I recognize it as a job listing that has already been sent to the user, and therefore, there's no need to notify the user again. This filtering saves the user from repetitive and potentially overwhelming notifications.
                 </p>
                 
                 <br/>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Efficient Alert System</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">Efficient Alert System</h6>
                 <p>
                     In contrast, when my script encounters a job listing that does not exist in the database, it recognizes this as a new job posting. At this point, the alert mechanism is triggered and sends an email to the user. This approach ensures users receive notifications exclusively for newly posted job listings, eliminating unnecessary redundancy.
                     <br/><br/>
@@ -124,21 +124,20 @@
                     How I’m not abusing LinkedIn to scrape data
                 </h5>
 
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Rate Limiting</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">Rate Limiting</h6>
                 <p>
                     To ensure that my bot doesn't send an excessive number of requests in a short period, I have implemented rate limiting. Specifically, I've configured the bot to run every 24 hours between each request. This respects LinkedIn's server capacity and ensures that the bot operates within acceptable usage limits.
                 </p>
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Using Official APIs</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">Using Official APIs</h6>
                 <p>
                     My bot does not attempt to access or scrape any parts of LinkedIn that are not publicly available to users. It solely relies on the public job listing pages, ensuring that it does not access private or restricted content.
                 </p>
                     
-                <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">No Unauthorized Access</h6>
+                <h6 style="max-width: 90%;padding-bottom:1%;">No Unauthorized Access</h6>
                 <p>
                     My bot does not attempt to log in or access any user accounts on LinkedIn. It does not seek any form of unauthorized access to the website.
                 </p>
 
-                <!-- <h6 style="max-width: 90%;margin-left: 3%;padding-bottom:1%;">Conclusion</h6> -->
                 
             </div>
         </center>
