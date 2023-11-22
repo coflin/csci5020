@@ -1,0 +1,210 @@
+2023-10-18 14:07:20.646 | DEBUG    | __main__:<module>:220 - Created log_output.log file
+2023-10-18 14:07:25.088 | DEBUG    | __main__:<module>:220 - Created log_output.log file
+2023-10-18 14:07:37.201 | DEBUG    | __main__:<module>:220 - Created log_output.log file
+2023-10-18 14:07:37.202 | DEBUG    | __main__:connect_to_database:35 - Connected to the job_listings.db database
+2023-10-18 14:07:37.205 | DEBUG    | __main__:connect_to_database:55 - job_listings table created
+2023-10-18 14:07:37.205 | DEBUG    | __main__:task:240 - Checking New Linkedin Job postings for network engineer intern
+2023-10-18 14:07:38.790 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Swire Coca-Cola, USA : Intern, Network Engineer
+2023-10-18 14:07:39.169 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Commonwealth of Massachusetts : Network Engineer Intern
+2023-10-18 14:07:39.440 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Trace3 : Network / Security Engineering Intern (Onsite)
+2023-10-18 14:07:39.886 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Sentinel Technologies : Network Engineer Internship
+2023-10-18 14:07:40.427 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Corteva Agriscience : Network Engineer Intern
+2023-10-18 14:07:40.850 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved State of Massachusetts : Network Engineer Intern
+2023-10-18 14:07:41.297 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Dawn Foods Global : Network Engineer Intern-Hybrid
+2023-10-18 14:07:41.671 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved CACI International Inc : IT Network Engineer Intern – Fall 2023
+2023-10-18 14:07:42.511 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Cboe Global Markets : NOC Support Intern
+2023-10-18 14:07:42.915 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved City Utilities of Springfield : SpringNet Network Engineer Intern
+2023-10-18 14:07:43.377 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved CACI International Inc : Network Engineer Intern – Summer 2024
+2023-10-18 14:07:43.775 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Spectrum : 2024 Summer Intern: Network Engineer Intern - Spectrum Enterprise
+2023-10-18 14:07:44.140 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Hewlett Packard Enterprise : Network Simulation Engineer Intern
+2023-10-18 14:07:44.818 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Spectrum Real-Time Visual Solutions : Spectrum, 2024 Summer Intern: Network Engineer Intern - Spectrum Enterprise - Application via WayUp
+2023-10-18 14:07:45.478 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Hewlett Packard Enterprise : Network Simulation Engineer Intern
+2023-10-18 14:07:45.876 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Electric Power Engineers : Power Systems Intern - Early Submission
+2023-10-18 14:07:46.278 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved ByteDance : Network Software Development Engineer Intern (SDN-Network Analytics) - 2024 Summer (MS)
+2023-10-18 14:07:46.921 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved NetApp : Intern - Support & Services
+2023-10-18 14:07:47.315 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved ByteDance : Network Software Development Engineer Intern (SDN-Network Analytics) - 2024 Summer (PHD)
+2023-10-18 14:07:52.814 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Uline : Network Engineer Internship - Summer 2024
+2023-10-18 14:07:53.237 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Uline : Network Engineer Internship - Summer 2024
+2023-10-18 14:07:53.564 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Uline : Network Engineer Internship - Summer 2024
+2023-10-18 14:07:54.075 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved McCormick & Company : Maintenance and Engineering Intern
+2023-10-18 14:07:54.905 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Comcast : Tech Intern - Hardware Test and Validation Engineer (TPX)
+2023-10-18 14:07:55.338 | DEBUG    | __main__:scrape_linkedin:184 - Retrieved Northrop Grumman : 2024 Intern, Electronics Engineer - Manhattan Beach, CA
+2023-10-18 14:07:55.341 | DEBUG    | __main__:task:258 - Inserting Swire Coca-Cola, USA:Intern, Network Engineer to job_listings table
+2023-10-18 14:07:55.347 | DEBUG    | __main__:insert_job_listing:77 - Inserted Swire Coca-Cola, USA:Intern, Network Engineer to job_listings table
+2023-10-18 14:07:55.347 | DEBUG    | __main__:task:258 - Inserting Commonwealth of Massachusetts:Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.354 | DEBUG    | __main__:insert_job_listing:77 - Inserted Commonwealth of Massachusetts:Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.355 | DEBUG    | __main__:task:258 - Inserting Trace3:Network / Security Engineering Intern (Onsite) to job_listings table
+2023-10-18 14:07:55.359 | DEBUG    | __main__:insert_job_listing:77 - Inserted Trace3:Network / Security Engineering Intern (Onsite) to job_listings table
+2023-10-18 14:07:55.360 | DEBUG    | __main__:task:258 - Inserting Sentinel Technologies:Network Engineer Internship to job_listings table
+2023-10-18 14:07:55.364 | DEBUG    | __main__:insert_job_listing:77 - Inserted Sentinel Technologies:Network Engineer Internship to job_listings table
+2023-10-18 14:07:55.364 | DEBUG    | __main__:task:258 - Inserting Corteva Agriscience:Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.367 | DEBUG    | __main__:insert_job_listing:77 - Inserted Corteva Agriscience:Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.367 | DEBUG    | __main__:task:258 - Inserting State of Massachusetts:Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.389 | DEBUG    | __main__:insert_job_listing:77 - Inserted State of Massachusetts:Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.389 | DEBUG    | __main__:task:258 - Inserting Dawn Foods Global:Network Engineer Intern-Hybrid to job_listings table
+2023-10-18 14:07:55.398 | DEBUG    | __main__:insert_job_listing:77 - Inserted Dawn Foods Global:Network Engineer Intern-Hybrid to job_listings table
+2023-10-18 14:07:55.398 | DEBUG    | __main__:task:258 - Inserting CACI International Inc:IT Network Engineer Intern – Fall 2023 to job_listings table
+2023-10-18 14:07:55.400 | DEBUG    | __main__:insert_job_listing:77 - Inserted CACI International Inc:IT Network Engineer Intern – Fall 2023 to job_listings table
+2023-10-18 14:07:55.400 | DEBUG    | __main__:task:258 - Inserting Cboe Global Markets:NOC Support Intern to job_listings table
+2023-10-18 14:07:55.402 | DEBUG    | __main__:insert_job_listing:77 - Inserted Cboe Global Markets:NOC Support Intern to job_listings table
+2023-10-18 14:07:55.403 | DEBUG    | __main__:task:258 - Inserting City Utilities of Springfield:SpringNet Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.410 | DEBUG    | __main__:insert_job_listing:77 - Inserted City Utilities of Springfield:SpringNet Network Engineer Intern to job_listings table
+2023-10-18 14:07:55.411 | DEBUG    | __main__:task:258 - Inserting CACI International Inc:Network Engineer Intern – Summer 2024 to job_listings table
+2023-10-18 14:07:55.414 | DEBUG    | __main__:insert_job_listing:77 - Inserted CACI International Inc:Network Engineer Intern – Summer 2024 to job_listings table
+2023-10-18 14:07:55.414 | DEBUG    | __main__:task:258 - Inserting Spectrum:2024 Summer Intern: Network Engineer Intern - Spectrum Enterprise to job_listings table
+2023-10-18 14:07:55.418 | DEBUG    | __main__:insert_job_listing:77 - Inserted Spectrum:2024 Summer Intern: Network Engineer Intern - Spectrum Enterprise to job_listings table
+2023-10-18 14:07:55.418 | DEBUG    | __main__:task:258 - Inserting Hewlett Packard Enterprise:Network Simulation Engineer Intern to job_listings table
+2023-10-18 14:07:55.426 | DEBUG    | __main__:insert_job_listing:77 - Inserted Hewlett Packard Enterprise:Network Simulation Engineer Intern to job_listings table
+2023-10-18 14:07:55.427 | DEBUG    | __main__:task:258 - Inserting Spectrum Real-Time Visual Solutions:Spectrum, 2024 Summer Intern: Network Engineer Intern - Spectrum Enterprise - Application via WayUp to job_listings table
+2023-10-18 14:07:55.431 | DEBUG    | __main__:insert_job_listing:77 - Inserted Spectrum Real-Time Visual Solutions:Spectrum, 2024 Summer Intern: Network Engineer Intern - Spectrum Enterprise - Application via WayUp to job_listings table
+2023-10-18 14:07:55.431 | DEBUG    | __main__:task:258 - Inserting Electric Power Engineers:Power Systems Intern - Early Submission to job_listings table
+2023-10-18 14:07:55.437 | DEBUG    | __main__:insert_job_listing:77 - Inserted Electric Power Engineers:Power Systems Intern - Early Submission to job_listings table
+2023-10-18 14:07:55.439 | DEBUG    | __main__:task:258 - Inserting ByteDance:Network Software Development Engineer Intern (SDN-Network Analytics) - 2024 Summer (MS) to job_listings table
+2023-10-18 14:07:55.442 | DEBUG    | __main__:insert_job_listing:77 - Inserted ByteDance:Network Software Development Engineer Intern (SDN-Network Analytics) - 2024 Summer (MS) to job_listings table
+2023-10-18 14:07:55.442 | DEBUG    | __main__:task:258 - Inserting NetApp:Intern - Support & Services to job_listings table
+2023-10-18 14:07:55.444 | DEBUG    | __main__:insert_job_listing:77 - Inserted NetApp:Intern - Support & Services to job_listings table
+2023-10-18 14:07:55.444 | DEBUG    | __main__:task:258 - Inserting ByteDance:Network Software Development Engineer Intern (SDN-Network Analytics) - 2024 Summer (PHD) to job_listings table
+2023-10-18 14:07:55.457 | DEBUG    | __main__:insert_job_listing:77 - Inserted ByteDance:Network Software Development Engineer Intern (SDN-Network Analytics) - 2024 Summer (PHD) to job_listings table
+2023-10-18 14:07:55.458 | DEBUG    | __main__:task:258 - Inserting Uline:Network Engineer Internship - Summer 2024 to job_listings table
+2023-10-18 14:07:55.467 | DEBUG    | __main__:insert_job_listing:77 - Inserted Uline:Network Engineer Internship - Summer 2024 to job_listings table
+2023-10-18 14:07:55.468 | DEBUG    | __main__:task:258 - Inserting McCormick & Company:Maintenance and Engineering Intern to job_listings table
+2023-10-18 14:07:55.471 | DEBUG    | __main__:insert_job_listing:77 - Inserted McCormick & Company:Maintenance and Engineering Intern to job_listings table
+2023-10-18 14:07:55.471 | DEBUG    | __main__:task:258 - Inserting Comcast:Tech Intern - Hardware Test and Validation Engineer (TPX) to job_listings table
+2023-10-18 14:07:55.475 | DEBUG    | __main__:insert_job_listing:77 - Inserted Comcast:Tech Intern - Hardware Test and Validation Engineer (TPX) to job_listings table
+2023-10-18 14:07:55.475 | DEBUG    | __main__:task:258 - Inserting Northrop Grumman:2024 Intern, Electronics Engineer - Manhattan Beach, CA to job_listings table
+2023-10-18 14:07:55.481 | DEBUG    | __main__:insert_job_listing:77 - Inserted Northrop Grumman:2024 Intern, Electronics Engineer - Manhattan Beach, CA to job_listings table
+2023-10-18 14:07:55.481 | DEBUG    | __main__:task:284 - Sending email notification
+2023-10-18 14:08:00.893 | ERROR    | __main__:send_email_notification:130 - Error sending email
+2023-10-18 18:26:54.681 | DEBUG    | __main__:<module>:220 - Created log_output.log file
+2023-10-18 18:26:58.195 | DEBUG    | __main__:<module>:220 - Created log_output.log file
+2023-11-07 17:13:49.143 | DEBUG    | __main__:<module>:221 - Created log_output.log file
+2023-11-07 17:14:06.042 | DEBUG    | __main__:<module>:221 - Created log_output.log file
+2023-11-07 17:14:33.990 | ERROR    | __main__:send_email_notification:131 - Error sending email
+2023-11-07 17:44:23.558 | DEBUG    | __main__:<module>:221 - Created log_output.log file
+2023-11-07 17:44:23.559 | DEBUG    | __main__:connect_to_database:36 - Connected to the job_listings.db database
+2023-11-07 17:44:23.559 | DEBUG    | __main__:connect_to_database:56 - job_listings table created
+2023-11-07 17:44:23.559 | DEBUG    | __main__:task:241 - Checking New Linkedin Job postings for Network Engineer Intern
+2023-11-07 17:44:25.174 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved Sev1Tech LLC : Jr. Network Engineer Intern
+2023-11-07 17:44:25.412 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved Greyson Technologies Inc. : Network Engineer (Intern)
+2023-11-07 17:44:25.869 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved SiriusXM : Summer Intern, Network Engineering
+2023-11-07 17:44:26.217 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved SiriusXM : Summer Intern, Network Engineering
+2023-11-07 17:44:26.518 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved Nemours : Associate Network Analyst
+2023-11-07 17:44:26.872 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved Lenovo : Server I/O Engineer (Summer Intern)
+2023-11-07 17:44:27.086 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:27.373 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:27.630 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved ClearanceJobs : Network Engineer 1-3 (SkillBridge Intern) - 8372 with Security Clearance
+2023-11-07 17:44:27.917 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved ClearanceJobs : Network Engineer 1-3 (SkillBridge Intern) - 8372 with Security Clearance
+2023-11-07 17:44:28.418 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:28.663 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:28.961 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:29.189 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:29.500 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:30.026 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved NTT Ltd. : MS Engineer L1 (Security)
+2023-11-07 17:44:30.805 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved UHS : Software Engineer Intern (SQL Server)*
+2023-11-07 17:44:31.178 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:31.444 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:31.610 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:31.766 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:32.105 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:32.399 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved NTT Ltd. : MS Engineer (L1)-3
+2023-11-07 17:44:32.646 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:32.809 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:32.927 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:33.244 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:33.389 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:33.627 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:33.766 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:33.969 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved WayUp : Americold Logistics, Infrastructure Systems Engineer Intern - Application via WayUp
+2023-11-07 17:44:34.285 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:34.604 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved WayUp : Americold Logistics, Infrastructure Cloud Engineer Intern - Application via WayUp
+2023-11-07 17:44:34.776 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:34.909 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:35.057 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:35.358 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:35.648 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved McCormick & Company : Engineering Intern Summer 2024
+2023-11-07 17:44:35.795 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:35.963 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:36.319 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved GHD : Mechanical Facilities Engineering Intern
+2023-11-07 17:44:36.533 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved Hearth & Home Technologies : Manufacturing Engineer Internship
+2023-11-07 17:44:36.775 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:36.956 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:37.105 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:37.442 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:37.612 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:37.804 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:37.969 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:38.086 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:38.207 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:38.470 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:38.611 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:38.789 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:38.947 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:39.111 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:39.264 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:39.563 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:39.725 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:39.932 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:40.086 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:40.234 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:40.524 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:40.846 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:40.988 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:41.313 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved Hewlett Packard Enterprise : Network Simulation Engineer Intern
+2023-11-07 17:44:41.639 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:41.765 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:41.938 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:42.070 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:42.213 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:42.332 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:42.634 | DEBUG    | __main__:scrape_linkedin:185 - Retrieved Joby Aviation : Electrical Engineer - Intern
+2023-11-07 17:44:42.798 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:42.966 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:43.106 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:43.246 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:43.369 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:43.624 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:43.776 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:43.911 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:44.153 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:44.312 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:44.432 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:44.776 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:44.923 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:45.133 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:45.245 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:45.492 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:45.801 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:45.948 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:46.117 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:46.278 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:46.455 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:46.586 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:46.928 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:47.061 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:47.309 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:47.420 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:47.547 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:47.891 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:48.029 | DEBUG    | __main__:scrape_linkedin:185 - 
+2023-11-07 17:44:48.030 | DEBUG    | __main__:task:259 - Inserting Sev1Tech LLC:Jr. Network Engineer Intern to job_listings table
+2023-11-07 17:44:48.033 | DEBUG    | __main__:insert_job_listing:78 - Inserted Sev1Tech LLC:Jr. Network Engineer Intern to job_listings table
+2023-11-07 17:44:48.033 | DEBUG    | __main__:task:259 - Inserting Greyson Technologies Inc.:Network Engineer (Intern) to job_listings table
+2023-11-07 17:44:48.036 | DEBUG    | __main__:insert_job_listing:78 - Inserted Greyson Technologies Inc.:Network Engineer (Intern) to job_listings table
+2023-11-07 17:44:48.036 | DEBUG    | __main__:task:259 - Inserting Nemours:Associate Network Analyst to job_listings table
+2023-11-07 17:44:48.040 | DEBUG    | __main__:insert_job_listing:78 - Inserted Nemours:Associate Network Analyst to job_listings table
+2023-11-07 17:44:48.040 | DEBUG    | __main__:task:259 - Inserting NTT Ltd.:MS Engineer L1 (Security) to job_listings table
+2023-11-07 17:44:48.043 | DEBUG    | __main__:insert_job_listing:78 - Inserted NTT Ltd.:MS Engineer L1 (Security) to job_listings table
+2023-11-07 17:44:48.043 | DEBUG    | __main__:task:259 - Inserting UHS:Software Engineer Intern (SQL Server)* to job_listings table
+2023-11-07 17:44:48.049 | DEBUG    | __main__:insert_job_listing:78 - Inserted UHS:Software Engineer Intern (SQL Server)* to job_listings table
+2023-11-07 17:44:48.049 | DEBUG    | __main__:task:259 - Inserting WayUp:Americold Logistics, Infrastructure Systems Engineer Intern - Application via WayUp to job_listings table
+2023-11-07 17:44:48.053 | DEBUG    | __main__:insert_job_listing:78 - Inserted WayUp:Americold Logistics, Infrastructure Systems Engineer Intern - Application via WayUp to job_listings table
+2023-11-07 17:44:48.053 | DEBUG    | __main__:task:259 - Inserting WayUp:Americold Logistics, Infrastructure Cloud Engineer Intern - Application via WayUp to job_listings table
+2023-11-07 17:44:48.057 | DEBUG    | __main__:insert_job_listing:78 - Inserted WayUp:Americold Logistics, Infrastructure Cloud Engineer Intern - Application via WayUp to job_listings table
+2023-11-07 17:44:48.057 | DEBUG    | __main__:task:259 - Inserting McCormick & Company:Engineering Intern Summer 2024 to job_listings table
+2023-11-07 17:44:48.059 | DEBUG    | __main__:insert_job_listing:78 - Inserted McCormick & Company:Engineering Intern Summer 2024 to job_listings table
+2023-11-07 17:44:48.059 | DEBUG    | __main__:task:259 - Inserting GHD:Mechanical Facilities Engineering Intern to job_listings table
+2023-11-07 17:44:48.061 | DEBUG    | __main__:insert_job_listing:78 - Inserted GHD:Mechanical Facilities Engineering Intern to job_listings table
+2023-11-07 17:44:48.061 | DEBUG    | __main__:task:259 - Inserting Joby Aviation:Electrical Engineer - Intern to job_listings table
+2023-11-07 17:44:48.070 | DEBUG    | __main__:insert_job_listing:78 - Inserted Joby Aviation:Electrical Engineer - Intern to job_listings table
+2023-11-07 17:44:48.072 | DEBUG    | __main__:task:285 - Sending email notification
+2023-11-07 17:44:48.558 | ERROR    | __main__:send_email_notification:131 - Error sending email
