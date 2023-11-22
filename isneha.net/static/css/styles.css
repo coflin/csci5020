@@ -11162,7 +11162,7 @@ html {
 }
 
 .myButton {
-  float:right;
+  float:left;
 	background-color:var(--bs-gray-700);
 	border-radius:21px;
 	border:2px solid #3f3f4156;
@@ -11173,7 +11173,7 @@ html {
 	text-decoration:none;
   display: inline-flex;
   height: 3.5rem;
-  width: 9.5rem;
+  width: 11.5rem;
 }
 
 .myButton:hover {
