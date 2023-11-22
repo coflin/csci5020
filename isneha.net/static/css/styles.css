@@ -11160,3 +11160,27 @@ html {
   height:auto;
   width:100%;
 }
+
+.myButton {
+  float:right;
+	background-color:var(--bs-gray-700);
+	border-radius:21px;
+	border:2px solid #3f3f4156;
+	cursor:pointer;
+	color:#ffffff;
+  font-family: var(--bs-font-monospace) var(--bs-body-font-size);
+  padding:13px 15px;
+	text-decoration:none;
+  display: inline-flex;
+  height: 3.5rem;
+  width: 9.5rem;
+}
+
+.myButton:hover {
+	background-color:var(--bs-link-color);
+  color:#ffffff
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
