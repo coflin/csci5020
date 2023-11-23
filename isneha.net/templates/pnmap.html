@@ -50,11 +50,17 @@
                     <br/><br/>
                     <img src="/static/assets/screen1.png">
                     <br/><br/>
-                    Nice. It returns answers and some "unanswer"-ed ports that didn't feel like chatting. Looking at it, it feels like the talkative ones
+                    100.64.26.1 is my own Linux VM which has just port 22 open. Our end goal is that our script should only report port 22 on my Linux VM as open.
+                    We are sending a TCP Syn (<i>S</i>) flag to check if TCP is open on the given port or not. Basically, I am politely knocking on doors and checking
+                    if someone is there to respond and open the door for me.
+                    From the output, I see that it returns answered and unanswer-<i>ed</i> ports that didn't feel like chatting. Looking at it, my assumptionis that the talkative ones
                     are open and the unanswered ones are a no-go. Let's see if my assumption is right.
                     <br/><br/>
                     <img src="/static/assets/screen2.png">
                     <br/><br/>
+                    Weird. All the ports answered to the TCP SYN flag I sent (<i>I can guarantee that only port 22 is open</i>). Probably, my assumption is not right.
+                    Let's examine the headers for a few ports to see if I can differentiate between open and close ports.
+                    <br/>
                 </p>
 
 
