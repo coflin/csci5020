@@ -122,6 +122,19 @@
                     <br/><i class="fa-solid fa-arrow-right fa-2xs"></i>&nbsp;Extract information from the responses – port and service.
                     <br/><i class="fa-solid fa-arrow-right fa-2xs"></i>&nbsp;Record open ports and services in the scan_results list.
 
+                    <br/><br/><b>2. tcpack_scan(target, port, scan_results)</b>
+
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen9.png">
+                    <br/><br/>
+
+                    <i class="fa-solid fa-arrow-right fa-2xs"></i>&nbsp;Craft a TCP ACK packet using Scapy (IP(dst=str(target)) / TCP(flags="A", dport=port)).
+                    <br/><i class="fa-solid fa-arrow-right fa-2xs"></i>&nbsp;Send the packet and wait for responses.
+                    <br/><i class="fa-solid fa-arrow-right fa-2xs"></i>&nbsp;Extract information from the responses – port and service.
+                    <br/><i class="fa-solid fa-arrow-right fa-2xs"></i>&nbsp;Record open ports and services in the scan_results list.
+
+
+
                 </p>
 
 
