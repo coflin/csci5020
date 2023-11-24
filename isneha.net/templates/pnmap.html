@@ -99,7 +99,7 @@
                     <br/>
                     <br/><b>Ninja Moves</b>
                     <br/>The script defines three key functions, each representing a different scanning technique.
-                    <br/><br/>1. tcpsyn_scan(target, port, scan_results)
+                    <br/><br/><b>1. tcpsyn_scan(target, port, scan_results)</b>
 
                     <br/><br/>
                     <img class="python-image" src="/static/assets/screen7.png">
@@ -110,6 +110,18 @@
                     <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Extract information from the responses – port, service, and response flag.
                     <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>If the response flag indicates synchronization-acknowledgment ("SA"), consider the port open.
                     <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Record the findings in the scan_results list.
+
+                    <br/><br/><b>2. udp_scan(target, port, scan_results)</b>
+
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen8.png">
+                    <br/><br/>
+
+                    <i class="fa-solid fa-user-ninja fa-2xs"></i>Create a UDP packet using Scapy (IP(dst=str(target)) / UDP(dport=port)).
+                    <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Send the packet and wait for responses, setting a timeout of 2 seconds.
+                    <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Extract information from the responses – port and service.
+                    <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Record open ports and services in the scan_results list.
+
                 </p>
 
 
