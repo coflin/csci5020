@@ -48,7 +48,7 @@
                     <i>Note: The first 1024 ports are a bit VIP or "well-known" ports, so we need to wear our "root" hats for scanning those.<br/></i>
                     Before diving straight to coding, let's figure out how to know if a port is open or not through scapy. First, I fired up Scapy on my command-line and ran this:
                     <br/><br/>
-                    <img src="/static/assets/screen1.png">
+                    <img class="python-image" src="/static/assets/screen1.png">
                     <br/><br/>
                     100.64.26.1 is my own Linux VM which has just port 22 open. Our end goal is that our script should only report port 22 on my Linux VM as open.
                     We are sending a TCP Syn (<i>S</i>) flag to check if TCP is open on the given port or not. Basically, I am politely knocking on doors and checking
@@ -56,11 +56,25 @@
                     From the output, I see that it returns answered and unanswer-<i>ed</i> ports that didn't feel like chatting. Looking at it, my assumptionis that the talkative ones
                     are open and the unanswered ones are a no-go. Let's see if my assumption is right.
                     <br/><br/>
-                    <img src="/static/assets/screen2.png">
+                    <img class="python-image" src="/static/assets/screen2.png">
                     <br/><br/>
                     Weird. All the ports answered to the TCP SYN flag I sent (<i>I can guarantee that only port 22 is open</i>). Probably, my assumption is not right.
                     Let's examine the headers for a few ports to see if I can differentiate between open and close ports.
-                    <br/>
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen3.png">
+                    <br/><br/>
+                    Closed ports were dropping “RA” flags instead of the expected “SA” for the “S” flag we sent. Expected a welcome mat, got a door slam.
+                    Checked for port 22 (<i>which is supposed to be open</i>). 
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen4.png">
+                    <br/><br/>
+                    Aha! Port 22 responded with the “SA” flag. So, lesson learned – we can’t just assume; gotta peek at those flags to know what’s up.
+                    So now we need to ensure that we actually check for the flags in the answered ports, that should help us figure out if a port is open.
+                    Let’s see how we can extract the flags portion. We know answers is a list so I’ll just iterate through it. 
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen5.png">
+                    <br/><br/>
+
                 </p>
 
 
