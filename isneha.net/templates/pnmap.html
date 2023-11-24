@@ -85,11 +85,30 @@
                     Alright! Let's talk code now.
                     <br/><br/><b>Libraries in the Ninja Toolkit</b>
                     <br/>The script utilizes several Python libraries to equip our ninja with essential tools
+
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen6.png">
+                    <br/><br/>
+
                     <br/><i>argparse</i>: Handles command-line arguments, allowing users to specify the target, ports, and scanning type.
                     <br/><i>ipaddress</i>: Facilitates working with IP addresses, crucial for defining target ranges.
                     <br/><i>Scapy</i>: Acts as the ninja's primary weapon, enabling the creation and sending of custom network packets for various scanning techniques.
                     <br/><i>loguru</i>: Provides logging functionality, helping to keep track of the ninja's actions.
                     <br/><i>concurrent.futures</i>: Empowers the ninja with multi-threading capabilities, enabling parallel execution of scanning tasks.
+                
+                    <br/><b>Ninja Moves</b>
+                    <br/>The script defines three key functions, each representing a different scanning technique.
+                    <br/>1. tcpsyn_scan(target, port, scan_results)
+
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen7.png">
+                    <br/><br/>
+    
+                    <i class="fa-solid fa-user-ninja fa-2xs"></i>Craft a TCP SYN packet using Scapy (IP(dst=str(target)) / TCP(flags="S", dport=port)).
+                    <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Send the packet and wait for responses (sr function).
+                    <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Extract information from the responses – port, service, and response flag.
+                    <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>If the response flag indicates synchronization-acknowledgment ("SA"), consider the port open.
+                    <br/><i class="fa-solid fa-user-ninja fa-2xs"></i>Record the findings in the scan_results list.
                 </p>
 
 
