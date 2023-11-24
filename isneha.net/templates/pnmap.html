@@ -164,6 +164,14 @@
                     <br/>For each target and port, it submits the appropriate scanning function (tcpsyn_scan, udp_scan, or tcpack_scan) along with the necessary parameters.
                     <br/>The concurrent.futures.wait function ensures that the script waits for all tasks to complete before moving forward.
 
+                    <br/><b>Presenting the output</b>
+
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen13.png">
+                    <br/><br/>
+
+                    Once all scanning tasks are completed, the script calls the print_results function to display the results.
+                    The print_results function takes the scan_results list and the protocol as parameters and prints the results in a neat table format.
                 </p>
 
 
