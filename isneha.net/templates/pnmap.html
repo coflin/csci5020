@@ -154,7 +154,12 @@
                     Based on the user's chosen scan type (args.t), it sets the protocol variable accordingly (e.g., "tcp", "udp", or "tcp-ack").
                     It uses a list comprehension to dynamically generate a list called target_ports, which contains tuples of target IP addresses and ports.
                     <br/>Scanning for multiple ports is <b>painfully</b> slow. Thus, to fasten the process, I used multithreading.
-                    <br/>The script utilizes the ThreadPoolExecutor from the concurrent.futures module to enable concurrent execution of scanning functions.
+
+                    <br/><br/>
+                    <img class="python-image" src="/static/assets/screen12.png">
+                    <br/><br/>
+
+                    <br/>The script utilizes the ThreadPoolExecutor from the <b>concurrent.futures</b> module to enable concurrent execution of scanning functions.
                     <br/>It iterates through the target_ports list, submitting tasks to the executor based on the chosen scan type (args.t).
                     <br/>For each target and port, it submits the appropriate scanning function (tcpsyn_scan, udp_scan, or tcpack_scan) along with the necessary parameters.
                     <br/>The concurrent.futures.wait function ensures that the script waits for all tasks to complete before moving forward.
