@@ -63,7 +63,7 @@
                     <br/><br/>
                     <img class="python-image" src="/static/assets/screen3.png">
                     <br/><br/>
-                    Closed ports were dropping “RA” flags instead of the expected “SA” for the “S” flag we sent. Expected a welcome mat, got a door slam.
+                    Closed ports were dropping <i>“RA”</i> flags instead of the expected <i>“SA”</i> for the <i>“S”</i> flag we sent. Expected a welcome mat, got a door slam.
                     Checked for port 22 (<i>which is supposed to be open</i>). 
                     <br/><br/>
                     <img class="python-image" src="/static/assets/screen4.png">
@@ -74,7 +74,8 @@
                     <br/><br/>
                     <img class="python-image" src="/static/assets/screen5.png">
                     <br/><br/>
-
+                    Essentially, <i>str(answer[i][1]["TCP"].flags)</i> would extract the flag the destination port sent, where <i>"i"</i> contains the information of the port that answered.
+                    
                 </p>
 
 
