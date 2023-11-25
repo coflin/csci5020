@@ -18,7 +18,7 @@ def python_projects():
 
 @app.route("/linux-projects")
 def linux_projects():
-    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",DHCPProjectRoute="/linux/dhcp")
+    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",DHCPProjectRoute="/linux/dhcp",LVMProjectRoute="/linux/lvm")
 
 @app.route("/networking-projects")
 def networking_projects():
@@ -39,6 +39,11 @@ def website():
 @app.route("/linux/dhcp")
 def dhcp():
     return render_template("dhcp.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
+@app.route("/linux/dhcp")
+def dhcp():
+    return render_template("lvm.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
 
 if __name__ == "__main__":
     app.debug = True
