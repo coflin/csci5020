@@ -14,27 +14,31 @@ def resume():
 
 @app.route("/python-projects")
 def python_projects():
-    return render_template("python-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",LinkedinProjectRoute="/linkedin-job-scraper",PnmapProjectRoute="/pnmap",WebsiteProjectRoute="/website")
+    return render_template("python-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",LinkedinProjectRoute="/python/linkedin-job-scraper",PnmapProjectRoute="/python/pnmap",WebsiteProjectRoute="/python/website")
 
 @app.route("/linux-projects")
 def linux_projects():
-    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",DHCPProjectRoute="/linux/dhcp")
 
 @app.route("/networking-projects")
 def networking_projects():
     return render_template("networking-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
-@app.route("/linkedin-job-scraper")
+@app.route("/python/linkedin-job-scraper")
 def linkedin_job_scraper():
     return render_template("linkedin-job-scraper.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
-@app.route("/pnmap")
+@app.route("/python/pnmap")
 def pnmap():
     return render_template("pnmap.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
-@app.route("/website")
+@app.route("/python/website")
 def website():
     return render_template("website.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
+@app.route("/linux/dhcp")
+def dhcp():
+    return render_template("dhcp.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
 if __name__ == "__main__":
     app.debug = True
