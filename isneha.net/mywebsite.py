@@ -43,9 +43,9 @@ def website():
 def dhcp():
     return render_template("dhcp.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
-#@app.route("/linux/lvm")
-#def dhcp():
-#    return render_template("lvm.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+@app.route("/linux/lvm")
+def lvm():
+    return render_template("lvm.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
 if __name__ == "__main__":
     app.debug = True
