@@ -40,11 +40,6 @@ def website():
 def dhcp():
     return render_template("dhcp.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
-@app.route("/linux/dhcp")
-def dhcp():
-    return render_template("lvm.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
-
 if __name__ == "__main__":
     app.debug = True
     app.run("127.0.0.1",port=80)
