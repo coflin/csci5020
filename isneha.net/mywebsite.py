@@ -6,7 +6,7 @@ app=Flask(__name__)
 
 @app.route("/")
 def staticpage():
-    return render_template("index.html",ResumeRoute="/resume",PythonProjectRoute="/python",LinuxProjectRoute="/linux",NetworkingProjectRoute="/networking",WebsiteProjectRoute="/website")
+    return render_template("index.html",ResumeRoute="/resume",PythonProjectRoute="/python",LinuxProjectRoute="/linux",NetworkingProjectRoute="/networking",WebsiteProjectRoute="/python/website")
 
 @app.route("/resume")
 def resume():
