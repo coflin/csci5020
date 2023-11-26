@@ -22,7 +22,7 @@ def linux_projects():
 
 @app.route("/networking")
 def networking_projects():
-    return render_template("networking-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+    return render_template("networking-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",GNS3ProjectRoute="/networking/gns3")
 
 
 #Python Projects
@@ -46,6 +46,11 @@ def dhcp():
 @app.route("/linux/lvm")
 def lvm():
     return render_template("lvm.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
+@app.route("/networking/gns3")
+def gns3():
+    return render_template("gns3.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
 
 if __name__ == "__main__":
     app.debug = True
