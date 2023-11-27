@@ -3685,13 +3685,13 @@ textarea.form-control-lg {
 .project-image {
   width: 25%;
   height: 25%;
-  margin-right: 2%;
+  margin-right: 1%;
 }
 
 .text-details {
   flex: 1; 
   text-align: left;
-  max-width: 30%;
+  max-width: 50%;
 }
 
 .masthead-project {
