@@ -3691,7 +3691,7 @@ textarea.form-control-lg {
 .text-details {
   flex: 1; 
   text-align: left;
-  max-width: 50%;
+  max-width: 30%;
 }
 
 .masthead-project {
