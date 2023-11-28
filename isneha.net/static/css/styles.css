@@ -11203,10 +11203,10 @@ html {
   width:35%
 }
 
-.a .homepage-link {
+.homepage-link {
   color:black;
   font-family: var(--bs-font-monospace);
-  margin-top: 10rem;
+  margin-top: 20%;
 }
 
 @media only screen and (max-width: 767px) {
