@@ -11204,7 +11204,8 @@ html {
 }
 
 .homepage-link {
-  font-family: var(--bs-font-monospace) var(--bs-body-font-size);
+  color: #000;
+  font-family: var(--bs-font-monospace);
   margin-top: 10rem;
 }
 
