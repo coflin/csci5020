@@ -11219,4 +11219,8 @@ html {
     text-align: left;
     max-width: 100%; 
     margin-top: 1rem;  }
+
+  .divider-project {
+    width:100%;
+  }
   }
