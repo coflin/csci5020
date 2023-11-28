@@ -11250,3 +11250,15 @@ html {
     background-color: transparent; 
     transition: background-color 0.3s ease; 
   }
+
+  /* Add this style to change the image color on hover */
+.nav-link-project:hover .project-details img {
+  filter: brightness(80%); /* Adjust the brightness to your liking */
+  transition: filter 0.3s ease; /* Transition for smooth brightness change */
+}
+
+/* Add a default filter for the image */
+.project-details img {
+  filter: brightness(100%); /* Set a default brightness for the image */
+  transition: filter 0.3s ease; /* Transition for smooth brightness change */
+}
