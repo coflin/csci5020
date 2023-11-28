@@ -11241,24 +11241,22 @@ html {
     margin-bottom: 1rem;  }
   }
 
-  .nav-link-project:hover .project-details {
-    background-color: #bd5d38; 
-    transition: background-color 0.5s ease; 
+  .nav-link-project .text-details {
+    opacity: 0; /* Initially hide the text */
+    transition: opacity 0.3s ease; /* Transition for smooth opacity change */
   }
   
-  .project-details {
-    background-color: transparent; 
-    transition: background-color 0.5s ease; 
+  /* Add this style to show the text on hover */
+  .nav-link-project:hover .text-details {
+    background-color: #bd5d38;
+    opacity: 1; /* Show the text on hover */
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Add a default background color to the text-details */
+  .text-details {
+    background-color: transparent; /* Set a default background color for text-details */
   }
 
-  /* Add this style to change the image color on hover */
-.nav-link-project:hover .project-details img {
-  filter: brightness(80%); /* Adjust the brightness to your liking */
-  transition: filter 0.5s ease; /* Transition for smooth brightness change */
-}
 
-/* Add a default filter for the image */
-.project-details img {
-  filter: brightness(80%); /* Set a default brightness for the image */
-  transition: filter 0.5s ease; /* Transition for smooth brightness change */
-}
+  
