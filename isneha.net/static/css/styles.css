@@ -11207,7 +11207,7 @@ html {
   }
 
   .project-image {
-    height:auto;
-    width: auto;
+    height:20%;
+    width: 20%;
   }
 }
