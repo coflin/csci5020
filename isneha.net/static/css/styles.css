@@ -11203,11 +11203,20 @@ html {
       width: 80%;
   }
   .project-details {
-    width: 100%
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .project-image {
-    height:20%;
-    width: 20%;
+    width: 100%; 
+    height: auto; 
+    margin-right: 0;
   }
-}
+
+  .text-details {
+    flex: 1;
+    text-align: left;
+    max-width: 100%; 
+    margin-top: 1rem;  }
+  }
