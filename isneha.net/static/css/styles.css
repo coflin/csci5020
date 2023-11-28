@@ -668,7 +668,7 @@ progress {
 }
 
 @media (min-width: 576px) {
-  .container-sm, .container, .img-fluid {
+  .container-sm, .container {
     max-width: 540px;
   }
 }
@@ -11196,4 +11196,30 @@ html {
 
 .aclass {
   width:35%
+}
+
+@media (min-width: 576px) {
+  .project-details {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .project-details {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .project-details {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .project-details {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .project-details {
+    max-width: 1320px;
+  }
 }
