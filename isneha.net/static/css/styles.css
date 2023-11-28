@@ -11198,8 +11198,9 @@ html {
   width:35%
 }
 
-@media (min-width: 576px) {
-  .projects-div {
-    max-width: 70%;
+@media only screen and (max-width: 767px) {
+  .img-fluid {
+      display: block; /* Ensure the image is displayed as a block element */
+      margin: 0 auto; /* Center the image horizontally */
   }
 }
