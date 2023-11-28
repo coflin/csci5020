@@ -668,7 +668,7 @@ progress {
 }
 
 @media (min-width: 576px) {
-  .container-sm, .container {
+  .container-sm, .container, .img-fluid {
     max-width: 540px;
   }
 }
@@ -3661,7 +3661,6 @@ textarea.form-control-lg {
 .nav-link:hover, .nav-link:focus {
   color: var(--bs-nav-link-hover-color);
 }
-
 
 .nav-link-project{
   display: block;
