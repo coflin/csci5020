@@ -11206,4 +11206,8 @@ html {
     width: 100%
   }
 
+  .project-image {
+    height:auto;
+    width: auto;
+  }
 }
