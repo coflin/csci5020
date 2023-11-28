@@ -11204,10 +11204,8 @@ html {
 }
 
 .homepage-link {
-  color:black;
   font-family: var(--bs-font-monospace) var(--bs-body-font-size);
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-top: 10rem;
 }
 
 @media only screen and (max-width: 767px) {
