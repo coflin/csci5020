@@ -11223,4 +11223,8 @@ html {
   .divider-project {
     width:100%;
   }
+
+  .img-profile {
+    width: 100%; 
+    margin-bottom: 1rem;  }
   }
