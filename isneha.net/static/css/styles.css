@@ -11240,23 +11240,4 @@ html {
     height:180%;
     margin-bottom: 1rem;  }
   }
-
-  .nav-link-project .text-details {
-    opacity: 0; /* Initially hide the text */
-    transition: opacity 0.3s ease; /* Transition for smooth opacity change */
-  }
-  
-  /* Add this style to show the text on hover */
-  .nav-link-project:hover .text-details {
-    background-color: #bd5d38;
-    opacity: 1; /* Show the text on hover */
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Add a default background color to the text-details */
-  .text-details {
-    background-color: transparent; /* Set a default background color for text-details */
-  }
-
-
   
