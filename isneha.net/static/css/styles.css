@@ -11203,8 +11203,8 @@ html {
   width:35%
 }
 
-.homepage-link {
-  color: #000;
+.a .homepage-link {
+  color:black;
   font-family: var(--bs-font-monospace);
   margin-top: 10rem;
 }
