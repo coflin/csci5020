@@ -11199,8 +11199,7 @@ html {
 }
 
 @media only screen and (max-width: 767px) {
-  .img-fluid {
-      display: block; /* Ensure the image is displayed as a block element */
-      margin: 0 auto; /* Center the image horizontally */
+  .projects-div {
+      width: 70%; 
   }
 }
