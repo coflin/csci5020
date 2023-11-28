@@ -11240,3 +11240,13 @@ html {
     height:180%;
     margin-bottom: 1rem;  }
   }
+
+  .nav-link-project:hover .project-details {
+    background-color: #bd5d38; 
+    transition: background-color 0.3s ease; 
+  }
+  
+  .project-details {
+    background-color: transparent; 
+    transition: background-color 0.3s ease; 
+  }
