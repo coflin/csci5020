@@ -624,8 +624,8 @@ progress {
 }
 
 .img-fluid {
-  max-width: auto;
-  height: 25%;
+  max-width: 100%;
+  height: auto;
 }
 
 .img-thumbnail {
@@ -11225,12 +11225,7 @@ html {
   }
 
   .d-lg-block {
-    width: 180%;
-    height:180%;
+    width: 60%;
+    height:60%;
     margin-bottom: 1rem;  }
-
-  .img-fluid {
-    width:auto;
-    height: auto;
-  }
   }
