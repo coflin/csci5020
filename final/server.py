@@ -17,7 +17,7 @@ def handle_client(client,addr):
     with open('/var/log/family_feud.log', 'a') as log_file:
         log_file.write(f"Received message from {addr}:{data}\n")
 
-    welcome_message = """
+    welcome_message = "\033[92m" + """ 
     __        __   _                        _        
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
  \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
@@ -30,7 +30,7 @@ def handle_client(client,addr):
 |  _| (_| | | | | | | | | |_| | |  _|  __/ |_| | (_| |_|
 |_|  \__,_|_| |_| |_|_|_|\__, | |_|  \___|\__,_|\__,_(_)
                          |___/                          
-"""
+""" + "\033[0m"
     client.send(welcome_message.encode('utf-8'))
 
 if __name__ == "__main__":
