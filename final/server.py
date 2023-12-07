@@ -12,13 +12,12 @@ def family_feud_server():
 
     while True:
         client, addr = server.accept()
-        return client, addr
-        
+        handle_client(client, addr)
 
-def welcome_client(client,addr):
+def handle_client(client,addr):
 
-    data = client.recv(1024)
-    logger.info(f"Received message from {addr}:{data}\n")
+    # data = client.recv(1024)
+    # logger.info(f"Received message from {addr}:{data}\n")
 
     welcome_message = "\033[92m" + """ 
 __        __   _                            _        
@@ -42,8 +41,7 @@ __        __   _                            _
 
 @logger.catch
 def main():
-    client, addr = family_feud_server()
-    welcome_client(client,addr)
+    family_feud_server()
 
 if __name__ == "__main__":
     family_feud_server()

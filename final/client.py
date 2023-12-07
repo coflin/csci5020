@@ -10,6 +10,8 @@ def family_feud_client():
     welcome_message = client.recv(1024)
     print(welcome_message.decode('utf-8'))
 
+    action = input("1. Create a room\n2. Join a room")
+    client.send(action.encode('utf-8'))
     
 
     #client.close()
