@@ -11,8 +11,5 @@ def family_feud_client():
     action = input("1. Create a room\n2. Join a room")
     client.send(action.encode('utf-8'))
     
-
-    #client.close()
-
 if __name__ == "__main__":
     family_feud_client()
