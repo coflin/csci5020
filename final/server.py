@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 import socket
+from loguru import logger
+
+logger.add("/var/log/family_feud_server.log")
 
 def family_feud_server():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -9,13 +12,13 @@ def family_feud_server():
 
     while True:
         client, addr = server.accept()
-        welcome_client(client,addr)
+        return client, addr
+        
 
 def welcome_client(client,addr):
 
     data = client.recv(1024)
-    with open('/var/log/family_feud.log', 'a') as log_file:
-        log_file.write(f"Received message from {addr}:{data}\n")
+    logger.info(f"Received message from {addr}:{data}\n")
 
     welcome_message = "\033[92m" + """ 
 __        __   _                            _        
@@ -32,8 +35,15 @@ __        __   _                            _
                          |___/                          
 """ + "\033[0m"
     client.send(welcome_message.encode('utf-8'))
-    user = input("Start Game? Y/N")
-    client.send(user.encode('utf-8'))
+
+    action_response = client.recv(1024)
+    logger.info(action_response.decode("utf-8"))
+
+
+@logger.catch
+def main():
+    client, addr = family_feud_server()
+    welcome_client(client,addr)
 
 if __name__ == "__main__":
     family_feud_server()
