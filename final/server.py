@@ -33,7 +33,7 @@ __        __   _                            _
 """ + "\033[0m"
     client.send(welcome_message.encode('utf-8'))
     user = input("Start Game? Y/N")
-    client.send(user.encode(utf-8))
+    client.send(user.encode('utf-8'))
 
 if __name__ == "__main__":
     family_feud_server()
