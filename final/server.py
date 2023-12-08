@@ -15,7 +15,7 @@ def handle_client(client_socket, client_id):
 
     # Receive user's response (create/join)
     response = client_socket.recv(1024).decode('utf-8').strip()
-    
+
     # Process user's response
     while response.lower() != "create" and response.lower() != "join":
         client_socket.sendall("Invalid response. Please enter 'create' or 'join' ".encode('utf-8'))
@@ -23,8 +23,13 @@ def handle_client(client_socket, client_id):
 
     if response.lower() == "create":
         client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
+
     elif response.lower() == "join":
         client_socket.sendall("Ok! Joining a room!".encode('utf-8'))
+
+    new = f"Tell me something: "
+    client_socket.sendall(new.encode('utf-8'))   
+    response = client_socket.recv(1024).decode('utf-8').strip()
    
 
 def main():
