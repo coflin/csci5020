@@ -1,112 +1,49 @@
 import socket
-import selectors
-import types
-from loguru import logger
+import threading
 
-logger.add("/var/log/family_feud_server.log")
-sel = selectors.DefaultSelector()
+def handle_client(client_socket, client_id):
+    # Send welcome message
+    client_socket.sendall("Welcome to Family Feud! What is your name? ".encode('utf-8'))
 
-def accept_wrapper(sock):
-    conn, addr = sock.accept()
-    logger.info(f"Accepted connection from {addr}")
-    conn.setblocking(False)
-    data = types.SimpleNamespace(addr=addr, inb=b"", outb=b"")
+    # Receive and print the user's name
+    user_name = client_socket.recv(1024).decode('utf-8').strip()
+    print(f"Client {client_id}: {user_name} connected")
 
-    # Welcome Message
-    welcome_message = "\033[92m" + """ 
-    __        __   _                            _        
-    \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
-     \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
-      \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
-       \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
-                                                         
-     ____             _             _____              _ _ 
-    / ___| _ __   ___| |__   __ _  |  ___|__ _   _  __| | |
-    \___ \| '_ \ / _ \ '_ \ / _` | | |_ / _ \ | | |/ _` | |
-     ___) | | | |  __/ | | | (_| | |  _|  __/ |_| | (_| |_|
-    |____/|_| |_|\___|_| |_|\__,_| |_|  \___|\__,_|\__,_(_)
-    """ + "\033[0m" + "What is your name? "
-    conn.sendall(welcome_message.encode('utf-8'))
+    # Send personalized greeting and prompt to create/join a room
+    greeting = f"Hello {user_name}! Do you want to create or join a room? "
+    client_socket.sendall(greeting.encode('utf-8'))
 
-    events = selectors.EVENT_READ | selectors.EVENT_WRITE
-    sel.register(conn, events, data=data)
+    # Receive user's response (create/join)
+    response = client_socket.recv(1024).decode('utf-8').strip()
 
-def service_connection(key, mask):
-    sock = key.fileobj
-    data = key.data
-    if mask & selectors.EVENT_READ:
-        recv_data = sock.recv(1024)
-        if recv_data:
-            data.outb += recv_data
-
-            # Check if the data is complete
-            if b'\n' in data.outb:
-                # Call handle_client with the received data
-                handle_client(sock, data.addr, data.outb.decode('utf-8').strip())
-                
-                # Reset outb for the next message
-                data.outb = b""
-        else:
-            print(f"Closing connection to {data.addr}")
-            sel.unregister(sock)
-            sock.close()
-
-    if mask & selectors.EVENT_WRITE:
-        if data.outb:
-            print(f"Echoing {data.outb!r} to {data.addr}")
-            sent = sock.send(data.outb)
-            data.outb = data.outb[sent:]
-
-def handle_client(sock, addr, received_data):
-    try:
-        response = f"Hello {received_data}! Let's play Sneha Feud!\nDo you want to create a room or join a room? create/join "
-        sock.sendall(response.encode('utf-8'))
-
-        while True:
-            response = sock.recv(1024).decode('utf-8').strip()
-
-            if not response:
-                # Client has closed the connection
-                break
-
-            if response == "create":
-                action = "Creating a room"
-            elif response == "join":
-                action = "Joining a room"
-            else:
-                action = "Invalid response. Please enter 'create' or 'join'"
-
-            # You can add logic here based on the client's response
-
-    except ConnectionResetError:
-        print(f"Connection closed by {addr}")
-    except Exception as e:
-        logger.error(f"Exception in handle_client for {addr}: {e}")
-        
-    finally:
-        sel.unregister(sock)
-        sock.close()
+    # Process user's response
+    if response.lower() == "create":
+        client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
+        # Implement logic for creating a room here
+    else:
+        client_socket.sendall("Invalid response. Connection closed.".encode('utf-8'))
+    
+    # Close the connection
+    client_socket.close()
+    print(f"Client {client_id}: Connection closed")
 
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
-    server.listen()
-    print("Family Feud started. Waiting for connections..")
-    server.setblocking(0)
-    sel.register(server, selectors.EVENT_READ, data=None)
+    server.listen(2)  # Listen for up to 2 connections
 
-    try:
-        while True:
-            events = sel.select()
-            for key, mask in events:
-                if key.data is None:
-                    accept_wrapper(key.fileobj)
-                else:
-                    service_connection(key, mask)
-    except KeyboardInterrupt:
-        print("Caught keyboard interrupt, exiting")
-    finally:
-        sel.close()
+    print("Family Feud server started. Waiting for connections...")
+
+    client_id = 1  # Client identifier
+
+    while True:
+        client_socket, client_addr = server.accept()
+
+        # Handle each client in a separate thread
+        client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
+        client_thread.start()
+
+        client_id += 1
 
 if __name__ == "__main__":
     main()
