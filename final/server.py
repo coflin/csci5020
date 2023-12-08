@@ -36,9 +36,12 @@ __        __   _                            _
     hello_message = b"Hello " + username + "! Do you want to create a room or join a room?\n Type 'create or join'"
     client.sendall(hello_message)
 
-    action = client.recv(1024)
-    action_message = b"Ok " + action + "ing"
-    client.sendall(action_message)
+    while True:
+        action = client.recv(1024)
+        if not action:
+            break  # Break the loop if the client disconnects
+        action_message = b"Ok " + action + "ing"
+        client.sendall(action_message)
 
 @logger.catch
 def main():
