@@ -28,10 +28,11 @@ __        __   _                            _
 """ + "\033[0m" + "What is your name?"
     client.sendall(welcome_message.encode('utf-8'))
 
-    username = client.recv(1024).decode("utf-8")
-    logger.info(f" Player 1: {username}")
+    username = client.recv(1024)
+    logger.info(f" Player 1: {username.decode('utf-8')}")
 
-    client.sendall(f"Hello {username}")
+    hello_message = b"Hello " + username
+    client.sendall(hello_message)
 
 @logger.catch
 def main():
@@ -42,4 +43,4 @@ def main():
     family_feud_server(server)
 
 if __name__ == "__main__":
-    family_feud_server()
+    main()
