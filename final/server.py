@@ -32,11 +32,13 @@ __        __   _                            _
 |____/|_| |_|\___|_| |_|\__,_| |_|  \___|\__,_|\__,_(_)
 
     """ + "\033[0m" + "What is your name? "
+    
     conn.sendall(welcome_message.encode('utf-8'))
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=connection)
 
 def service_connection(key, mask):
+    logger.info("in service_connection")
     connection = key.data
     sock = connection.sock
 
@@ -51,7 +53,7 @@ def service_connection(key, mask):
 
     if mask & selectors.EVENT_WRITE:
         if connection.outb:
-            print(f"Echoing {connection.outb!r} to {connection.addr}")
+            logger.info(f"Echoing {connection.outb!r} to {connection.addr}")
             sent = sock.send(connection.outb)
             connection.outb = connection.outb[sent:]
             handle_client(connection)
@@ -79,6 +81,8 @@ def main():
         while True:
             events = sel.select()
             for key, mask in events:
+                logger.info(f"key:{key}")
+                logger.info(f"mask:{mask}")
                 if key.data is None:
                     accept_wrapper(key.fileobj)
                 else:
