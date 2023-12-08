@@ -44,8 +44,7 @@ def handle_client(client,addr):
     #     client.sendall(action_message)
     except Exception as e:
         logger.error(f"Exception in handle_client for {addr}: {e}")
-    finally:
-        client.close()
+  
 
 @logger.catch
 def main():
