@@ -13,28 +13,28 @@ def family_feud_server(server):
             executor.submit(handle_client, client, addr)
 
 def handle_client(client,addr):
+    try:
+        welcome_message = "\033[92m" + """ 
+    __        __   _                            _        
+    \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
+    \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
+    \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
+    \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
+                                                        
+    _____               _ _         _____              _ _ 
+    |  ___|_ _ _ __ ___ (_) |_   _  |  ___|__ _   _  __| | |
+    | |_ / _` | '_ ` _ \| | | | | | | |_ / _ \ | | |/ _` | |
+    |  _| (_| | | | | | | | | |_| | |  _|  __/ |_| | (_| |_|
+    |_|  \__,_|_| |_| |_|_|_|\__, | |_|  \___|\__,_|\__,_(_)
+                            |___/                          
+    """ + "\033[0m" + "What is your name? "
+        client.sendall(welcome_message.encode('utf-8'))
 
-    welcome_message = "\033[92m" + """ 
-__        __   _                            _        
-\ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
- \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
-  \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
-   \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
-                                                     
- _____               _ _         _____              _ _ 
-|  ___|_ _ _ __ ___ (_) |_   _  |  ___|__ _   _  __| | |
-| |_ / _` | '_ ` _ \| | | | | | | |_ / _ \ | | |/ _` | |
-|  _| (_| | | | | | | | | |_| | |  _|  __/ |_| | (_| |_|
-|_|  \__,_|_| |_| |_|_|_|\__, | |_|  \___|\__,_|\__,_(_)
-                         |___/                          
-""" + "\033[0m" + "What is your name? "
-    client.sendall(welcome_message.encode('utf-8'))
+        username = client.recv(1024)
+        logger.info(f" Player {addr}: {username.decode('utf-8')}")
 
-    username = client.recv(1024)
-    logger.info(f" Player {addr}: {username.decode('utf-8')}")
-
-    hello_message = b"Hello! Do you want to create a room or join a room? Type 'create or join'"
-    client.sendall(hello_message)
+        hello_message = b"Hello! Do you want to create a room or join a room? Type 'create or join'"
+        client.sendall(hello_message)
 
     # while True:
     #     action = client.recv(1024)
@@ -42,6 +42,10 @@ __        __   _                            _
     #         break  # Break the loop if the client disconnects
     #     action_message = b"Ok " + action + "ing"
     #     client.sendall(action_message)
+    except Exception as e:
+        logger.error(f"Exception in handle_client for {addr}: {e}")
+    finally:
+        client.close()
 
 @logger.catch
 def main():
