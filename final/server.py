@@ -11,12 +11,13 @@ def handle_client(client_socket, client_id):
     print(f"Client {client_id}: {user_name} connected")
 
     for player in players:
-        if user_name not in player.values():
-            player_dict = {"username": user_name}
-            players.append(player_dict)
-        else:
+        if user_name == player["username"]:
             welcome_user = f"Welcome back, {user_name}"
             client_socket.sendall(welcome_user.encode('utf-8'))
+            break
+    else:
+        player_dict = {"username": user_name}
+        players.append(player_dict)
 
     # Send personalized greeting and prompt to create/join a room
     greeting = f"Hello {user_name}! Do you want to create or join a room? "
