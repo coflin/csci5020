@@ -1,6 +1,7 @@
 import socket
 import threading
 
+players = []
 def handle_client(client_socket, client_id):
     # Send welcome message
     client_socket.sendall("Welcome to Family Feud! What is your name? ".encode('utf-8'))
@@ -8,6 +9,9 @@ def handle_client(client_socket, client_id):
     # Receive and print the user's name
     user_name = client_socket.recv(1024).decode('utf-8').strip()
     print(f"Client {client_id}: {user_name} connected")
+
+    player_dict = {"username": user_name}
+    players.append(player_dict)
 
     # Send personalized greeting and prompt to create/join a room
     greeting = f"Hello {user_name}! Do you want to create or join a room? "
@@ -25,17 +29,14 @@ def handle_client(client_socket, client_id):
         client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
 
     elif response.lower() == "join":
-        client_socket.sendall("Ok! Joining a room!".encode('utf-8'))
+        client_socket.sendall("Ok! Joining a room!".encode('utf-8'))  
 
-    new = f"Tell me something: "
-    client_socket.sendall(new.encode('utf-8'))   
-    response = client_socket.recv(1024).decode('utf-8').strip()
-   
-
+    print(players)
+ 
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
-    server.listen(2)  # Listen for up to 2 connections
+    server.listen(20)  # Listen for up to 2 connections
 
     print("Family Feud server started. Waiting for connections...")
 
@@ -49,6 +50,7 @@ def main():
         client_thread.start()
 
         client_id += 1
+    
 
 if __name__ == "__main__":
     main()
