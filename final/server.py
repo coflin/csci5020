@@ -59,11 +59,9 @@ def service_connection(key, mask):
 
 def handle_client(sock, addr, received_data):
     try:
-        response = f"Hello {received_data}! Let's play Sneha Feud!"
+        response = f"Hello {received_data}! Let's play Sneha Feud!\nDo you want to create a room or join a room? create/join "
         sock.sendall(response.encode('utf-8'))
 
-        action = f"\nDo you want to create a room or join a room? create/join "
-        sock.sendall(action.encode('utf-8'))
         while True:
             response = sock.recv(1024).decode('utf-8').strip()
             if response == "create":
