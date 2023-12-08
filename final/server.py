@@ -7,7 +7,7 @@ from loguru import logger
 logger.add("/var/log/family_feud_server.log")
 
 def family_feud_server(server):
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    with concurrent.futures.ProcessPoolExecutor() as executor:
         while True:
             client, addr = server.accept()
             executor.submit(handle_client, client, addr)
@@ -17,9 +17,9 @@ def handle_client(client,addr):
         welcome_message = "\033[92m" + """ 
     __        __   _                            _        
     \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
-    \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
-    \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
-    \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
+     \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
+      \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
+       \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
                                                         
     _____               _ _         _____              _ _ 
     |  ___|_ _ _ __ ___ (_) |_   _  |  ___|__ _   _  __| | |
