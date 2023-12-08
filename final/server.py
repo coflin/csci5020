@@ -33,7 +33,7 @@ __        __   _                            _
     username = client.recv(1024)
     logger.info(f" Player {addr}: {username.decode('utf-8')}")
 
-    hello_message = b"Hello " + username + "! Do you want to create a room or join a room?\n Type 'create or join'"
+    hello_message = b"Hello! Do you want to create a room or join a room? Type 'create or join'"
     client.sendall(hello_message)
 
     # while True:
