@@ -31,7 +31,7 @@ __        __   _                            _
  ___) | | | |  __/ | | | (_| | |  _|  __/ |_| | (_| |_|
 |____/|_| |_|\___|_| |_|\__,_| |_|  \___|\__,_|\__,_(_)
 
-    """ + "\033[0m" + "What is your name? "
+    """ + "\033[0m"
     
     conn.sendall(welcome_message.encode('utf-8'))
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
@@ -67,13 +67,13 @@ def handle_client(connection):
         connection.sock.sendall(response.encode('utf-8'))
         action = connection.sock.recv(1024).decode('utf-8').strip()
 
-        # while True:
-        #     data = connection.sock.recv(1024)
-        #     if not data:
-        #         logger.error(f"Connection closed by {connection.addr}")
-        #         break
-        #     response = process_data(data)
-        #     connection.sock.sendall(response.encode('utf-8'))
+        while True:
+            data = connection.sock.recv(1024)
+            if not data:
+                logger.error(f"Connection closed by {connection.addr}")
+                break
+            response = process_data(data)
+            connection.sock.sendall(response.encode('utf-8'))
                 
     except Exception as e:
         logger.error(f"Exception in handle_client for {connection.addr}: {e}")
