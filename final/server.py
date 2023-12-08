@@ -37,8 +37,9 @@ __        __   _                            _
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=connection)
 
+    handle_client(connection)
+
 def service_connection(key, mask):
-    logger.info("in service_connection")
     connection = key.data
     sock = connection.sock
 
@@ -56,12 +57,11 @@ def service_connection(key, mask):
             logger.info(f"Echoing {connection.outb!r} to {connection.addr}")
             sent = sock.send(connection.outb)
             connection.outb = connection.outb[sent:]
-            handle_client(connection)
 
 def handle_client(connection):
     try:
         # Add your custom logic here based on connection.inb
-        response = f"Hello {connection.inb.decode('utf-8')}! Let's play Sneha Feud!"
+        response = f"Hello {connection.inb.decode('utf-8')}! Let's play Sneha Feud!\n Do you want to create or join a room? "
         connection.sock.sendall(response.encode('utf-8'))
     except Exception as e:
         logger.error(f"Exception in handle_client for {connection.addr}: {e}")
