@@ -63,12 +63,32 @@ def handle_client(connection):
         # Add your custom logic here based on connection.inb
         response = f"Hello {connection.inb.decode('utf-8')}! Let's play Sneha Feud!\n Do you want to create or join a room? "
         connection.sock.sendall(response.encode('utf-8'))
+
+        while True:
+            data = connection.sock.recv(1024)
+            if not data:
+                logger.error(f"Connection closed by {connection.addr}")
+                break
+            response = process_data(data)
+            connection.sock.sendall(response.encode('utf-8'))
+                
     except Exception as e:
         logger.error(f"Exception in handle_client for {connection.addr}: {e}")
+
     finally:
         sel.unregister(connection.sock)
         connection.sock.close()
 
+def process_data(data):
+    # Implement your logic to process the received data and generate a response
+    # This is where you can handle different commands or game-related interactions
+    # Modify this function according to your requirements
+    if data.decode('utf-8') == "create":
+        return f"{data.decode('utf-8')}ing room"
+    elif data.decode('utf-8') == "join":
+        return f"{data.decode('utf-8')}ing room"
+    else:
+        return f"Error! Type either 'create or join' to create or join a room"
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
