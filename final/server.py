@@ -64,6 +64,11 @@ def handle_client(sock, addr, received_data):
 
         while True:
             response = sock.recv(1024).decode('utf-8').strip()
+
+            if not response:
+                # Client has closed the connection
+                break
+
             if response == "create":
                 action = "Creating a room"
             elif response == "join":
@@ -71,6 +76,10 @@ def handle_client(sock, addr, received_data):
             else:
                 action = "Invalid response. Please enter 'create' or 'join'"
 
+            # You can add logic here based on the client's response
+
+    except ConnectionResetError:
+        print(f"Connection closed by {addr}")
     except Exception as e:
         logger.error(f"Exception in handle_client for {addr}: {e}")
         
