@@ -3,11 +3,12 @@ import selectors
 import types
 from loguru import logger
 
+logger.add("/var/log/family_feud_server.log")
 sel = selectors.DefaultSelector()
 
 def accept_wrapper(sock):
     conn, addr = sock.accept()
-    print(f"Accepted connection from {addr}")
+    logger.info(f"Accepted connection from {addr}")
     conn.setblocking(False)
     data = types.SimpleNamespace(addr=addr, inb=b"", outb=b"")
 
@@ -41,11 +42,29 @@ def service_connection(key, mask):
             print(f"Closing connection to {data.addr}")
             sel.unregister(sock)
             sock.close()
+            
     if mask & selectors.EVENT_WRITE:
         if data.outb:
             print(f"Echoing {data.outb!r} to {data.addr}")
             sent = sock.send(data.outb)
             data.outb = data.outb[sent:]
+
+            # Call handle_client with the received data
+            handle_client(sock, data.addr, data.outb.decode('utf-8'))
+
+def handle_client(sock, addr, received_data):
+    try:
+        # Add your custom logic here based on the received_data
+        response = f"Hello {received_data}! Welcome to the game."
+
+        # Send the response
+        sock.sendall(response.encode('utf-8'))
+
+    except Exception as e:
+        logger.error(f"Exception in handle_client for {addr}: {e}")
+    finally:
+        sel.unregister(sock)
+        sock.close()
 
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
