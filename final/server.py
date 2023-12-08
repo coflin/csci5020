@@ -60,17 +60,20 @@ def service_connection(key, mask):
 
 def handle_client(connection):
     try:
-        # Add your custom logic here based on connection.inb
-        response = f"Hello {connection.inb.decode('utf-8')}! Let's play Sneha Feud!\n Do you want to create or join a room? "
-        connection.sock.sendall(response.encode('utf-8'))
+        connection.sock.sendall("What is your name? ".encode('utf-8'))
+        username = connection.sock.recv(1024).decode('utf-8').strip()
 
-        while True:
-            data = connection.sock.recv(1024)
-            if not data:
-                logger.error(f"Connection closed by {connection.addr}")
-                break
-            response = process_data(data)
-            connection.sock.sendall(response.encode('utf-8'))
+        response = f"Hello {username}! Let's play Sneha Feud!\n Do you want to create or join a room? "
+        connection.sock.sendall(response.encode('utf-8'))
+        action = connection.sock.recv(1024).decode('utf-8').strip()
+
+        # while True:
+        #     data = connection.sock.recv(1024)
+        #     if not data:
+        #         logger.error(f"Connection closed by {connection.addr}")
+        #         break
+        #     response = process_data(data)
+        #     connection.sock.sendall(response.encode('utf-8'))
                 
     except Exception as e:
         logger.error(f"Exception in handle_client for {connection.addr}: {e}")
