@@ -62,16 +62,16 @@ def handle_client(sock, addr, received_data):
         response = f"Hello {received_data}! Let's play Sneha Feud!"
         sock.sendall(response.encode('utf-8'))
 
-        action = f"Do you want to create a room or join a room? create/join "
+        action = f"\nDo you want to create a room or join a room? create/join "
         sock.sendall(action.encode('utf-8'))
-        response = sock.recv(1024).decode('utf-8').strip()
-
-        if response == "create":
-            action = "Creating a room"
-        elif response == "join":
-            action = "Joining a room"
-        else:
-            action = "Invalid response"
+        while True:
+            response = sock.recv(1024).decode('utf-8').strip()
+            if response == "create":
+                action = "Creating a room"
+            elif response == "join":
+                action = "Joining a room"
+            else:
+                action = "Invalid response. Please enter 'create' or 'join'"
 
     except Exception as e:
         logger.error(f"Exception in handle_client for {addr}: {e}")
