@@ -38,6 +38,14 @@ def service_connection(key, mask):
         recv_data = sock.recv(1024)
         if recv_data:
             data.outb += recv_data
+
+            # Check if the data is complete
+            if b'\n' in data.outb:
+                # Call handle_client with the received data
+                handle_client(sock, data.addr, data.outb.decode('utf-8').strip())
+                
+                # Reset outb for the next message
+                data.outb = b""
         else:
             print(f"Closing connection to {data.addr}")
             sel.unregister(sock)
@@ -49,9 +57,6 @@ def service_connection(key, mask):
             sent = sock.send(data.outb)
             data.outb = data.outb[sent:]
 
-            # Call handle_client with the received data
-            handle_client(sock, data.addr, data.outb.decode('utf-8'))
-
 def handle_client(sock, addr, received_data):
     try:
         # Add your custom logic here based on the received_data
@@ -59,6 +64,7 @@ def handle_client(sock, addr, received_data):
 
         # Send the response
         sock.sendall(response.encode('utf-8'))
+        
 
     except Exception as e:
         logger.error(f"Exception in handle_client for {addr}: {e}")
