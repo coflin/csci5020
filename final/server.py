@@ -6,17 +6,17 @@ logger.add("/var/log/family_feud_server.log")
 sel = selectors.DefaultSelector()
 
 class Connection:
-    def __init__(self, conn, addr):
-        self.conn = conn
+    def __init__(self, sock, addr):
+        self.sock = sock
         self.addr = addr
-        self.conn.setblocking(False)
+        self.sock.setblocking(False)
         self.inb = b""
         self.outb = b""
 
 def accept_wrapper(sock):
     conn, addr = sock.accept()
     logger.info(f"Accepted connection from {addr}")
-
+    
     connection = Connection(conn, addr)
     welcome_message = "\033[92m" + """ 
 __        __   _                            _        
@@ -32,7 +32,6 @@ __        __   _                            _
 |____/|_| |_|\___|_| |_|\__,_| |_|  \___|\__,_|\__,_(_)
 
     """ + "\033[0m" + "What is your name? "
-    
     conn.sendall(welcome_message.encode('utf-8'))
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=connection)
