@@ -92,7 +92,7 @@ def main():
     server.bind(('0.0.0.0', 5020))
     server.listen()
     print("Family Feud started. Waiting for connections..")
-    server.setblocking(False)
+    server.setblocking(0)
     sel.register(server, selectors.EVENT_READ, data=None)
 
     try:
