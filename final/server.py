@@ -1,14 +1,16 @@
 #!/usr/bin/python3
+
 import socket
+import concurrent.futures
 from loguru import logger
 
 logger.add("/var/log/family_feud_server.log")
 
 def family_feud_server(server):
-
-    while True:
-        client, addr = server.accept()
-        handle_client(client, addr)
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        while True:
+            client, addr = server.accept()
+            executor.submit(handle_client, client, addr)
 
 def handle_client(client,addr):
 
@@ -25,14 +27,16 @@ __        __   _                            _
 |  _| (_| | | | | | | | | |_| | |  _|  __/ |_| | (_| |_|
 |_|  \__,_|_| |_| |_|_|_|\__, | |_|  \___|\__,_|\__,_(_)
                          |___/                          
-""" + "\033[0m" + "What is your name?"
+""" + "\033[0m" + "What is your name? "
     client.sendall(welcome_message.encode('utf-8'))
 
     username = client.recv(1024)
-    logger.info(f" Player 1: {username.decode('utf-8')}")
+    logger.info(f" Player {addr}: {username.decode('utf-8')}")
 
-    hello_message = b"Hello " + username
+    hello_message = b"Hello " + username + "! Do you want to create a room or join a room?\n Type 'create or join'"
     client.sendall(hello_message)
+
+    action = client.recv(1024)
 
 @logger.catch
 def main():
