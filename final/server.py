@@ -31,7 +31,7 @@ def countdown(client_socket):
 
 def handle_client(client_socket, client_id):
     # Send welcome message
-    welcome_message = """
+    welcome_message = """\033[92m
 __        __   _                            _        
 \ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
  \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
@@ -44,7 +44,7 @@ __        __   _                            _
  ___) | | | |  __/ | | | (_| | |  _|  __/ |_| | (_| |_|
 |____/|_| |_|\___|_| |_|\__,_| |_|  \___|\__,_|\__,_(_)
                                                        
-""" + "\n Enter a username: "
+\033[0m""" + "\n Enter a username: "
     
     client_socket.sendall(welcome_message.encode('utf-8'))
 
