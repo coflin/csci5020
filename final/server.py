@@ -1,7 +1,7 @@
 import socket
 import threading
 import time
-import random
+from loguru import logger
 
 questions = ["Question 1", "Question 2", "Question 3"]
 current_question_index = 0
@@ -35,12 +35,9 @@ def handle_client(client_socket, client_id):
     print(f"Client {client_id}: {user_name} connected")
 
     for player in players:
-        if user_name not in player.values():
             player_dict = {"username": user_name, "socket": client_socket}
             players.append(player_dict)
-        else:
-            welcome_user = f"Welcome back, {user_name}"
-            client_socket.sendall(welcome_user.encode('utf-8'))
+    logger.info(f"Players list: {players}")
 
     # Send personalized greeting and prompt to create/join a room
     greeting = f"Hello {user_name}! Do you want to create or join a room? "
@@ -55,15 +52,14 @@ def handle_client(client_socket, client_id):
         response = client_socket.recv(1024).decode('utf-8').strip()
 
     if response.lower() == "create":
-        client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
+        client_socket.sendall("Ok! Creating a room..".encode('utf-8'))
 
-        # Wait for the other player to join
-        # while len(players) = 2:
-        #     time.sleep(1)
+        #while len(players) < 2:
+        time.sleep(3)
 
         # Notify both players to start the game
-        #for player in players:
-        client_socket.sendall("Start game? (yes/no) ".encode('utf-8'))
+        for player in players:
+            player["socket"].sendall("Start game?".encode('utf-8'))
 
         # Wait for both players to agree to start the game
         start_game_event.wait()
@@ -86,8 +82,6 @@ def handle_client(client_socket, client_id):
         client_socket.sendall("Ok! Joining a room!".encode('utf-8'))
 
         # Wait for the other player to create the room
-        while len(players) < 2:
-            time.sleep(1)
 
         # Notify both players to start the game
         for player in players:
