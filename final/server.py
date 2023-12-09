@@ -1,14 +1,30 @@
 import socket
 import threading
-import random
 import time
+import random
+
+questions = ["Question 1", "Question 2", "Question 3"]
+current_question_index = 0
+start_game_event = threading.Event()
 
 players = []
-questions = ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"]
-used_questions = []
 
-question_lock = threading.Lock()
-shared_question = None
+def get_next_question():
+    global current_question_index
+    if current_question_index < len(questions):
+        question = questions[current_question_index]
+        current_question_index += 1
+        return question
+    else:
+        return None
+
+def countdown(client_socket):
+    for i in range(3, 0, -1):
+        time.sleep(1)
+        client_socket.sendall(str(i).encode('utf-8'))
+
+    # Notify that the countdown is over
+    start_game_event.set()
 
 def handle_client(client_socket, client_id):
     # Send welcome message
@@ -19,13 +35,12 @@ def handle_client(client_socket, client_id):
     print(f"Client {client_id}: {user_name} connected")
 
     for player in players:
-        if user_name == player["username"]:
-            welcome_user = f"Welcome back, {user_name}\n"
+        if user_name not in player.values():
+            player_dict = {"username": user_name, "socket": client_socket}
+            players.append(player_dict)
+        else:
+            welcome_user = f"Welcome back, {user_name}"
             client_socket.sendall(welcome_user.encode('utf-8'))
-            break
-    else:
-        player_dict = {"username": user_name}
-        players.append(player_dict)
 
     # Send personalized greeting and prompt to create/join a room
     greeting = f"Hello {user_name}! Do you want to create or join a room? "
@@ -37,31 +52,64 @@ def handle_client(client_socket, client_id):
     # Process user's response
     while response.lower() != "create" and response.lower() != "join":
         client_socket.sendall("Invalid response. Please enter 'create' or 'join' ".encode('utf-8'))
-        response = client_socket.recv(1024).decode('utf-8').strip()         
+        response = client_socket.recv(1024).decode('utf-8').strip()
 
     if response.lower() == "create":
-        client_socket.sendall("Ok! Creating a room..".encode('utf-8'))
-        time.sleep(2)
-        join_room(client_socket,user_name)
+        client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
+
+        # Wait for the other player to join
+        while len(players) < 2:
+            time.sleep(1)
+
+        # Notify both players to start the game
+        for player in players:
+            player["socket"].sendall("Start game? (yes/no) ".encode('utf-8'))
+
+        # Wait for both players to agree to start the game
+        start_game_event.wait()
+
+        # Send countdown to both players
+        for player in players:
+            player["socket"].sendall("Game starting in...".encode('utf-8'))
+            countdown_thread = threading.Thread(target=countdown, args=(player["socket"],))
+            countdown_thread.start()
+
+        # Wait for the countdown to finish
+        countdown_thread.join()
+
+        # Send the first question to both players
+        question = get_next_question()
+        for player in players:
+            player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
 
     elif response.lower() == "join":
-        client_socket.sendall("Ok! Joining a room..".encode('utf-8'))  
-        time.sleep(2)
-        join_room(client_socket,user_name)
+        client_socket.sendall("Ok! Joining a room!".encode('utf-8'))
 
-def join_room(client_socket,user_name):
-    with question_lock:
-        # Randomize the selection of a question from the list
-        if shared_question is None:
-            shared_question = random.choice(questions)    
-    client_socket.sendall(f"Room Question:{shared_question}".encode('utf-8'))
+        # Wait for the other player to create the room
+        while len(players) < 2:
+            time.sleep(1)
 
-def get_question():
-    question = random.choice(questions)
-    used_questions.append(question)
-    questions.remove(question)
-    return question
- 
+        # Notify both players to start the game
+        for player in players:
+            player["socket"].sendall("Start game? (yes/no) ".encode('utf-8'))
+
+        # Wait for both players to agree to start the game
+        start_game_event.wait()
+
+        # Send countdown to both players
+        for player in players:
+            player["socket"].sendall("Game starting in...".encode('utf-8'))
+            countdown_thread = threading.Thread(target=countdown, args=(player["socket"],))
+            countdown_thread.start()
+
+        # Wait for the countdown to finish
+        countdown_thread.join()
+
+        # Send the first question to both players
+        question = get_next_question()
+        for player in players:
+            player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
+
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
@@ -74,12 +122,11 @@ def main():
     while True:
         client_socket, client_addr = server.accept()
 
-        #Handle each client in a seperate thread
+        # Handle each client in a separate thread
         client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
         client_thread.start()
 
         client_id += 1
-    
 
 if __name__ == "__main__":
     main()
