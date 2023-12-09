@@ -1,7 +1,11 @@
 import socket
 import threading
+import random
 
 players = []
+questions = ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"]
+used_questions = []
+
 def handle_client(client_socket, client_id):
     # Send welcome message
     client_socket.sendall("Welcome to Family Feud! What is your name? ".encode('utf-8'))
@@ -33,11 +37,21 @@ def handle_client(client_socket, client_id):
 
     if response.lower() == "create":
         client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
+        join_room(client_socket,user_name)
 
     elif response.lower() == "join":
         client_socket.sendall("Ok! Joining a room!".encode('utf-8'))  
+        join_room(client_socket,user_name)
 
-    print(players)
+def join_room(client_socket,user_name):
+    question = get_question()
+    client_socket.sendall(f"Room Question:{question}".encode('utf-8'))
+
+def get_question():
+    question = random.choice(questions)
+    used_questions.append(question)
+    questions.remove(question)
+    return question
  
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
