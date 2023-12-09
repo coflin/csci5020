@@ -60,9 +60,12 @@ def handle_client(client_socket, client_id):
         #while len(players) < 2:
         time.sleep(3)
 
+        client_socket.sendall("Start game?".encode('utf-8'))
+        
         # Notify both players to start the game
         for player in players:
-            player["socket"].sendall("Start game?".encode('utf-8'))
+            if player["socket"] != client_socket:
+                player["socket"].sendall("Start game?".encode('utf-8'))
 
         # Wait for both players to agree to start the game
         start_game_event.wait()
