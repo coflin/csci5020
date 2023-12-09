@@ -1,10 +1,14 @@
 import socket
 import threading
 import random
+import time
 
 players = []
 questions = ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"]
 used_questions = []
+
+question_lock = threading.Lock()
+shared_question = None
 
 def handle_client(client_socket, client_id):
     # Send welcome message
@@ -36,16 +40,21 @@ def handle_client(client_socket, client_id):
         response = client_socket.recv(1024).decode('utf-8').strip()         
 
     if response.lower() == "create":
-        client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
+        client_socket.sendall("Ok! Creating a room..".encode('utf-8'))
+        time.sleep(2)
         join_room(client_socket,user_name)
 
     elif response.lower() == "join":
-        client_socket.sendall("Ok! Joining a room!".encode('utf-8'))  
+        client_socket.sendall("Ok! Joining a room..".encode('utf-8'))  
+        time.sleep(2)
         join_room(client_socket,user_name)
 
 def join_room(client_socket,user_name):
-    question = get_question()
-    client_socket.sendall(f"Room Question:{question}".encode('utf-8'))
+    with question_lock:
+        # Randomize the selection of a question from the list
+        if shared_question is None:
+            shared_question = random.choice(questions)    
+    client_socket.sendall(f"Room Question:{shared_question}".encode('utf-8'))
 
 def get_question():
     question = random.choice(questions)
