@@ -58,8 +58,8 @@ def handle_client(client_socket, client_id):
         client_socket.sendall("Ok! Creating a room!".encode('utf-8'))
 
         # Wait for the other player to join
-        while len(players) < 2:
-            time.sleep(1)
+        # while len(players) = 2:
+        #     time.sleep(1)
 
         # Notify both players to start the game
         for player in players:
