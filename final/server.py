@@ -61,7 +61,7 @@ def handle_client(client_socket, client_id):
         time.sleep(3)
 
         client_socket.sendall("Start game?".encode('utf-8'))
-        
+
         # Notify both players to start the game
         for player in players:
             if player["socket"] != client_socket:
@@ -87,11 +87,13 @@ def handle_client(client_socket, client_id):
     elif response.lower() == "join":
         client_socket.sendall("Ok! Joining a room!".encode('utf-8'))
 
-        # Wait for the other player to create the room
+        time.sleep(3)
 
+        client_socket.sendall("Start game?")    
         # Notify both players to start the game
         for player in players:
-            player["socket"].sendall("Start game? (yes/no) ".encode('utf-8'))
+            if player["socket"] != client_socket:
+                player["socket"].sendall("Start game?".encode('utf-8'))
 
         # Wait for both players to agree to start the game
         start_game_event.wait()
