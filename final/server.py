@@ -37,9 +37,9 @@ def handle_client(client_socket, client_id):
     user_name = client_socket.recv(1024).decode('utf-8').strip()
     print(f"Client {client_id}: {user_name} connected")
 
-    for player in players:
-            player_dict = {"username": user_name, "socket": client_socket}
-            players.append(player_dict)
+    player_dict = {"username": user_name, "socket": client_socket}
+    players.append(player_dict)
+    
     logger.info(f"Players list: {players}")
 
     # Send personalized greeting and prompt to create/join a room
@@ -55,17 +55,14 @@ def handle_client(client_socket, client_id):
         response = client_socket.recv(1024).decode('utf-8').strip()
 
     if response.lower() == "create":
-        client_socket.sendall("Ok! Creating a room..".encode('utf-8'))
+        client_socket.sendall("Ok! Creating a room...\n".encode('utf-8'))
 
-        #while len(players) < 2:
-        time.sleep(3)
-
-        client_socket.sendall("Start game?".encode('utf-8'))
+        while len(players) < 2:
+            time.sleep(1)
 
         # Notify both players to start the game
         for player in players:
-            if player["socket"] != client_socket:
-                player["socket"].sendall("Start game?".encode('utf-8'))
+            player["socket"].sendall("Start game?".encode('utf-8'))
 
         # Wait for both players to agree to start the game
         start_game_event.wait()
@@ -85,15 +82,14 @@ def handle_client(client_socket, client_id):
             player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
 
     elif response.lower() == "join":
-        client_socket.sendall("Ok! Joining a room!".encode('utf-8'))
+        client_socket.sendall("Ok! Joining a room...\n".encode('utf-8'))
 
-        time.sleep(3)
-
-        client_socket.sendall("Start game?")    
+        # while len(players) < 2:
+        #     time.sleep(3)
+        #client_socket.sendall("Start game?")    
         # Notify both players to start the game
         for player in players:
-            if player["socket"] != client_socket:
-                player["socket"].sendall("Start game?".encode('utf-8'))
+            player["socket"].sendall("Start game?".encode('utf-8'))
 
         # Wait for both players to agree to start the game
         start_game_event.wait()
