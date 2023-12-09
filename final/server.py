@@ -3,6 +3,9 @@ import threading
 import time
 from loguru import logger
 
+
+logger.add("/var/log/family_feud_server.log")
+
 questions = ["Question 1", "Question 2", "Question 3"]
 current_question_index = 0
 start_game_event = threading.Event()
@@ -104,6 +107,7 @@ def handle_client(client_socket, client_id):
         for player in players:
             player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
 
+@logger.catch
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
