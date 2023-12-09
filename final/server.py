@@ -12,7 +12,7 @@ def handle_client(client_socket, client_id):
 
     for player in players:
         if user_name == player["username"]:
-            welcome_user = f"Welcome back, {user_name}"
+            welcome_user = f"Welcome back, {user_name}\n"
             client_socket.sendall(welcome_user.encode('utf-8'))
             break
     else:
