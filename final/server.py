@@ -58,7 +58,7 @@ __        __   _                            _
     logger.info(f"Players list: {players}")
 
     # Send personalized greeting and prompt to create/join a room
-    greeting = f"Hello {user_name}! Do you want to create or join a room? "
+    greeting = f"Hello {user_name}! Do you want to 'create' or 'join' a room? "
     client_socket.sendall(greeting.encode('utf-8'))
 
     # Receive user's response (create/join)
@@ -75,7 +75,7 @@ __        __   _                            _
         while len(players) < 2:
             time.sleep(1)
 
-        client_socket.sendall("Start game? Y/N: ")
+        #client_socket.sendall("Start game? Y/N: ")
         # Notify both players to start the game
         for player in players:
             player["socket"].sendall("Start game?".encode('utf-8'))
