@@ -60,7 +60,7 @@ def handle_client(client_socket,clients):
                 guesses.append(guess)
             logger.info(f"Client {username} answered: {guesses}")
 
-            logger.info(f"{player_score}")
+            logger.info(f"{player_scores}")
             question_score = calculate_score(question,guesses)
             player_score[username] += question_score
 
