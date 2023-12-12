@@ -23,7 +23,9 @@ def handle_client(client_socket,clients):
 
         # Add the client to the list
         clients.append(client_socket)
-        
+        for client in clients:
+            logger.info(f"CLIENT INFO:{client}")
+            
         # Wait for 2 players to join
         while len(clients) <2:
             time.sleep(1)
