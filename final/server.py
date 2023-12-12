@@ -71,30 +71,30 @@ __        __   _                            _
     while len(players) < 2:
         time.sleep(1)
 
-    creator = players[0]["socket"]
-    player2 = players[1]["socket"]
+    creator = players[0]
+    player2 = players[1]
 
     logger.info(f"creator:{creator}\nplayer2:{player2}")
 
     # Notify the creator to start the game
-    creator.send("Type 'start' to begin the game: ".encode('utf-8'))
-    start_game_response = creator.recv(1024).decode('utf-8').strip().lower()
+    creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
+    start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
 
-    player2.sendall("Waiting for the creator to start the game")
+    player2["socket"].sendall("Waiting for the creator to start the game")
 
-    if start_game_response == "start":
-        # Notify both players to start the game
-        countdown_threads = []
-        for player in players:
-            player["socket"].sendall("The game is starting!".encode('utf-8'))
-            player["socket"].sendall("Game starting in...".encode('utf-8'))
-            countdown_thread_creator = threading.Thread(target=countdown, args=(player["socket"],))
-            countdown_thread_creator.start()
-            countdown_threads.append(countdown_thread_creator)
+    # if start_game_response == "start":
+    #     # Notify both players to start the game
+    #     countdown_threads = []
+    #     for player in players:
+    #         player["socket"].sendall("The game is starting!".encode('utf-8'))
+    #         player["socket"].sendall("Game starting in...".encode('utf-8'))
+    #         countdown_thread_creator = threading.Thread(target=countdown, args=(player["socket"],))
+    #         countdown_thread_creator.start()
+    #         countdown_threads.append(countdown_thread_creator)
 
-        # Wait for the countdown threads to finish
-        for thread in countdown_threads:
-            thread.join()
+    #     # Wait for the countdown threads to finish
+    #     for thread in countdown_threads:
+    #         thread.join()
 
         # Send the first question to both players
     question = get_next_question()
