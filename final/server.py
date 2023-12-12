@@ -12,12 +12,12 @@ def handle_client(client_socket,clients):
         # Send a welcome message
         client_socket.send(b"Enter your username: ")
         
-        player_score = {username: 0}
         guesses = []
 
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8")
         print(f"Client {username} connected.")
+        player_score = {username: 0}
         
         # Add the client to the list
         clients.append(client_socket)
