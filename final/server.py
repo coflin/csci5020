@@ -2,7 +2,7 @@ import socket
 import threading
 import time
 
-SERVER_IP = '0.0.0.0'  # Listen on all available interfaces
+SERVER_IP = '0.0.0.0'
 SERVER_PORT = 5020
 
 questions = [
@@ -30,7 +30,10 @@ def handle_client(client_socket):
 
         # Send a starting game message
         client_socket.send(b"Starting game in 3..\n")
-        time.sleep(3)
+        time.sleep(1)
+        client_socket.send(b"2..\n")
+        time.sleep(1)
+        client_socket.send(b"1..\n")
         
         # Get a random question and send it to the client
         question = get_random_question()
