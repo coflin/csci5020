@@ -88,10 +88,10 @@ def calculate_score(question,guesses):
     score = 0
     for guess in guesses:
         for i in range(1,6):
-            logger.info(question[f'guess{i}'])
             if guess.strip().lower() == question[f'guess{i}']:
+                logger.info(question[f'guess{i}'])
                 score += question[f'guess{i}_score']
-                logger.info(f"SCORE: {score}")
+    logger.info(f"SCORE: {score}")
     return score
 
 def get_random_question(used_questions):
