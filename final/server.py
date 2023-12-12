@@ -37,7 +37,6 @@ def handle_client(client_socket,clients):
         # Get a random question and send it to the client
         for question_number in range(1,3):
             question = get_random_question(used_questions)
-            logger.info(f"QUESTION QUESTION: {question}")
             client_socket.send(f"Question {question_number}: {question['prompt']}\n".encode("utf-8"))
                     
             # Simulate receiving the client's response
@@ -49,10 +48,11 @@ def handle_client(client_socket,clients):
             logger.info(f"Client {username} answered: {guesses}")
 
             question_score = calculate_score(question,guesses)
+            player_score[username] += question_score
             client_socket.send(f"Your score for this question is: {question_score}".encode("utf-8"))
-            
-            total_score = update_score(player_score,username,question_score)
-            client_socket.send(f"Your score so far: {total_score}\n\n".encode("utf-8"))
+            time.sleep(1)
+            client_socket.send(f"Your score so far: {player_score[username]}\n\n".encode("utf-8"))
+            time.sleep(1)
 
     except Exception as e:
         logger.error(f"Error handling client: {e}")
@@ -70,12 +70,6 @@ def calculate_score(question,guesses):
                 score += question[f'guess{i}_score']
                 logger.info(f"SCORE: {score}")
     return score
-
-def update_score(player_score,username,question_score):
-    total_score = player_score[username]+question_score
-    player_score = {username:total_score}
-    return player_score
-
 
 def get_random_question(used_questions):
     """Gets and returns a random question that has not been used before"""
