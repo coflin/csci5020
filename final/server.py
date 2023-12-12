@@ -90,7 +90,7 @@ __        __   _                            _
             player["socket"].sendall("Game starting in...".encode('utf-8'))
             countdown_thread_creator = threading.Thread(target=countdown, args=(player["socket"],))
             countdown_thread_creator.start()
-            countdown_threads.append(countdown_threads)
+            countdown_threads.append(countdown_thread_creator)
 
     # Wait for the countdown threads to finish
     for thread in countdown_threads:
