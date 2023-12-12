@@ -78,8 +78,10 @@ def handle_client(client_socket,clients):
             client_socket.send(f"IT'S A TIE!".encode("utf-8"))
 
     except Exception as e:
-        logger.error(f"Error handling client: {e}")
-    
+        import traceback
+        traceback.print_exc()
+        logger.error(f"Error handling client: {e}")    
+        
     finally:
         # Close the client socket
         client_socket.close()
