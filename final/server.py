@@ -54,7 +54,7 @@ def handle_client(client_socket,clients):
 def get_random_question():
     """Gets and returns a random question from the list"""
     questions = [
-    {"prompt": "What is the capital of France?", "answer": "Paris"},
+    {"prompt": "What is the capital of France?", "answer": "paris"},
     {"prompt": "What is 2 + 2?", "answer": "4"},
     ]
     for question in questions:
