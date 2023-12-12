@@ -14,6 +14,8 @@ clients = []
 
 def handle_client(client_socket):
     try:
+        if len(clients) > 2:
+            clients = []
         # Send a welcome message
         client_socket.send(b"Enter your name: ")
         
@@ -34,7 +36,7 @@ def handle_client(client_socket):
         client_socket.send(b"2..\n")
         time.sleep(1)
         client_socket.send(b"1..\n")
-        
+
         # Get a random question and send it to the client
         question = get_random_question()
         client_socket.send(f"Question: {question['prompt']}\n".encode("utf-8"))
