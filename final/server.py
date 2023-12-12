@@ -69,7 +69,7 @@ __        __   _                            _
     client_socket.sendall(greeting.encode('utf-8'))
 
     # Receive user's response (create/join)
-    response = client_socket.recv(1024).decode('utf-8').strip()
+    #response = client_socket.recv(1024).decode('utf-8').strip()
 
     # Process user's response
     # while response.lower() != "create" and response.lower() != "join":
