@@ -63,8 +63,8 @@ def handle_client(client_socket,clients):
 
             question_score = calculate_score(question,guesses)
             logger.info(f"QUESTION SCORE: {question_score}\n PLAYER SCORE: {player_score[username]}")
-            player_score[username] += question_score
-            logger.info(f"PLAYER SCORE: {player_score}")
+            # player_score[username] += question_score
+            # logger.info(f"PLAYER SCORE: {player_score}")
 
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
@@ -81,7 +81,7 @@ def handle_client(client_socket,clients):
         import traceback
         traceback.print_exc()
         logger.error(f"Error handling client: {e}")    
-        
+
     finally:
         # Close the client socket
         client_socket.close()
