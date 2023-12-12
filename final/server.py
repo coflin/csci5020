@@ -41,13 +41,13 @@ def handle_client(client_socket,clients):
         # Simulate receiving the client's response
         time.sleep(1)
         for i in range(1,6):
-            client_socket.send(f"Guess {i}: ")
+            client_socket.send(f"Guess {i}: ".encode("utf-8"))
             guess = client_socket.recv(1024).decode("utf-8")
             guesses.append(guess)
             logger.info(f"Client {username} answered: {guess}")
 
         score = calculate_score(question,score,guesses)
-        client_socket.send(f"Your score is: {score}")
+        client_socket.send(f"Your score is: {score}".encode("utf-8"))
         
     except Exception as e:
         logger.error(f"Error handling client: {e}")
