@@ -1,11 +1,8 @@
 import socket
 import threading
-import json
 import time
-from loguru import logger
 
-# Add your EC2 instance's public IP and port here
-SERVER_IP = "54.215.236.176"
+SERVER_IP = '0.0.0.0'  # Listen on all available interfaces
 SERVER_PORT = 5020
 
 questions = [
@@ -16,49 +13,42 @@ questions = [
 
 clients = []
 
-
-def handle_client(client_socket, username):
-    """Handles an incoming client connection"""
-
+def handle_client(client_socket):
     try:
         # Send a welcome message
-        send(client_socket, {"message": f"Hello {username}!"})
-
-        # Wait for both clients to connect
-        while len(clients) < 2:
-            time.sleep(1)
-
+        client_socket.send(b"Enter your name: ")
+        
+        # Receive and print the client's name
+        username = client_socket.recv(1024).decode("utf-8")
+        print(f"Client {username} connected.")
+        
+        # Add the client to the list
+        clients.append(client_socket)
+        
         # Send a starting game message
-        send(client_socket, {"message": "Starting game in 3..2..1.."})
-
-        # Get a random question and send it to both clients
+        client_socket.send(b"Starting game in 3..2..1..\n")
+        
+        # Get a random question and send it to the client
         question = get_random_question()
-        send(client_socket, {"prompt": question["prompt"]})
-
-        # Wait for both clients to answer the question
-        while len(clients) > 0:
-            time.sleep(1)
-
-        # Implement scoring logic here if needed
-
+        client_socket.send(f"Question: {question['prompt']}\n".encode("utf-8"))
+        
+        # Simulate waiting for the client's response
+        time.sleep(5)  # Adjust this delay as needed
+        
+        # Simulate receiving the client's response
+        client_response = client_socket.recv(1024).decode("utf-8")
+        print(f"Client {username} answered: {client_response}")
+        
     except Exception as e:
-        logger.error(f"Error handling client {username}: {e}")
-
+        print(f"Error handling client: {e}")
+    
     finally:
         # Close the client socket
         client_socket.close()
 
-
 def get_random_question():
     """Gets and returns a random question from the list"""
     return questions[0]  # Replace this with logic to get a random question
-
-
-def send(client_socket, message):
-    """Converts the dictionary to a JSON string and sends it to the client"""
-    json_message = json.dumps(message)
-    client_socket.send(json_message.encode())
-
 
 def main():
     # Create a server socket
@@ -69,36 +59,22 @@ def main():
 
     # Listen for incoming connections
     server_socket.listen(2)
-    logger.info(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
+    print(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
 
     try:
         # Accept incoming connections
         while True:
             client, address = server_socket.accept()
-            logger.info(f"Accepted connection from {address}")
-
-            # Prompt the client for their name
-            send(client, {"message": "Enter your name:"})
-            username = receive(client)["name"]
-
-            # Add the client to the list
-            clients.append(client)
+            print(f"Accepted connection from {address}")
 
             # Start a new thread to handle the client
-            threading.Thread(target=handle_client, args=(client, username)).start()
+            threading.Thread(target=handle_client, args=(client,)).start()
 
     except Exception as e:
-        logger.info(f"Error in main loop: {e}")
+        print(f"Error in main loop: {e}")
 
     finally:
         server_socket.close()
-
-
-def receive(client_socket):
-    """Receives a JSON string from the client and converts it to a dictionary"""
-    json_string = client_socket.recv(1024).decode("utf-8")
-    return json.loads(json_string)
-
 
 if __name__ == "__main__":
     main()
