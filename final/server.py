@@ -8,7 +8,7 @@ logger.add("/var/log/family_feud_server.log")
 
 questions = ["Question 1", "Question 2", "Question 3"]
 current_question_index = 0
-#start_game_event = threading.Event()
+start_game_event = threading.Event()
 
 players = []
 
@@ -27,8 +27,9 @@ def countdown(client_socket):
         client_socket.sendall(str(i).encode('utf-8'))
 
     # Notify that the countdown is over
-    #start_game_event.set()
+    start_game_event.set()
 
+lock = threading.Lock()
 def handle_client(client_socket, client_id):
     # Send welcome message
     welcome_message = """\033[92m
@@ -77,8 +78,9 @@ __        __   _                            _
     logger.info(f"creator:{creator}\nplayer2:{player2}")
 
         # Notify the creator to start the game
-    player2["socket"].sendall("Waiting for the creator to start the game")
     creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
+
+    player2["socket"].sendall("Waiting for the creator to start the game")
     start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
 
 
@@ -127,28 +129,20 @@ __        __   _                            _
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
-    server.listen(4)  # Listen for up to 20 connections
+    server.listen(20)  # Listen for up to 20 connections
 
     print("Family Feud server started. Waiting for connections...")
 
     client_id = 1  # Client identifier
 
-    try:
-        while client_id <= 2:  # Accept only two connections
-            client_socket, client_addr = server.accept()
+    while True:
+        client_socket, client_addr = server.accept()
 
-            # Handle each client in a separate thread
-            client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
-            client_thread.start()
+        # Handle each client in a separate thread
+        client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
+        client_thread.start()
 
-            client_id += 1
-
-    except Exception as e:
-        print(f"Error accepting connections: {e}")
-
-    finally:
-        server.close()
-
+        client_id += 1
 
 if __name__ == "__main__":
     main()
