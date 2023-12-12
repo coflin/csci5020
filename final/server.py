@@ -1,4 +1,5 @@
 import socket
+from tabnanny import check
 import threading
 import time
 import sqlite3
@@ -6,6 +7,15 @@ import random
 from loguru import logger
 
 logger.add("/var/log/family_feud_server.log")
+
+
+def check_winner(username,player_scores):
+    if player_scores[0][username] > player_scores[1][username]:
+        return list(player_scores[0].keys)[0]
+    elif player_scores[0][username] < player_scores[1][username]:
+        return list(player_scores[1].keys)[0]
+    else:
+        return None
 
 def handle_client(client_socket,clients):
     try:
@@ -19,12 +29,16 @@ def handle_client(client_socket,clients):
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8")
         logger.info(f"Client {username} connected.")
-        player_score = {username: 0}
+        player_score={}
+        player_scores = []
 
         # Add the client to the list
         clients.append(client_socket)
         for client in clients:
-            logger.info(f"CLIENT INFO:{client}")
+            player_score[username] = 0
+            player_scores.append(player_score)
+
+        logger.info(f"CLIENT INFO:{player_scores}")
 
         # Wait for 2 players to join
         while len(clients) <2:
@@ -39,7 +53,7 @@ def handle_client(client_socket,clients):
         # Get a random question and send it to the client
         for question_number in range(1,3):
             question = get_random_question(used_questions)
-            client_socket.send(f"\033[1mQuestion {question_number}:\033[0m {question['prompt']}\n".encode("utf-8"))
+            client_socket.send(f"\033[1mQuestion {question_number}: {question['prompt']}\033[0m\n".encode("utf-8"))
                     
             # Simulate receiving the client's response
             time.sleep(1)
@@ -51,10 +65,17 @@ def handle_client(client_socket,clients):
 
             question_score = calculate_score(question,guesses)
             player_score[username] += question_score
+
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
             client_socket.send(f"\033[93mYour score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
             time.sleep(1)
+
+        winner = check_winner(username,player_scores)
+        if winner:
+            client_socket.send(f"{winner.upper()} WINS!")
+        else:
+            client_socket.send(f"IT'S A TIE!")
 
     except Exception as e:
         logger.error(f"Error handling client: {e}")
