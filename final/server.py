@@ -64,7 +64,7 @@ def handle_client(client_socket,clients):
             question_score = calculate_score(question,guesses)
             logger.info(f"QUESTION SCORE: {question_score}\n PLAYER SCORE: {player_score[username]}")
             player_score[username] += question_score
-            logger.info(f"PLAYER SCORE: {player_score[username]}")
+            logger.info(f"PLAYER SCORE: {player_score}")
 
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
