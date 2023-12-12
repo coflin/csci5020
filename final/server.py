@@ -1,21 +1,14 @@
 import socket
 import threading
 import time
+from loguru import logger
 
-SERVER_IP = '0.0.0.0'
-SERVER_PORT = 5020
+logger.add("/var/log/family_feud_server.log")
 
-questions = [
-    {"prompt": "What is the capital of France?", "answer": "Paris"},
-    {"prompt": "What is 2 + 2?", "answer": "4"},
-]
-
-clients = []
-
-def handle_client(client_socket):
+def handle_client(client_socket,clients):
     try:
-        # if len(clients) > 2:
-        #     clients = []
+        if len(clients) > 2:
+            clients = []
         # Send a welcome message
         client_socket.send(b"Enter your name: ")
         
@@ -57,19 +50,30 @@ def handle_client(client_socket):
 
 def get_random_question():
     """Gets and returns a random question from the list"""
+    questions = [
+    {"prompt": "What is the capital of France?", "answer": "Paris"},
+    {"prompt": "What is 2 + 2?", "answer": "4"},
+    ]
     for question in questions:
         return question
+
+@logger.catch()
 
 def main():
     # Create a server socket
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    SERVER_IP = '0.0.0.0'
+    SERVER_PORT = 5020
 
     # Bind the server socket to the IP and port
     server_socket.bind((SERVER_IP, SERVER_PORT))
 
     # Listen for incoming connections
     server_socket.listen(2)
-    print(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
+    logger.info(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
+    
+    clients = []
 
     try:
         # Accept incoming connections
@@ -78,7 +82,7 @@ def main():
             print(f"Accepted connection from {address}")
 
             # Start a new thread to handle the client
-            threading.Thread(target=handle_client, args=(client,)).start()
+            threading.Thread(target=handle_client, args=(client,clients)).start()
 
     except Exception as e:
         print(f"Error in main loop: {e}")
