@@ -12,13 +12,14 @@ def handle_client(client_socket,clients):
         # Send a welcome message
         client_socket.send(b"Enter your username: ")
         
+        used_questions = []
         guesses = []
 
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8")
         print(f"Client {username} connected.")
         player_score = {username: 0}
-        
+
         # Add the client to the list
         clients.append(client_socket)
         
@@ -34,7 +35,7 @@ def handle_client(client_socket,clients):
 
         # Get a random question and send it to the client
         for question_number in range(1,3):
-            question = get_random_question()
+            question = get_random_question(used_questions)
             client_socket.send(f"Question {question_number}: {question['prompt']}\n".encode("utf-8"))
                     
             # Simulate receiving the client's response
@@ -75,7 +76,7 @@ def update_score(player_score,username,question_score):
 
 def get_random_question(used_questions):
     """Gets and returns a random question that has not been used before"""
-    conn = sqlite3.connect(DB_FILE)
+    conn = sqlite3.connect("questions.db")
     cursor = conn.cursor()
     logger.info("connected to database")
 
