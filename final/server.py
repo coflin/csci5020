@@ -38,11 +38,18 @@ __        __   _                            _
   \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
    \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
                                                      
- ____             _             _____              _ _ 
-/ ___| _ __   ___| |__   __ _  |  ___|__ _   _  __| | |
-\___ \| '_ \ / _ \ '_ \ / _` | | |_ / _ \ | | |/ _` | |
- ___) | | | |  __/ | | | (_| | |  _|  __/ |_| | (_| |_|
-|____/|_| |_|\___|_| |_|\__,_| |_|  \___|\__,_|\__,_(_)
+ ____             _           _     
+/ ___| _ __   ___| |__   __ _( )___ 
+\___ \| '_ \ / _ \ '_ \ / _` |// __|
+ ___) | | | |  __/ | | | (_| | \__ \
+|____/|_| |_|\___|_| |_|\__,_| |___/
+                                    
+ _____               _ _         _____              _ 
+|  ___|_ _ _ __ ___ (_) |_   _  |  ___|__ _   _  __| |
+| |_ / _` | '_ ` _ \| | | | | | | |_ / _ \ | | |/ _` |
+|  _| (_| | | | | | | | | |_| | |  _|  __/ |_| | (_| |
+|_|  \__,_|_| |_| |_|_|_|\__, | |_|  \___|\__,_|\__,_|
+                         |___/                        
                                                        
 \033[0m""" + "\n Enter a username: "
     
@@ -58,71 +65,69 @@ __        __   _                            _
     logger.info(f"Players list: {players}")
 
     # Send personalized greeting and prompt to create/join a room
-    greeting = f"Hello {user_name}! Do you want to 'create' or 'join' a room? "
+    greeting = f"Hello {user_name}!"
     client_socket.sendall(greeting.encode('utf-8'))
 
     # Receive user's response (create/join)
     response = client_socket.recv(1024).decode('utf-8').strip()
 
     # Process user's response
-    while response.lower() != "create" and response.lower() != "join":
-        client_socket.sendall("Invalid response. Please enter 'create' or 'join' ".encode('utf-8'))
-        response = client_socket.recv(1024).decode('utf-8').strip()
+    # while response.lower() != "create" and response.lower() != "join":
+    #     client_socket.sendall("Invalid response. Please enter 'create' or 'join' ".encode('utf-8'))
+    #     response = client_socket.recv(1024).decode('utf-8').strip()
 
-    if response.lower() == "create":
-        client_socket.sendall("Ok! Creating a room...\n".encode('utf-8'))
+    # if response.lower() == "create":
+    client_socket.sendall("Ok! Creating a room...\n".encode('utf-8'))
 
-        while len(players) < 2:
-            time.sleep(1)
+    while len(players) < 2:
+        time.sleep(1)
 
-        #client_socket.sendall("Start game? Y/N: ")
-        # Notify both players to start the game
+        # Notify the creator to start the game
+    client_socket.sendall("Type 'start' to begin the game: ".encode('utf-8'))
+
+        # Wait for the creator to type 'start'
+    start_game_response = client_socket.recv(1024).decode('utf-8').strip().lower()
+
+    if start_game_response == "start":
+            # Notify both players to start the game
+        countdown_threads = []
         for player in players:
-            player["socket"].sendall("Start game?".encode('utf-8'))
+            player["socket"].sendall("The game is starting!".encode('utf-8'))
+            client_socket.sendall("Game starting in...".encode('utf-8'))
+            countdown_thread_creator = threading.Thread(target=countdown, args=(client_socket,))
+            countdown_thread_creator.start()
+            countdown_threads.append(countdown_threads)
 
-        # Wait for both players to agree to start the game
-        start_game_event.wait()
-
-        # Send countdown to both players
-        for player in players:
-            player["socket"].sendall("Game starting in...".encode('utf-8'))
-            countdown_thread = threading.Thread(target=countdown, args=(player["socket"],))
-            countdown_thread.start()
-
-        # Wait for the countdown to finish
-        countdown_thread.join()
+        # Wait for the countdown threads to finish
+    for thread in countdown_threads:
+        thread.join()
 
         # Send the first question to both players
-        question = get_next_question()
-        for player in players:
-            player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
+    question = get_next_question()
+    for player in players:
+        player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
 
-#-----------------------------------------------------------------------------------------------------
-    elif response.lower() == "join":
-        client_socket.sendall("Ok! Joining a room...\n".encode('utf-8'))
+    # elif response.lower() == "join":
+    #     client_socket.sendall("Ok! Joining a room...\n".encode('utf-8'))
 
-        # while len(players) < 2:
-        #     time.sleep(3)
-        #client_socket.sendall("Start game?")    
-        # Notify both players to start the game
-        # for player in players:
-        #     player["socket"].sendall("Start game?".encode('utf-8'))
-        # Wait for both players to agree to start the game
-        start_game_event.wait()
+        # Notify the joiner to wait for the creator
+        # client_socket.sendall("Waiting for the creator to start the game...".encode('utf-8'))
 
-        # Send countdown to both players
-        for player in players:
-            player["socket"].sendall("Game starting in...".encode('utf-8'))
-            countdown_thread = threading.Thread(target=countdown, args=(player["socket"],))
-            countdown_thread.start()
+        # # Wait for the creator to start the game
+        # start_game_event.wait()
+
+        # # Send countdown to the joiner
+        # client_socket.sendall("Game starting in...".encode('utf-8'))
+        # countdown_thread_joiner = threading.Thread(target=countdown, args=(client_socket,))
+        # countdown_thread_joiner.start()
 
         # Wait for the countdown to finish
-        countdown_thread.join()
+        # countdown_thread_joiner.join()
 
-        # Send the first question to both players
-        question = get_next_question()
-        for player in players:
-            player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
+        # # Send the first question to the joiner
+        # question = get_next_question()
+        # client_socket.sendall(f"Your question is: {question}".encode('utf-8'))
+
 
 @logger.catch
 def main():
