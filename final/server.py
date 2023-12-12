@@ -29,6 +29,7 @@ def countdown(client_socket):
     # Notify that the countdown is over
     start_game_event.set()
 
+lock = threading.Lock()
 def handle_client(client_socket, client_id):
     # Send welcome message
     welcome_message = """\033[92m
@@ -76,51 +77,52 @@ __        __   _                            _
 
     logger.info(f"creator:{creator}\nplayer2:{player2}")
 
-    # Notify the creator to start the game
-    creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
-    #start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
+    with lock:
+        # Notify the creator to start the game
+        creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
+        #start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
 
-    player2["socket"].sendall("Waiting for the creator to start the game")
+        player2["socket"].sendall("Waiting for the creator to start the game")
 
-    # if start_game_response == "start":
-    #     # Notify both players to start the game
-    #     countdown_threads = []
-    #     for player in players:
-    #         player["socket"].sendall("The game is starting!".encode('utf-8'))
-    #         player["socket"].sendall("Game starting in...".encode('utf-8'))
-    #         countdown_thread_creator = threading.Thread(target=countdown, args=(player["socket"],))
-    #         countdown_thread_creator.start()
-    #         countdown_threads.append(countdown_thread_creator)
+        # if start_game_response == "start":
+        #     # Notify both players to start the game
+        #     countdown_threads = []
+        #     for player in players:
+        #         player["socket"].sendall("The game is starting!".encode('utf-8'))
+        #         player["socket"].sendall("Game starting in...".encode('utf-8'))
+        #         countdown_thread_creator = threading.Thread(target=countdown, args=(player["socket"],))
+        #         countdown_thread_creator.start()
+        #         countdown_threads.append(countdown_thread_creator)
 
-    #     # Wait for the countdown threads to finish
-    #     for thread in countdown_threads:
-    #         thread.join()
+        #     # Wait for the countdown threads to finish
+        #     for thread in countdown_threads:
+        #         thread.join()
 
-        # Send the first question to both players
-    question = get_next_question()
-    for player in players:
-        player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
+            # Send the first question to both players
+        question = get_next_question()
+        for player in players:
+            player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
 
-    # elif response.lower() == "join":
-    #     client_socket.sendall("Ok! Joining a room...\n".encode('utf-8'))
+        # elif response.lower() == "join":
+        #     client_socket.sendall("Ok! Joining a room...\n".encode('utf-8'))
 
-        # Notify the joiner to wait for the creator
-        # client_socket.sendall("Waiting for the creator to start the game...".encode('utf-8'))
+            # Notify the joiner to wait for the creator
+            # client_socket.sendall("Waiting for the creator to start the game...".encode('utf-8'))
 
-        # # Wait for the creator to start the game
-        # start_game_event.wait()
+            # # Wait for the creator to start the game
+            # start_game_event.wait()
 
-        # # Send countdown to the joiner
-        # client_socket.sendall("Game starting in...".encode('utf-8'))
-        # countdown_thread_joiner = threading.Thread(target=countdown, args=(client_socket,))
-        # countdown_thread_joiner.start()
+            # # Send countdown to the joiner
+            # client_socket.sendall("Game starting in...".encode('utf-8'))
+            # countdown_thread_joiner = threading.Thread(target=countdown, args=(client_socket,))
+            # countdown_thread_joiner.start()
 
-        # Wait for the countdown to finish
-        # countdown_thread_joiner.join()
+            # Wait for the countdown to finish
+            # countdown_thread_joiner.join()
 
-        # # Send the first question to the joiner
-        # question = get_next_question()
-        # client_socket.sendall(f"Your question is: {question}".encode('utf-8'))
+            # # Send the first question to the joiner
+            # question = get_next_question()
+            # client_socket.sendall(f"Your question is: {question}".encode('utf-8'))
 
 
 @logger.catch
