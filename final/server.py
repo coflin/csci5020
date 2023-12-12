@@ -129,20 +129,28 @@ __        __   _                            _
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
-    server.listen(20)  # Listen for up to 20 connections
+    server.listen(2)  # Listen for up to 20 connections
 
     print("Family Feud server started. Waiting for connections...")
 
     client_id = 1  # Client identifier
 
-    while True:
-        client_socket, client_addr = server.accept()
+    try:
+        while client_id <= 2:  # Accept only two connections
+            client_socket, client_addr = server.accept()
 
-        # Handle each client in a separate thread
-        client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
-        client_thread.start()
+            # Handle each client in a separate thread
+            client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
+            client_thread.start()
 
-        client_id += 1
+            client_id += 1
+
+    except Exception as e:
+        print(f"Error accepting connections: {e}")
+        
+    finally:
+        server.close()
+
 
 if __name__ == "__main__":
     main()
