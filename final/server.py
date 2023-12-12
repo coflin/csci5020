@@ -12,7 +12,7 @@ def handle_client(client_socket,clients):
         # Send a welcome message
         client_socket.send(b"Enter your username: ")
         
-        score = 0
+        player_score = {username: 0}
         guesses = []
 
         # Receive and print the client's name
@@ -33,20 +33,24 @@ def handle_client(client_socket,clients):
             client_socket.send(f"{i}..\n".encode("utf-8"))
 
         # Get a random question and send it to the client
-        question = get_random_question()
-        client_socket.send(f"Question: {question['prompt']}\n".encode("utf-8"))
-                
-        # Simulate receiving the client's response
-        time.sleep(1)
-        for i in range(1,6):
-            client_socket.send(f"Guess {i}: ".encode("utf-8"))
-            guess = client_socket.recv(1024).decode("utf-8")
-            guesses.append(guess)
-        logger.info(f"Client {username} answered: {guesses}")
+        for question_number in range(1,3):
+            question = get_random_question()
+            client_socket.send(f"Question {question_number}: {question['prompt']}\n".encode("utf-8"))
+                    
+            # Simulate receiving the client's response
+            time.sleep(1)
+            for i in range(1,6):
+                client_socket.send(f"Guess {i}: ".encode("utf-8"))
+                guess = client_socket.recv(1024).decode("utf-8")
+                guesses.append(guess)
+            logger.info(f"Client {username} answered: {guesses}")
 
-        score = calculate_score(question,score,guesses)
-        client_socket.send(f"Your score is: {score}".encode("utf-8"))
-        
+            question_score = calculate_score(question,guesses)
+            client_socket.send(f"Your score for this question is: {question_score}".encode("utf-8"))
+            
+            total_score = update_score(player_score,username,question_score)
+            client_socket.send(f"Your score so far: {total_score}\n\n".encode("utf-8"))
+
     except Exception as e:
         logger.error(f"Error handling client: {e}")
     
@@ -54,33 +58,48 @@ def handle_client(client_socket,clients):
         # Close the client socket
         client_socket.close()
 
-def calculate_score(question,score,guesses):
-    logger.info("IN CALCULATE SCORE FUNCTION")
+def calculate_score(question,guesses):
     for guess in guesses:
-        logger.info(guess.strip())
         for i in range(1,6):
             logger.info(question[f'guess{i}'])
             if guess.strip() == question[f'guess{i}']:
-                logger.info("in guess == question condition")
-                score += question[f'guess{i}_score']
+                score = question[f'guess{i}_score']
                 logger.info(f"SCORE: {score}")
     return score
 
-def get_random_question():
-    """Gets and returns a random question from the list"""
-    conn = sqlite3.connect("/home/ubuntu/csci5020/final/questions.db")
+def update_score(player_score,username,question_score):
+    total_score = player_score[username]+question_score
+    player_score = {username:total_score}
+    return player_score
+
+
+def get_random_question(used_questions):
+    """Gets and returns a random question that has not been used before"""
+    conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     logger.info("connected to database")
-    cursor.execute("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1;")
-    question_data = cursor.fetchone()
-    logger.info(f"Question data: {question_data}")
-    # Convert the question data into a dictionary
-    columns = [column[0] for column in cursor.description]
-    question = dict(zip(columns, question_data))
+
+    # Get all questions
+    cursor.execute("SELECT * FROM questions;")
+    all_questions = cursor.fetchall()
+
+    # Filter out used questions
+    available_questions = [q for q in all_questions if q['prompt'] not in used_questions]
+
+    if not available_questions:
+        # Reset used questions if all have been used
+        used_questions.clear()
+        available_questions = all_questions
+
+    # Select a random question from available questions
+    question = random.choice(available_questions)
+
+    # Add the used question to the list
+    used_questions.append(question['prompt'])
 
     conn.close()
     logger.info(f"Question: {question}")
-    return question 
+    return question
 
 @logger.catch()
 def main():
