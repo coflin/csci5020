@@ -6,11 +6,14 @@ from loguru import logger
 logger.add("/var/log/family_feud_server.log")
 
 def handle_client(client_socket,clients):
-    try:        
+    try:
         
         # Send a welcome message
         client_socket.send(b"Enter your username: ")
         
+        score = 0
+        guesses = []
+
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8")
         print(f"Client {username} connected.")
@@ -34,15 +37,17 @@ def handle_client(client_socket,clients):
         # Get a random question and send it to the client
         question = get_random_question()
         client_socket.send(f"Question: {question['prompt']}\n".encode("utf-8"))
-        
-        # # Simulate waiting for the client's response
-        # time.sleep(5)  # Adjust this delay as needed
-        
+                
         # Simulate receiving the client's response
-        client_response = client_socket.recv(1024).decode("utf-8")
-        logger.info(f"Client {username} answered: {client_response}")
-        if client_response.lower() == question['answer']:
-            client_socket.send(f"Correct! You get 5 points!")
+        time.sleep(1)
+        for i in range(1,6):
+            client_socket.send(f"Guess {i}: ")
+            guess = client_socket.recv(1024).decode("utf-8")
+            guesses.append(guess)
+            logger.info(f"Client {username} answered: {guess}")
+
+        score = calculate_score(question,score,guesses)
+        client_socket.send(f"Your score is: {score}")
         
     except Exception as e:
         logger.error(f"Error handling client: {e}")
@@ -51,11 +56,23 @@ def handle_client(client_socket,clients):
         # Close the client socket
         client_socket.close()
 
+def calculate_score(question,score,guesses):
+    for guess in guesses:
+        for i in range(1,6):
+            if guess == question[f'guess{i}']:
+                score += question[f'guess{i}_score']
+    return score
+
 def get_random_question():
     """Gets and returns a random question from the list"""
     questions = [
-    {"prompt": "What is the capital of France?", "answer": "paris"},
-    {"prompt": "What is 2 + 2?", "answer": "4"},
+    {'prompt': 'question1', 
+            'guess1': 'a', 'guess1_score': 30,
+            'guess2': 'b', 'guess2_score': 25, 
+            'guess3': 'c', 'guess3_score': 20,
+            'guess4': 'd', 'guess4_score': 15,
+            'guess5': 'e', 'guess5_score': 10
+        }
     ]
     for question in questions:
         return question
