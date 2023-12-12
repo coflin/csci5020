@@ -74,6 +74,8 @@ __        __   _                            _
     creator = players[0]["socket"]
     player2 = players[1]["socket"]
 
+    logger.info(f"creator:{creator}\nplayer2:{player2}")
+
     # Notify the creator to start the game
     creator.sendall("Type 'start' to begin the game: ".encode('utf-8'))
     start_game_response = creator.recv(1024).decode('utf-8').strip().lower()
