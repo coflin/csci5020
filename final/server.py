@@ -36,6 +36,7 @@ def handle_client(client_socket,clients):
 
         # Get a random question and send it to the client
         question = get_random_question()
+        logger.info(f"QUESTION:  {question}")
         client_socket.send(f"Question: {question['prompt']}\n".encode("utf-8"))
                 
         # Simulate receiving the client's response
