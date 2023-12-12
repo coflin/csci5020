@@ -50,8 +50,7 @@ def insert_question(prompt, guesses):
     conn.close()
 
 # Check if the database file exists, create it if not
-if not os.path.exists(DB_FILE):
-    create_database()
+create_database()
 
 new_questions = [
     {
