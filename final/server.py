@@ -2,6 +2,7 @@ import socket
 import threading
 import time
 import sqlite3
+import random
 from loguru import logger
 
 logger.add("/var/log/family_feud_server.log")
@@ -17,7 +18,7 @@ def handle_client(client_socket,clients):
 
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8")
-        print(f"Client {username} connected.")
+        logger.info(f"Client {username} connected.")
         player_score = {username: 0}
 
         # Add the client to the list
@@ -83,9 +84,11 @@ def get_random_question(used_questions):
     # Get all questions
     cursor.execute("SELECT * FROM questions;")
     all_questions = cursor.fetchall()
+    logger.info(f"ALL_QUESTIONS VAR: {all_questions}")
 
     # Filter out used questions
     available_questions = [q for q in all_questions if q['prompt'] not in used_questions]
+    logger.info(f"AVAILABLE_QUESTIONS VAR: {all_questions}")
 
     if not available_questions:
         # Reset used questions if all have been used
