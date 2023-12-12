@@ -8,7 +8,6 @@ SERVER_PORT = 5020
 questions = [
     {"prompt": "What is the capital of France?", "answer": "Paris"},
     {"prompt": "What is 2 + 2?", "answer": "4"},
-    # Add more questions as needed
 ]
 
 clients = []
@@ -25,8 +24,13 @@ def handle_client(client_socket):
         # Add the client to the list
         clients.append(client_socket)
         
+        # Wait for 2 players to join
+        while len(clients) <2:
+            time.sleep(1)
+
         # Send a starting game message
-        client_socket.send(b"Starting game in 3..2..1..\n")
+        client_socket.send(b"Starting game in 3..\n")
+        time.sleep(3)
         
         # Get a random question and send it to the client
         question = get_random_question()
@@ -48,7 +52,8 @@ def handle_client(client_socket):
 
 def get_random_question():
     """Gets and returns a random question from the list"""
-    return questions[0]  # Replace this with logic to get a random question
+    for question in questions:
+        return question
 
 def main():
     # Create a server socket
