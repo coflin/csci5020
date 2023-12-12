@@ -85,20 +85,27 @@ def get_random_question(used_questions):
     cursor.execute("SELECT * FROM questions;")
     all_questions = cursor.fetchall()
 
+    # Convert rows to dictionaries for easier access
+    questions_dict_list = []
+    for row in all_questions:
+        columns = [column[0] for column in cursor.description]
+        question_dict = dict(zip(columns, row))
+        questions_dict_list.append(question_dict)
+
     # Filter out used questions
-    available_questions = [q for q in all_questions if q[1] not in used_questions]
+    available_questions = [q for q in questions_dict_list if q["prompt"] not in used_questions]
 
     if not available_questions:
         # Reset used questions if all have been used
         used_questions.clear()
-        available_questions = all_questions
+        available_questions = questions_dict_list
 
     # Select a random question from available questions
     question = random.choice(available_questions)
     logger.info(f"QUESTION: {question}")
 
     # Add the used question to the list
-    used_questions.append(question['prompt'])
+    used_questions.append(question["prompt"])
 
     conn.close()
     logger.info(f"Question: {question}")
