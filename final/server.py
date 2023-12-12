@@ -37,6 +37,7 @@ def handle_client(client_socket,clients):
         # Get a random question and send it to the client
         for question_number in range(1,3):
             question = get_random_question(used_questions)
+            logger.info(f"QUESTION QUESTION: {question}")
             client_socket.send(f"Question {question_number}: {question['prompt']}\n".encode("utf-8"))
                     
             # Simulate receiving the client's response
@@ -65,7 +66,7 @@ def calculate_score(question,guesses):
         for i in range(1,6):
             logger.info(question[f'guess{i}'])
             if guess.strip() == question[f'guess{i}']:
-                score = question[f'guess{i}_score']
+                score += question[f'guess{i}_score']
                 logger.info(f"SCORE: {score}")
     return score
 
@@ -102,13 +103,11 @@ def get_random_question(used_questions):
 
     # Select a random question from available questions
     question = random.choice(available_questions)
-    logger.info(f"QUESTION: {question}")
 
     # Add the used question to the list
     used_questions.append(question["prompt"])
 
     conn.close()
-    logger.info(f"Question: {question}")
     return question
 
 @logger.catch()
