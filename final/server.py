@@ -44,7 +44,7 @@ def handle_client(client_socket,clients):
             guesses.append(guess)
         logger.info(f"Client {username} answered: {guesses}")
 
-        #score = calculate_score(question,score,guesses)
+        score = calculate_score(question,score,guesses)
         client_socket.send(f"Your score is: {score}".encode("utf-8"))
         
     except Exception as e:
@@ -59,6 +59,7 @@ def calculate_score(question,score,guesses):
         for i in range(1,6):
             if guess == question[f'guess{i}']:
                 score += question[f'guess{i}_score']
+                logger.info(f"SCORE: {score}")
     return score
 
 def get_random_question():
