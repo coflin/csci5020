@@ -55,11 +55,13 @@ if not os.path.exists(DB_FILE):
 
 new_questions = [
     {
-        "prompt": "What is the capital of Germany?",
+        "prompt": "What is the best honeymoon destination?",
         "guesses": [
-            {"guess": "Berlin", "score": 30},
-            {"guess": "Paris", "score": 20},
-            {"guess": "London", "score": 10}
+            {"guess": "maldives", "score": 30},
+            {"guess": "paris", "score": 20},
+            {"guess": "hawaii", "score": 10},
+            {"guess": "bali", "score": 5},
+            {"guess": "switzerland", "score": 2}
         ]
     },
     {
@@ -67,7 +69,9 @@ new_questions = [
         "guesses": [
             {"guess": "fat", "score": 30},
             {"guess": "mat", "score": 20},
-            {"guess": "rat", "score": 10}
+            {"guess": "rat", "score": 10},
+            {"guess": "hat", "score": 5},
+            {"guess": "pat", "score": 2}
         ]
     }
 ]
