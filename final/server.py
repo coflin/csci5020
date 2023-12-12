@@ -79,9 +79,10 @@ __        __   _                            _
 
         # Notify the creator to start the game
     creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
-        #start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
 
     player2["socket"].sendall("Waiting for the creator to start the game")
+    start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
+
 
         # if start_game_response == "start":
         #     # Notify both players to start the game
@@ -138,9 +139,8 @@ def main():
         client_socket, client_addr = server.accept()
 
         # Handle each client in a separate thread
-        handle_client(client_socket, client_id)
-        #client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
-        #client_thread.start()
+        client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
+        client_thread.start()
 
         client_id += 1
 
