@@ -77,19 +77,19 @@ __        __   _                            _
     #     response = client_socket.recv(1024).decode('utf-8').strip()
 
     # if response.lower() == "create":
-    client_socket.sendall("Ok! Creating a room...\n".encode('utf-8'))
+    #client_socket.sendall("Ok! Creating a room...\n".encode('utf-8'))
 
     while len(players) < 2:
         time.sleep(1)
 
-        # Notify the creator to start the game
+    # Notify the creator to start the game
     client_socket.sendall("Type 'start' to begin the game: ".encode('utf-8'))
 
-        # Wait for the creator to type 'start'
+    # Wait for the creator to type 'start'
     start_game_response = client_socket.recv(1024).decode('utf-8').strip().lower()
 
     if start_game_response == "start":
-            # Notify both players to start the game
+        # Notify both players to start the game
         countdown_threads = []
         for player in players:
             player["socket"].sendall("The game is starting!".encode('utf-8'))
