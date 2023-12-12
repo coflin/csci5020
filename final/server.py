@@ -77,7 +77,7 @@ __        __   _                            _
     logger.info(f"creator:{creator}\nplayer2:{player2}")
 
     # Notify the creator to start the game
-    creator.sendall("Type 'start' to begin the game: ".encode('utf-8'))
+    creator.send("Type 'start' to begin the game: ".encode('utf-8'))
     start_game_response = creator.recv(1024).decode('utf-8').strip().lower()
 
     player2.sendall("Waiting for the creator to start the game")
@@ -92,9 +92,9 @@ __        __   _                            _
             countdown_thread_creator.start()
             countdown_threads.append(countdown_thread_creator)
 
-    # Wait for the countdown threads to finish
-    for thread in countdown_threads:
-        thread.join()
+        # Wait for the countdown threads to finish
+        for thread in countdown_threads:
+            thread.join()
 
         # Send the first question to both players
     question = get_next_question()
