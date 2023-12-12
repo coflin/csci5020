@@ -25,7 +25,7 @@ def handle_client(client_socket,clients):
         clients.append(client_socket)
         for client in clients:
             logger.info(f"CLIENT INFO:{client}")
-            
+
         # Wait for 2 players to join
         while len(clients) <2:
             time.sleep(1)
@@ -39,21 +39,21 @@ def handle_client(client_socket,clients):
         # Get a random question and send it to the client
         for question_number in range(1,3):
             question = get_random_question(used_questions)
-            client_socket.send(f"Question {question_number}: {question['prompt']}\n".encode("utf-8"))
+            client_socket.send(f"\033[1mQuestion {question_number}:\033[0m {question['prompt']}\n".encode("utf-8"))
                     
             # Simulate receiving the client's response
             time.sleep(1)
             for i in range(1,6):
-                client_socket.send(f"Guess {i}: ".encode("utf-8"))
+                client_socket.send(f"\033[93mGuess {i}:\033[0m ".encode("utf-8"))
                 guess = client_socket.recv(1024).decode("utf-8")
                 guesses.append(guess)
             logger.info(f"Client {username} answered: {guesses}")
 
             question_score = calculate_score(question,guesses)
             player_score[username] += question_score
-            client_socket.send(f"Your score for this question is: {question_score}".encode("utf-8"))
+            client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
-            client_socket.send(f"Your score so far: {player_score[username]}\n\n".encode("utf-8"))
+            client_socket.send(f"\033[93mYour score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
             time.sleep(1)
 
     except Exception as e:
