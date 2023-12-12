@@ -78,7 +78,7 @@ __        __   _                            _
 
     # Notify the creator to start the game
     creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
-    start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
+    #start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
 
     player2["socket"].sendall("Waiting for the creator to start the game")
 
