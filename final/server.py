@@ -89,7 +89,7 @@ def calculate_score(question,guesses):
     for guess in guesses:
         for i in range(1,6):
             logger.info(question[f'guess{i}'])
-            if guess.strip() == question[f'guess{i}']:
+            if guess.strip().lower() == question[f'guess{i}']:
                 score += question[f'guess{i}_score']
                 logger.info(f"SCORE: {score}")
     return score
