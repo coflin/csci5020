@@ -77,12 +77,11 @@ __        __   _                            _
 
     logger.info(f"creator:{creator}\nplayer2:{player2}")
 
-    with lock:
         # Notify the creator to start the game
-        creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
+    creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
         #start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
 
-        player2["socket"].sendall("Waiting for the creator to start the game")
+    player2["socket"].sendall("Waiting for the creator to start the game")
 
         # if start_game_response == "start":
         #     # Notify both players to start the game
@@ -99,9 +98,9 @@ __        __   _                            _
         #         thread.join()
 
             # Send the first question to both players
-        question = get_next_question()
-        for player in players:
-            player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
+    question = get_next_question()
+    for player in players:
+        player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
 
         # elif response.lower() == "join":
         #     client_socket.sendall("Ok! Joining a room...\n".encode('utf-8'))
@@ -129,7 +128,7 @@ __        __   _                            _
 def main():
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(('0.0.0.0', 5020))
-    server.listen(20)  # Listen for up to 2 connections
+    server.listen(20)  # Listen for up to 20 connections
 
     print("Family Feud server started. Waiting for connections...")
 
@@ -139,8 +138,9 @@ def main():
         client_socket, client_addr = server.accept()
 
         # Handle each client in a separate thread
-        client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
-        client_thread.start()
+        handle_client(client_socket, client_id)
+        #client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
+        #client_thread.start()
 
         client_id += 1
 
