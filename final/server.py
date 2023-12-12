@@ -68,25 +68,17 @@ __        __   _                            _
     greeting = f"Hello {user_name}!"
     client_socket.sendall(greeting.encode('utf-8'))
 
-    # Receive user's response (create/join)
-    #response = client_socket.recv(1024).decode('utf-8').strip()
-
-    # Process user's response
-    # while response.lower() != "create" and response.lower() != "join":
-    #     client_socket.sendall("Invalid response. Please enter 'create' or 'join' ".encode('utf-8'))
-    #     response = client_socket.recv(1024).decode('utf-8').strip()
-
-    # if response.lower() == "create":
-    #client_socket.sendall("Ok! Creating a room...\n".encode('utf-8'))
-
     while len(players) < 2:
         time.sleep(1)
 
-    # Notify the creator to start the game
-    client_socket.sendall("Type 'start' to begin the game: ".encode('utf-8'))
+    creator = players[0]["socket"]
+    player2 = players[1]["socket"]
 
-    # Wait for the creator to type 'start'
-    start_game_response = client_socket.recv(1024).decode('utf-8').strip().lower()
+    # Notify the creator to start the game
+    creator.sendall("Type 'start' to begin the game: ".encode('utf-8'))
+    start_game_response = creator.recv(1024).decode('utf-8').strip().lower()
+
+    player2.sendall("Waiting for the creator to start the game")
 
     if start_game_response == "start":
         # Notify both players to start the game
@@ -94,11 +86,11 @@ __        __   _                            _
         for player in players:
             player["socket"].sendall("The game is starting!".encode('utf-8'))
             player["socket"].sendall("Game starting in...".encode('utf-8'))
-        countdown_thread_creator = threading.Thread(target=countdown, args=(client_socket,))
-        countdown_thread_creator.start()
-        countdown_threads.append(countdown_threads)
+            countdown_thread_creator = threading.Thread(target=countdown, args=(player["socket"],))
+            countdown_thread_creator.start()
+            countdown_threads.append(countdown_threads)
 
-        # Wait for the countdown threads to finish
+    # Wait for the countdown threads to finish
     for thread in countdown_threads:
         thread.join()
 
