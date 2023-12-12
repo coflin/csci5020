@@ -1,9 +1,12 @@
 import socket
 import threading
 import time
+import sqlite3
 from loguru import logger
 
 logger.add("/var/log/family_feud_server.log")
+
+DB_FILE = "questions.db"
 
 def handle_client(client_socket,clients):
     try:
@@ -27,12 +30,9 @@ def handle_client(client_socket,clients):
 
         # Send a starting game message
         client_socket.send(b"Starting game in\n")
-        time.sleep(1)
-        client_socket.send(b"3..\n")
-        time.sleep(1)
-        client_socket.send(b"2..\n")
-        time.sleep(1)
-        client_socket.send(b"1..\n")
+        for i in range(3,0,-1):
+            time.sleep(1)
+            client_socket.send(f"{i}..\n".encode("utf-8"))
 
         # Get a random question and send it to the client
         question = get_random_question()
@@ -46,7 +46,7 @@ def handle_client(client_socket,clients):
             guesses.append(guess)
             logger.info(f"Client {username} answered: {guess}")
 
-        score = calculate_score(question,score,guesses)
+        #score = calculate_score(question,score,guesses)
         client_socket.send(f"Your score is: {score}".encode("utf-8"))
         
     except Exception as e:
@@ -65,20 +65,20 @@ def calculate_score(question,score,guesses):
 
 def get_random_question():
     """Gets and returns a random question from the list"""
-    questions = [
-    {'prompt': 'question1', 
-            'guess1': 'a', 'guess1_score': 30,
-            'guess2': 'b', 'guess2_score': 25, 
-            'guess3': 'c', 'guess3_score': 20,
-            'guess4': 'd', 'guess4_score': 15,
-            'guess5': 'e', 'guess5_score': 10
-        }
-    ]
-    for question in questions:
-        return question
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1;")
+    question_data = cursor.fetchone()
+
+    # Convert the question data into a dictionary
+    columns = [column[0] for column in cursor.description]
+    question = dict(zip(columns, question_data))
+
+    conn.close()
+    return question 
 
 @logger.catch()
-
 def main():
     # Create a server socket
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
