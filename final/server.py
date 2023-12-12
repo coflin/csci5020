@@ -11,9 +11,9 @@ logger.add("/var/log/family_feud_server.log")
 
 def check_winner(username,player_scores):
     if player_scores[0][username] > player_scores[1][username]:
-        return list(player_scores[0].keys)[0]
+        return list(player_scores[0].keys())[0]
     elif player_scores[0][username] < player_scores[1][username]:
-        return list(player_scores[1].keys)[0]
+        return list(player_scores[1].keys())[0]
     else:
         return None
 
@@ -33,11 +33,9 @@ def handle_client(client_socket,clients):
         player_scores = []
 
         # Add the client to the list
-        clients.append(client_socket)
-        for client in clients:
-            player_score[username] = 0
-            player_scores.append(player_score)
-
+        clients.append((client_socket, username))
+        for client, username in clients:
+            player_scores.append({username: 0})
         logger.info(f"CLIENT INFO:{player_scores}")
 
         # Wait for 2 players to join
@@ -73,9 +71,9 @@ def handle_client(client_socket,clients):
 
         winner = check_winner(username,player_scores)
         if winner:
-            client_socket.send(f"{winner.upper()} WINS!")
+            client_socket.send(f"{winner.upper()} WINS!".encode("utf-8"))
         else:
-            client_socket.send(f"IT'S A TIE!")
+            client_socket.send(f"IT'S A TIE!".encode("utf-8"))
 
     except Exception as e:
         logger.error(f"Error handling client: {e}")
