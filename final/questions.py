@@ -35,7 +35,7 @@ def insert_question(prompt, guesses):
     cursor = conn.cursor()
 
     # Generate the SQL query for inserting a new question
-    columns = ["prompt"] + [f"guess{i}" for i in range(1, 4)] + [f"guess{i}_score" for i in range(1, 4)]
+    columns = ["prompt"] + [f"guess{i}" for i in range(1, 6)] + [f"guess{i}_score" for i in range(1, 6)]
     values = [prompt] + [guess["guess"] for guess in guesses] + [guess["score"] for guess in guesses]
     placeholders = ",".join(["?"] * len(columns))
 
