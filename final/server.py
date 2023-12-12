@@ -1,5 +1,4 @@
 import socket
-from tabnanny import check
 import threading
 import time
 import sqlite3
@@ -11,11 +10,11 @@ logger.add("/var/log/family_feud_server.log")
 
 def check_winner(username,player_scores):
     if player_scores[0][username] > player_scores[1][username]:
-        return list(player_scores[0].keys())[0]
+        return player_scores[0]
     elif player_scores[0][username] < player_scores[1][username]:
-        return list(player_scores[1].keys())[0]
+        return player_scores[1]
     else:
-        return None
+        return "tie"
 
 def handle_client(client_socket,clients):
     try:
@@ -33,9 +32,11 @@ def handle_client(client_socket,clients):
         player_scores = []
 
         # Add the client to the list
-        clients.append((client_socket, username))
-        for client, username in clients:
-            player_scores.append({username: 0})
+        clients.append(client_socket)
+        for client in clients:
+            player_score[username] = 0
+            player_scores.append(player_score)
+
         logger.info(f"CLIENT INFO:{player_scores}")
 
         # Wait for 2 players to join
@@ -62,20 +63,11 @@ def handle_client(client_socket,clients):
             logger.info(f"Client {username} answered: {guesses}")
 
             question_score = calculate_score(question,guesses)
-            logger.info(f"QUESTION SCORE: {question_score}\n PLAYER SCORE: {player_score[username]}")
             player_score[username] += question_score
-            logger.info(f"PLAYER SCORE: {player_score}")
-
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
             client_socket.send(f"\033[93mYour score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
             time.sleep(1)
-
-        winner = check_winner(username,player_scores)
-        if winner:
-            client_socket.send(f"{winner.upper()} WINS!".encode("utf-8"))
-        else:
-            client_socket.send(f"IT'S A TIE!".encode("utf-8"))
 
     except Exception as e:
         logger.error(f"Error handling client: {e}")
@@ -88,10 +80,10 @@ def calculate_score(question,guesses):
     score = 0
     for guess in guesses:
         for i in range(1,6):
-            if guess.strip().lower() == question[f'guess{i}']:
-                logger.info(question[f'guess{i}'])
+            logger.info(question[f'guess{i}'])
+            if guess.strip() == question[f'guess{i}']:
                 score += question[f'guess{i}_score']
-    logger.info(f"SCORE: {score}")
+                logger.info(f"SCORE: {score}")
     return score
 
 def get_random_question(used_questions):
