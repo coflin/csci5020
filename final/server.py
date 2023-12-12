@@ -93,10 +93,10 @@ __        __   _                            _
         countdown_threads = []
         for player in players:
             player["socket"].sendall("The game is starting!".encode('utf-8'))
-            client_socket.sendall("Game starting in...".encode('utf-8'))
-            countdown_thread_creator = threading.Thread(target=countdown, args=(client_socket,))
-            countdown_thread_creator.start()
-            countdown_threads.append(countdown_threads)
+            player["socket"].sendall("Game starting in...".encode('utf-8'))
+        countdown_thread_creator = threading.Thread(target=countdown, args=(client_socket,))
+        countdown_thread_creator.start()
+        countdown_threads.append(countdown_threads)
 
         # Wait for the countdown threads to finish
     for thread in countdown_threads:
