@@ -14,8 +14,8 @@ clients = []
 
 def handle_client(client_socket):
     try:
-        if len(clients) > 2:
-            clients = []
+        # if len(clients) > 2:
+        #     clients = []
         # Send a welcome message
         client_socket.send(b"Enter your name: ")
         
