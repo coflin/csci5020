@@ -6,8 +6,6 @@ from loguru import logger
 
 logger.add("/var/log/family_feud_server.log")
 
-DB_FILE = "questions.db"
-
 def handle_client(client_socket,clients):
     try:
         
@@ -66,17 +64,18 @@ def calculate_score(question,score,guesses):
 
 def get_random_question():
     """Gets and returns a random question from the list"""
-    conn = sqlite3.connect(DB_FILE)
+    conn = sqlite3.connect("questions.db")
     cursor = conn.cursor()
-
+    logger.info("connected to database")
     cursor.execute("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1;")
     question_data = cursor.fetchone()
-
+    logger.info(f"Question data: {question_data}")
     # Convert the question data into a dictionary
     columns = [column[0] for column in cursor.description]
     question = dict(zip(columns, question_data))
 
     conn.close()
+    logger.info(f"Question: {question}")
     return question 
 
 @logger.catch()
