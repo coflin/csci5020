@@ -34,8 +34,7 @@ def handle_client(client_socket,clients):
 
         # Add the client to the list
         clients.append((client_socket, username))
-        for client, username in clients:
-            player_scores.append({username: 0})
+        player_scores = [{username: 0} for _, username in clients]
         logger.info(f"CLIENT INFO:{player_scores}")
 
         # Wait for 2 players to join
@@ -61,10 +60,9 @@ def handle_client(client_socket,clients):
                 guesses.append(guess)
             logger.info(f"Client {username} answered: {guesses}")
 
+            logger.info(f"{player_score}")
             question_score = calculate_score(question,guesses)
-            #logger.info(f"QUESTION SCORE: {question_score}\n PLAYER SCORE: {player_score[username]}")
-            # player_score[username] += question_score
-            # logger.info(f"PLAYER SCORE: {player_score}")
+            player_score[username] += question_score
 
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
