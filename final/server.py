@@ -6,11 +6,10 @@ from loguru import logger
 logger.add("/var/log/family_feud_server.log")
 
 def handle_client(client_socket,clients):
-    try:
-        if len(clients) > 2:
-            clients = []
+    try:        
+        
         # Send a welcome message
-        client_socket.send(b"Enter your name: ")
+        client_socket.send(b"Enter your username: ")
         
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8")
@@ -24,7 +23,9 @@ def handle_client(client_socket,clients):
             time.sleep(1)
 
         # Send a starting game message
-        client_socket.send(b"Starting game in 3..\n")
+        client_socket.send(b"Starting game in\n")
+        time.sleep(1)
+        client_socket.send(b"3..\n")
         time.sleep(1)
         client_socket.send(b"2..\n")
         time.sleep(1)
@@ -34,15 +35,17 @@ def handle_client(client_socket,clients):
         question = get_random_question()
         client_socket.send(f"Question: {question['prompt']}\n".encode("utf-8"))
         
-        # Simulate waiting for the client's response
-        time.sleep(5)  # Adjust this delay as needed
+        # # Simulate waiting for the client's response
+        # time.sleep(5)  # Adjust this delay as needed
         
         # Simulate receiving the client's response
         client_response = client_socket.recv(1024).decode("utf-8")
-        print(f"Client {username} answered: {client_response}")
+        logger.info(f"Client {username} answered: {client_response}")
+        if client_response.lower() == question['answer']:
+            client_socket.send(f"Correct! You get 5 points!")
         
     except Exception as e:
-        print(f"Error handling client: {e}")
+        logger.error(f"Error handling client: {e}")
     
     finally:
         # Close the client socket
