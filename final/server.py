@@ -34,7 +34,6 @@ def handle_client(client_socket,clients):
 
         # Get a random question and send it to the client
         question = get_random_question()
-        logger.info(f"QUESTION:  {question}")
         client_socket.send(f"Question: {question['prompt']}\n".encode("utf-8"))
                 
         # Simulate receiving the client's response
@@ -43,7 +42,7 @@ def handle_client(client_socket,clients):
             client_socket.send(f"Guess {i}: ".encode("utf-8"))
             guess = client_socket.recv(1024).decode("utf-8")
             guesses.append(guess)
-            logger.info(f"Client {username} answered: {guess}")
+        logger.info(f"Client {username} answered: {guesses}")
 
         #score = calculate_score(question,score,guesses)
         client_socket.send(f"Your score is: {score}".encode("utf-8"))
@@ -64,7 +63,7 @@ def calculate_score(question,score,guesses):
 
 def get_random_question():
     """Gets and returns a random question from the list"""
-    conn = sqlite3.connect("questions.db")
+    conn = sqlite3.connect("/home/ubuntu/csci5020/final/questions.db")
     cursor = conn.cursor()
     logger.info("connected to database")
     cursor.execute("SELECT * FROM questions ORDER BY RANDOM() LIMIT 1;")
