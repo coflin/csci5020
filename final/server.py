@@ -55,9 +55,13 @@ def handle_client(client_socket,clients):
         client_socket.close()
 
 def calculate_score(question,score,guesses):
+    logger.info("IN CALCULATE SCORE FUNCTION")
     for guess in guesses:
+        logger.info(guess)
         for i in range(1,6):
+            logger.info(question[f'guess{i}'])
             if guess == question[f'guess{i}']:
+                logger.info("in guess == question condition")
                 score += question[f'guess{i}_score']
                 logger.info(f"SCORE: {score}")
     return score
