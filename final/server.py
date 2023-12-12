@@ -1,147 +1,104 @@
 import socket
 import threading
+import json
 import time
 from loguru import logger
 
+# Add your EC2 instance's public IP and port here
+SERVER_IP = "54.215.236.176"
+SERVER_PORT = 5020
 
-logger.add("/var/log/family_feud_server.log")
+questions = [
+    {"prompt": "What is the capital of France?", "answer": "Paris"},
+    {"prompt": "What is 2 + 2?", "answer": "4"},
+    # Add more questions as needed
+]
 
-questions = ["Question 1", "Question 2", "Question 3"]
-current_question_index = 0
-#start_game_event = threading.Event()
-
-players = []
-
-def get_next_question():
-    global current_question_index
-    if current_question_index < len(questions):
-        question = questions[current_question_index]
-        current_question_index += 1
-        return question
-    else:
-        return None
-
-def countdown(client_socket):
-    for i in range(3, 0, -1):
-        time.sleep(1)
-        client_socket.sendall(str(i).encode('utf-8'))
-
-    # Notify that the countdown is over
-    #start_game_event.set()
-
-def handle_client(client_socket, client_id):
-    # Send welcome message
-    welcome_message = """\033[92m
-__        __   _                            _        
-\ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
- \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
-  \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
-   \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
-                                                     
- ____             _           _     
-/ ___| _ __   ___| |__   __ _( )___ 
-\___ \| '_ \ / _ \ '_ \ / _` |// __|
- ___) | | | |  __/ | | | (_| | \__ \
-|____/|_| |_|\___|_| |_|\__,_| |___/
-                                    
- _____               _ _         _____              _ 
-|  ___|_ _ _ __ ___ (_) |_   _  |  ___|__ _   _  __| |
-| |_ / _` | '_ ` _ \| | | | | | | |_ / _ \ | | |/ _` |
-|  _| (_| | | | | | | | | |_| | |  _|  __/ |_| | (_| |
-|_|  \__,_|_| |_| |_|_|_|\__, | |_|  \___|\__,_|\__,_|
-                         |___/                        
-                                                       
-\033[0m""" + "\n Enter a username: "
-    
-    client_socket.sendall(welcome_message.encode('utf-8'))
-
-    # Receive and print the user's name
-    user_name = client_socket.recv(1024).decode('utf-8').strip()
-    print(f"Client {client_id}: {user_name} connected")
-
-    player_dict = {"username": user_name, "socket": client_socket}
-    players.append(player_dict)
-    
-    logger.info(f"Players list: {players}")
-
-    # Send personalized greeting and prompt to create/join a room
-    greeting = f"Hello {user_name}!"
-    client_socket.sendall(greeting.encode('utf-8'))
-
-    while len(players) < 2:
-        time.sleep(1)
-
-    creator = players[0]
-    player2 = players[1]
-
-    logger.info(f"creator:{creator}\nplayer2:{player2}")
-
-        # Notify the creator to start the game
-    creator["socket"].sendall("Type 'start' to begin the game: ".encode('utf-8'))
-
-    player2["socket"].sendall("Waiting for the creator to start the game")
-    start_game_response = creator["socket"].recv(1024).decode('utf-8').strip().lower()
+clients = []
 
 
-        # if start_game_response == "start":
-        #     # Notify both players to start the game
-        #     countdown_threads = []
-        #     for player in players:
-        #         player["socket"].sendall("The game is starting!".encode('utf-8'))
-        #         player["socket"].sendall("Game starting in...".encode('utf-8'))
-        #         countdown_thread_creator = threading.Thread(target=countdown, args=(player["socket"],))
-        #         countdown_thread_creator.start()
-        #         countdown_threads.append(countdown_thread_creator)
+def handle_client(client_socket, username):
+    """Handles an incoming client connection"""
 
-        #     # Wait for the countdown threads to finish
-        #     for thread in countdown_threads:
-        #         thread.join()
+    try:
+        # Send a welcome message
+        send(client_socket, {"message": f"Hello {username}!"})
 
-            # Send the first question to both players
-    question = get_next_question()
-    for player in players:
-        player["socket"].sendall(f"Your question is: {question}".encode('utf-8'))
+        # Wait for both clients to connect
+        while len(clients) < 2:
+            time.sleep(1)
 
-        # elif response.lower() == "join":
-        #     client_socket.sendall("Ok! Joining a room...\n".encode('utf-8'))
+        # Send a starting game message
+        send(client_socket, {"message": "Starting game in 3..2..1.."})
 
-            # Notify the joiner to wait for the creator
-            # client_socket.sendall("Waiting for the creator to start the game...".encode('utf-8'))
+        # Get a random question and send it to both clients
+        question = get_random_question()
+        send(client_socket, {"prompt": question["prompt"]})
 
-            # # Wait for the creator to start the game
-            # start_game_event.wait()
+        # Wait for both clients to answer the question
+        while len(clients) > 0:
+            time.sleep(1)
 
-            # # Send countdown to the joiner
-            # client_socket.sendall("Game starting in...".encode('utf-8'))
-            # countdown_thread_joiner = threading.Thread(target=countdown, args=(client_socket,))
-            # countdown_thread_joiner.start()
+        # Implement scoring logic here if needed
 
-            # Wait for the countdown to finish
-            # countdown_thread_joiner.join()
+    except Exception as e:
+        logger.error(f"Error handling client {username}: {e}")
 
-            # # Send the first question to the joiner
-            # question = get_next_question()
-            # client_socket.sendall(f"Your question is: {question}".encode('utf-8'))
+    finally:
+        # Close the client socket
+        client_socket.close()
 
 
-@logger.catch
+def get_random_question():
+    """Gets and returns a random question from the list"""
+    return questions[0]  # Replace this with logic to get a random question
+
+
+def send(client_socket, message):
+    """Converts the dictionary to a JSON string and sends it to the client"""
+    json_message = json.dumps(message)
+    client_socket.send(json_message.encode())
+
+
 def main():
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(('0.0.0.0', 5020))
-    server.listen(4)  # Listen for up to 20 connections
+    # Create a server socket
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    print("Family Feud server started. Waiting for connections...")
+    # Bind the server socket to the IP and port
+    server_socket.bind((SERVER_IP, SERVER_PORT))
 
-    client_id = 1  # Client identifier
+    # Listen for incoming connections
+    server_socket.listen(2)
+    logger.info(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
 
-    while True:
-        client_socket, client_addr = server.accept()
+    try:
+        # Accept incoming connections
+        while True:
+            client, address = server_socket.accept()
+            logger.info(f"Accepted connection from {address}")
 
-        # Handle each client in a separate thread
-        client_thread = threading.Thread(target=handle_client, args=(client_socket, client_id))
-        client_thread.start()
+            # Prompt the client for their name
+            send(client, {"message": "Enter your name:"})
+            username = receive(client)["name"]
 
-        client_id += 1
+            # Add the client to the list
+            clients.append(client)
+
+            # Start a new thread to handle the client
+            threading.Thread(target=handle_client, args=(client, username)).start()
+
+    except Exception as e:
+        logger.info(f"Error in main loop: {e}")
+
+    finally:
+        server_socket.close()
+
+
+def receive(client_socket):
+    """Receives a JSON string from the client and converts it to a dictionary"""
+    json_string = client_socket.recv(1024).decode("utf-8")
+    return json.loads(json_string)
+
 
 if __name__ == "__main__":
     main()
