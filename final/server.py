@@ -83,9 +83,11 @@ def handle_client(client_socket,clients,barrier):
 
         winner = check_winner(username,player_scores)
         if winner:
-            client_socket.send(f"{winner.upper()} WINS!".encode("utf-8"))
+            for client in clients:
+                client.send(f"{winner.upper()} WINS!".encode("utf-8"))
         else:
-            client_socket.send(f"IT'S A TIE!".encode("utf-8"))
+            for client in clients:
+                client.send(f"IT'S A TIE!".encode("utf-8"))
 
     except Exception as e:
         import traceback
