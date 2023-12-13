@@ -9,16 +9,17 @@ from loguru import logger
 logger.add("/var/log/family_feud_server.log")
 
 
-def check_winner(username,player_scores):
-    logger.info(f"PLAYER_SCORES {player_scores}")
-    
-    if player_scores[0][username] > player_scores[1][username]:
+def check_winner(username, player_scores):
+    score_player1 = player_scores[0].get(username, 0)
+    score_player2 = player_scores[1].get(username, 0)
+
+    if score_player1 > score_player2:
         return list(player_scores[0].keys())[0]
-    elif player_scores[0][username] < player_scores[1][username]:
+    elif score_player1 < score_player2:
         return list(player_scores[1].keys())[0]
     else:
         return None
-
+    
 def handle_client(client_socket,clients):
     try:
         
