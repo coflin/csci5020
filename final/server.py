@@ -25,7 +25,13 @@ def check_winner(username, player1_scores, player2_scores):
     else:
         logger.info(f"NOBODY WON {score1}")
         return None
-        
+
+def send_score_to_client(client_socket, username, score):
+    client_socket.send(f"\033[92mYour score for this question is: {score}\033[0m\n".encode("utf-8"))
+    time.sleep(1)
+    client_socket.send(f"\033[93mYour score so far: {score}\033[0m\n\n".encode("utf-8"))
+    time.sleep(1)
+
 def handle_client(client_socket, clients, barrier, player1_scores, player2_scores):
     try:
         # Send a welcome message
@@ -68,10 +74,10 @@ def handle_client(client_socket, clients, barrier, player1_scores, player2_score
             # Update the respective player's score
             if username in player1_scores:
                 player1_scores[username] += question_score
-                client_socket.send(f"\033[93mYour score so far: {player1_scores[username]}\033[0m\n\n".encode("utf-8"))
+                send_score_to_client(client_socket, username, player1_scores[username])
             elif username in player2_scores:
                 player2_scores[username] += question_score
-                client_socket.send(f"\033[93mYour score so far: {player2_scores[username]}\033[0m\n\n".encode("utf-8"))
+                send_score_to_client(client_socket, username, player2_scores[username])
 
             time.sleep(1)      
                   
