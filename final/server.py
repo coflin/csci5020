@@ -98,7 +98,7 @@ The player with the highest total points at the end of the game wins! Have fun!
             # Simulate receiving the client's response
             time.sleep(1)
             for i in range(1,6):
-                client_socket.send(f"\033[93mGuess {i}:\033[0m ".encode("utf-8"))
+                client_socket.send(f"\n\033[93mGuess {i}:\033[0m ".encode("utf-8"))
                 guess = client_socket.recv(1024).decode("utf-8")
                 guesses.append(guess)
 
