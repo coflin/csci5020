@@ -24,13 +24,18 @@ def check_winner(username, player_scores):
         score2 = player2_score.get(username, 0)
 
         if score1 > score2:
+            logger.info(f"PLAYER 1 WON {player1_score[username]}")
             return player1_score[username]
-
+        
         elif score1 < score2:
+            logger.info(f"PLAYER 1 WON {player2_score[username]}")
             return player2_score[username]
+            
         
         else:
+            logger.info(f"NOBODY WON {player1_score[username]}")
             return None
+        
 
     # score_player1 = player_scores[0].get(username, 0)
     # logger.info(f"player1: {score_player1}")
