@@ -9,6 +9,7 @@ from loguru import logger
 logger.add("/var/log/family_feud_server.log")
 
 scores_lock = threading.Lock()
+scores_updated_event = threading.Event()
 
 def check_winner(username, player_scores):
     logger.info(f"PLAYER SCORES: {player_scores}")
@@ -33,7 +34,9 @@ def check_winner(username, player_scores):
                 return player2_score[username]
             else:
                 logger.info(f"NOBODY WON {player1_score[username]}")
-                return None        
+                return None
+    else:
+        return None
     
 def handle_client(client_socket,clients,barrier):
     try:
@@ -56,8 +59,6 @@ def handle_client(client_socket,clients,barrier):
 
         # Wait for 2 players to join
         barrier.wait()
-        # while len(clients) <2:
-        #     time.sleep(1)
 
         # Send a starting game message
         client_socket.send(b"Starting game in\n")
@@ -92,13 +93,19 @@ def handle_client(client_socket,clients,barrier):
             # Wait for all players to finish before moving to the next question
             barrier.wait()
 
-        winner = check_winner(username,player_scores)
+        # Wait for all players to finish updating scores before checking the winner
+        scores_updated_event.wait()
+
+        winner = check_winner(username, player_scores)
         if winner:
-            for client in clients:
-                client.send(f"{winner.upper()} WINS!".encode("utf-8"))
+            for client_info in clients:
+                client_info[0].send(f"{winner.upper()} WINS!".encode("utf-8"))
         else:
-            for client in clients:
-                client.send(f"IT'S A TIE!".encode("utf-8"))
+            for client_info in clients:
+                client_info[0].send(f"IT'S A TIE!".encode("utf-8"))
+        
+        # Reset the event for the next round
+        scores_updated_event.clear()
 
     except Exception as e:
         import traceback
