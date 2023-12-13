@@ -67,7 +67,7 @@ __          __  _                            _
         # Get a random question and send it to the client
         for question_number in range(1,6):
             question = get_random_question(used_questions)
-            client_socket.send(f"\033[1mQuestion {question_number}: {question['prompt']}\033[0m\n".encode("utf-8"))
+            client_socket.send(f"\033[37m\033[1mQuestion {question_number}: {question['prompt']}\033[0m\033[0m\n".encode("utf-8"))
                     
             # Simulate receiving the client's response
             time.sleep(1)
