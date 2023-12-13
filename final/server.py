@@ -13,7 +13,7 @@ def handle_client(client_socket,clients,barrier):
     try:
 
         # Send a welcome message
-        client_socket.send(b"""\033[94m
+        client_socket.send(b"""\033[93m
 __          __  _                            _        
 \ \        / / | |                          | |       
  \ \  /\  / /__| | ___ ___  _ __ ___   ___  | |_ ___  
