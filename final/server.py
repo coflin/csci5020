@@ -38,7 +38,7 @@ __          __  _                            _
 |_|  \___|\__,_|\__,_|
                                     
 \033[0m                          
- \n\n \033[5m\033[92mAuthor: Sneha Irukuvajjula\033[0m\033[0m                 
+ \n\033[92mAuthor: Sneha Irukuvajjula\033[0m                
 
         \n\n Enter your username: """)
         
