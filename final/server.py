@@ -11,18 +11,35 @@ logger.add("/var/log/family_feud_server.log")
 
 def check_winner(username, player_scores):
     logger.info(f"PLAYER SCORES: {player_scores}")
-    score_player1 = player_scores[0].get(username, 0)
-    logger.info(f"player1: {score_player1}")
-    score_player2 = player_scores[1].get(username, 0)
-    logger.info(f"player2: {score_player2}")
 
-    if score_player1 > score_player2:
-        return list(player_scores[0].keys())[0]
+    if len(player_scores >= 2):
+        for player in player_scores:
+            if username == list(player.keys())[0]:
+                player1_score = [username, player[username]]
+    else:
+        if username == list(player_scores[0].keys())[0]:
+            player2_score = [username, player[username]]
     
-    elif score_player1 < score_player2:
-        return list(player_scores[1].keys())[0]
+    if player1_score[1] > player2_score[1]:
+        return player1_score[0]
+    elif player1_score[1] < player2_score[1]:
+        return player2_score[0]
     else:
         return None
+
+
+    # score_player1 = player_scores[0].get(username, 0)
+    # logger.info(f"player1: {score_player1}")
+    # score_player2 = player_scores[1].get(username, 0)
+    # logger.info(f"player2: {score_player2}")
+
+    # if score_player1 > score_player2:
+    #     return list(player_scores[0].keys())[0]
+    
+    # elif score_player1 < score_player2:
+    #     return list(player_scores[1].keys())[0]
+    # else:
+    #     return None
     
 def handle_client(client_socket,clients,barrier):
     try:
