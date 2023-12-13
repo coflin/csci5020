@@ -8,6 +8,7 @@ from loguru import logger
 
 logger.add("/var/log/family_feud_server.log")
 
+scores_lock = threading.Lock()
 
 def check_winner(username, player_scores):
     logger.info(f"PLAYER SCORES: {player_scores}")
@@ -23,32 +24,16 @@ def check_winner(username, player_scores):
         score1 = player1_score.get(username, 0)
         score2 = player2_score.get(username, 0)
 
-        if score1 > score2:
-            logger.info(f"PLAYER 1 WON {player1_score[username]}")
-            return player1_score[username]
-        
-        elif score1 < score2:
-            logger.info(f"PLAYER 1 WON {player2_score[username]}")
-            return player2_score[username]
-            
-        
-        else:
-            logger.info(f"NOBODY WON {player1_score[username]}")
-            return None
-        
-
-    # score_player1 = player_scores[0].get(username, 0)
-    # logger.info(f"player1: {score_player1}")
-    # score_player2 = player_scores[1].get(username, 0)
-    # logger.info(f"player2: {score_player2}")
-
-    # if score_player1 > score_player2:
-    #     return list(player_scores[0].keys())[0]
-    
-    # elif score_player1 < score_player2:
-    #     return list(player_scores[1].keys())[0]
-    # else:
-    #     return None
+        with scores_lock:
+            if score1 > score2:
+                logger.info(f"PLAYER 1 WON {player1_score[username]}")
+                return player1_score[username]
+            elif score1 < score2:
+                logger.info(f"PLAYER 2 WON {player2_score[username]}")
+                return player2_score[username]
+            else:
+                logger.info(f"NOBODY WON {player1_score[username]}")
+                return None        
     
 def handle_client(client_socket,clients,barrier):
     try:
@@ -95,10 +80,10 @@ def handle_client(client_socket,clients,barrier):
 
             logger.info(f"{player_scores}")
             question_score = calculate_score(question,guesses)
-            for player_score in player_scores:
-                if username == list(player_score.keys())[0]:
-                    player_score[username] += question_score
-
+            with scores_lock:
+                for player_score in player_scores:
+                    if username == list(player_score.keys())[0]:
+                        player_score[username] += question_score
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
             client_socket.send(f"\033[93mYour score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
