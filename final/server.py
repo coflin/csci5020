@@ -112,7 +112,7 @@ The player with the highest total points at the end of the game wins! Have fun!
                         player_score[username] += question_score
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
-            client_socket.send(f"\033[93mYour score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
+            client_socket.send(f"\033[93mYour total score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
             time.sleep(1)
             
             # Wait for all players to finish before moving to the next question
