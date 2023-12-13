@@ -10,11 +10,15 @@ logger.add("/var/log/family_feud_server.log")
 
 
 def check_winner(username, player_scores):
+    logger.info(f"PLAYER SCORES: {player_scores}")
     score_player1 = player_scores[0].get(username, 0)
+    logger.info(f"player1: {score_player1}")
     score_player2 = player_scores[1].get(username, 0)
+    logger.info(f"player2: {score_player2}")
 
     if score_player1 > score_player2:
         return list(player_scores[0].keys())[0]
+    
     elif score_player1 < score_player2:
         return list(player_scores[1].keys())[0]
     else:
