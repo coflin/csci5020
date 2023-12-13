@@ -1,6 +1,5 @@
 import socket
 import threading
-import threading
 import time
 import sqlite3
 import random
@@ -14,7 +13,35 @@ def handle_client(client_socket,clients,barrier):
     try:
 
         # Send a welcome message
-        client_socket.send(b"Enter your username: ")
+        client_socket.send(b"""\033[94m
+__          __  _                            _        
+\ \        / / | |                          | |       
+ \ \  /\  / /__| | ___ ___  _ __ ___   ___  | |_ ___  
+  \ \/  \/ / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
+   \  /\  /  __/ | (_| (_) | | | | | |  __/ | || (_) |
+    \/  \/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
+                                                      
+                                                      
+  _____            _           _     
+ / ____|          | |         ( )    
+| (___  _ __   ___| |__   __ _|/ ___ 
+ \___ \| '_ \ / _ \ '_ \ / _` | / __|
+ ____) | | | |  __/ | | | (_| | \__ \
+|_____/|_| |_|\___|_| |_|\__,_| |___/
+                                    
+                                    
+ ______              _ _           ______             _ 
+|  ____|            (_) |         |  ____|           | |
+| |__ __ _ _ __ ___  _| |_   _    | |__ ___ _   _  __| |
+|  __/ _` | '_ ` _ \| | | | | |   |  __/ _ \ | | |/ _` |
+| | | (_| | | | | | | | | |_| |   | | |  __/ |_| | (_| |
+|_|  \__,_|_| |_| |_|_|_|\__, |   |_|  \___|\__,_|\__,_|
+                          __/ |  
+                         |___/    
+\033[0m                          
+ \n\n \033[92mAuthor: Sneha Irukuvajjula\033[0m                 
+
+        \n\n Enter your username: """)
         
         used_questions = []
         guesses = []
