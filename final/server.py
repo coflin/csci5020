@@ -92,7 +92,9 @@ __          __  _                            _
             # Wait for all players to finish before moving to the next question
             barrier.wait()
 
-        client_socket.send(f"Your final score: {player_score[username]}\n\n".encode("utf-8"))
+        final_score = print_in_box(f"Your final score: {player_score[username]}")
+                     
+        client_socket.send(f"{final_score}\n\n".encode("utf-8"))
         time.sleep(1)
         client_socket.send(b"Thanks for playing this game. Good bye! :) ")        
 
@@ -148,6 +150,14 @@ def get_random_question(used_questions):
 
     conn.close()
     return question
+
+def print_in_box(text):
+    box_width = len(text) + 4  # Adjust the width based on the length of the text
+    horizontal_line = '+' + '-' * (box_width - 2) + '+'
+    
+    print(horizontal_line)
+    print(f"| {text} |")
+    print(horizontal_line)
 
 barrier = threading.Barrier(2)
 @logger.catch()
