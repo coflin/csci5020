@@ -15,20 +15,22 @@ def check_winner(username, player_scores):
     player2_score = None
     for player in player_scores:
         if username == list(player.keys())[0]:
-            player1_score = player[username]
+            player1_score = player
         else:
-            player2_score = player[username]
+            player2_score = player
 
     if player1_score is not None and player2_score is not None:
         score1 = player1_score.get(username, 0)
         score2 = player2_score.get(username, 0)
 
         if score1 > score2:
-            return player1_score
-        elif score1 < score2:
-            return player2_score
+            return player1_score[username]
 
-    return None
+        elif score1 < score2:
+            return player2_score[username]
+        
+        else:
+            return None
 
     # score_player1 = player_scores[0].get(username, 0)
     # logger.info(f"player1: {score_player1}")
