@@ -1,6 +1,7 @@
 import socket
 from tabnanny import check
-import threading import Lock
+import threading
+from threading import Lock
 import time
 import sqlite3
 import random
