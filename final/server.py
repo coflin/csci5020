@@ -62,7 +62,8 @@ def handle_client(client_socket,clients):
             logger.info(f"{player_scores}")
             question_score = calculate_score(question,guesses)
             for player_score in player_scores:
-                player_score[username] += question_score
+                if username == list(player_score.keys())[0]:
+                    player_score[username] += question_score
 
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
