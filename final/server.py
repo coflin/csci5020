@@ -10,10 +10,9 @@ logger.add("/var/log/family_feud_server.log")
 
 scores_lock = threading.Lock()
 
-        
 def handle_client(client_socket,clients,barrier):
     try:
-        
+
         # Send a welcome message
         client_socket.send(b"Enter your username: ")
         
@@ -23,7 +22,6 @@ def handle_client(client_socket,clients,barrier):
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8").strip()
         logger.info(f"Client {username} connected.")
-        player1_scores={}
         
         # Add the client to the list
         clients.append((client_socket, username))
@@ -32,9 +30,10 @@ def handle_client(client_socket,clients,barrier):
 
         # Wait for 2 players to join
         barrier.wait()
+        client_socket.send(b"Waiting for another player to join..")
 
         # Send a starting game message
-        client_socket.send(b"Starting game in\n")
+        client_socket.send(b"All players have joined. Starting game in\n")
         for i in range(3,0,-1):
             time.sleep(1)
             client_socket.send(f"{i}..\n".encode("utf-8"))
@@ -50,9 +49,10 @@ def handle_client(client_socket,clients,barrier):
                 client_socket.send(f"\033[93mGuess {i}:\033[0m ".encode("utf-8"))
                 guess = client_socket.recv(1024).decode("utf-8")
                 guesses.append(guess)
-            logger.info(f"Client {username} answered: {guesses}")
 
+            logger.info(f"Client {username} answered: {guesses}")
             logger.info(f"{player_scores}")
+
             question_score = calculate_score(question,guesses)
             with scores_lock:
                 for player_score in player_scores:
@@ -65,6 +65,7 @@ def handle_client(client_socket,clients,barrier):
             
             # Wait for all players to finish before moving to the next question
             barrier.wait()
+            
         client_socket.send(f"Your final score: {player_score[username]}".encode("utf-8"))
         time.sleep(1)
         client_socket.send(b"Thanks for playing this game. Good bye! :) ")        
