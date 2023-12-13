@@ -11,12 +11,13 @@ logger.add("/var/log/family_feud_server.log")
 
 def check_winner(username, player_scores):
     logger.info(f"PLAYER SCORES: {player_scores}")
-
+    player1_score = None
+    player2_score = None
     for player in player_scores:
         if username == list(player.keys())[0]:
-            player1_score = player
+            player1_score = player[username]
         else:
-            player2_score = player
+            player2_score = player[username]
 
     if player1_score is not None and player2_score is not None:
         score1 = player1_score.get(username, 0)
@@ -73,7 +74,7 @@ def handle_client(client_socket,clients,barrier):
             client_socket.send(f"{i}..\n".encode("utf-8"))
 
         # Get a random question and send it to the client
-        for question_number in range(1,3):
+        for question_number in range(1,6):
             question = get_random_question(used_questions)
             client_socket.send(f"\033[1mQuestion {question_number}: {question['prompt']}\033[0m\n".encode("utf-8"))
                     
