@@ -5,6 +5,11 @@ import sqlite3
 import random
 from loguru import logger
 
+"""
+Same question to both parties sequentially. Possibly have 2 tables so that the questions don't repeat.
+Add instructions
+"""
+
 logger.add("/var/log/family_feud_server.log")
 
 scores_lock = threading.Lock()
@@ -38,9 +43,31 @@ __          __  _                            _
 |_|  \___|\__,_|\__,_|
                                     
 \033[0m                          
- \n\033[92mAuthor: Sneha Irukuvajjula\033[0m                
+ \n\033[92mAuthor: Sneha Irukuvajjula\033[0m   
 
-        \n\n Enter your username: """)
+\n\n \033[1m Game Setup \033[0m \n
+Two players are part of the game. A survey was conducted with around 100 people,\n 
+and the top 5 responses to various questions were collected.
+                           
+\n\n \033[1m Objective \033[0m \n
+Players aim to guess the top 5 most popular answers to these survey questions.
+                           
+\n\n \033[1m Game Play \033[0m \n
+Players will be presented with questions from the survey.\n
+They need to guess the top 5 answers in order of popularity.\n
+The order in which players guess does not matter as long as the answer is one among the top 5.
+                           
+\n\n \033[1m Scoring \033[0m \n
+Points are awarded based on the popularity of the guessed answers.\n
+The most popular answer earns the highest points, followed by decreasing points for the subsequent answers.
+                           
+\n\n \033[1m Winning \033[0m \n
+The player with the highest total points at the end of the game wins! Have fun!
+\n \033[1mLet's play Sneha's Family Feud!\033[0m
+""")
+
+        time.sleep(1)
+        client_socket.send(b"\n\n Enter your name: """)
         
         used_questions = []
         guesses = []
@@ -67,7 +94,7 @@ __          __  _                            _
         # Get a random question and send it to the client
         for question_number in range(1,6):
             question = get_random_question(used_questions)
-            client_socket.send(f"\033[37m\033[1mQuestion {question_number}: {question['prompt']}\033[0m\033[0m\n".encode("utf-8"))
+            client_socket.send(f"\n\n\033[37m\033[1mQuestion {question_number}: {question['prompt']}\033[0m\033[0m".encode("utf-8"))
                     
             # Simulate receiving the client's response
             time.sleep(1)
