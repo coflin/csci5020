@@ -22,8 +22,8 @@ def check_winner(username, player_scores):
             player2_score = player
 
     if player1_score is not None and player2_score is not None:
-        score1 = player1_score[username]
-        score2 = player2_score[username]
+        score1 = player1_score.get(username, 0)
+        score2 = player2_score.get(username, 0)
 
         if score1 > score2:
             return player1_score
