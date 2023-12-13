@@ -12,9 +12,6 @@ logger.add("/var/log/family_feud_server.log")
 def check_winner(username, player_scores):
     logger.info(f"PLAYER SCORES: {player_scores}")
 
-    player1_score = None
-    player2_score = None
-
     for player in player_scores:
         if username == list(player.keys())[0]:
             player1_score = player

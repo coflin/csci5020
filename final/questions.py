@@ -53,26 +53,46 @@ def insert_question(prompt, guesses):
 create_database()
 
 new_questions = [
-    {
-        "prompt": "What is the best honeymoon destination?",
-        "guesses": [
-            {"guess": "maldives", "score": 30},
-            {"guess": "paris", "score": 20},
-            {"guess": "hawaii", "score": 10},
-            {"guess": "bali", "score": 5},
-            {"guess": "switzerland", "score": 2}
-        ]
-    },
-    {
-        "prompt": "Words that end with at",
-        "guesses": [
-            {"guess": "fat", "score": 30},
-            {"guess": "mat", "score": 20},
-            {"guess": "rat", "score": 10},
-            {"guess": "hat", "score": 5},
-            {"guess": "pat", "score": 2}
-        ]
-    }
+{
+    "prompt": "Name a food that people usually eat with their hands.",
+    "guesses": [
+        {"guess": "pizza", "score": 30},
+        {"guess": "hamburger", "score": 25},
+        {"guess": "sandwich", "score": 15},
+        {"guess": "chicken wings", "score": 12},
+        {"guess": "french fries", "score": 8},
+    ]
+},
+{
+    "prompt": "What's a type of dance move?",
+    "guesses": [
+        {"guess": "twirl", "score": 30},
+        {"guess": "moonwalk", "score": 20},
+        {"guess": "spin", "score": 15},
+        {"guess": "dip", "score": 10},
+        {"guess": "shuffle", "score": 5}
+    ]
+},
+{
+    "prompt": "Name a funny noise.",
+    "guesses": [
+        {"guess": "snicker", "score": 30},
+        {"guess": "giggle", "score": 20},
+        {"guess": "snort", "score": 15},
+        {"guess": "chortle", "score": 10},
+        {"guess": "whoopee", "score": 5}
+    ]
+},
+{
+    "prompt": "Name a silly thing to do with spaghetti.",
+    "guesses": [
+        {"guess": "slurp", "score": 30},
+        {"guess": "twirl", "score": 20},
+        {"guess": "noodle dance", "score": 15},
+        {"guess": "spaghetti art", "score": 10},
+        {"guess": "spaghetti hair", "score": 5}
+    ]
+}
 ]
 
 # Insert the new questions into the database
