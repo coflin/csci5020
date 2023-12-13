@@ -1,6 +1,6 @@
 import socket
 import threading
-import threading.Barrier
+import threading
 import time
 import sqlite3
 import random
