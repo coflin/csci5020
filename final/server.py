@@ -1,6 +1,6 @@
 import socket
 from tabnanny import check
-import threading
+import threading import Lock
 import time
 import sqlite3
 import random
@@ -25,6 +25,8 @@ def handle_client(client_socket,clients):
         
         used_questions = []
         guesses = []
+
+        score_lock = Lock()
 
         # Receive and print the client's name
         username = client_socket.recv(1024).decode("utf-8").strip()
@@ -61,8 +63,10 @@ def handle_client(client_socket,clients):
             logger.info(f"Client {username} answered: {guesses}")
 
             logger.info(f"{player_scores}")
-            question_score = calculate_score(question,guesses)
-            player_score[username] += question_score
+            with score_lock:
+                question_score = calculate_score(question,guesses)
+                for player_score in player_scores:
+                    player_score[username] += question_score
 
             client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
             time.sleep(1)
