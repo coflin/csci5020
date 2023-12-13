@@ -41,8 +41,8 @@ def handle_client(client_socket,clients,barrier):
 
         # Wait for 2 players to join
         barrier.wait()
-        while len(clients) <2:
-            time.sleep(1)
+        # while len(clients) <2:
+        #     time.sleep(1)
 
         # Send a starting game message
         client_socket.send(b"Starting game in\n")
@@ -136,6 +136,7 @@ def get_random_question(used_questions):
     conn.close()
     return question
 
+barrier = threading.Barrier(2)
 @logger.catch()
 def main():
     # Create a server socket
@@ -152,7 +153,7 @@ def main():
     logger.info(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
     
     clients = []
-    barrier = threading.Barrier(2)
+    
 
     try:
         # Accept incoming connections
