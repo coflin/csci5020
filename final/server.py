@@ -67,7 +67,7 @@ The player with the highest total points at the end of the game wins! Have fun!
 """)
 
         time.sleep(1)
-        client_socket.send(b"\n\n Enter your name: """)
+        client_socket.send(b"\n\n Enter your name: ")
         
         used_questions = []
         guesses = []
