@@ -154,10 +154,8 @@ def get_random_question(used_questions):
 def print_in_box(text):
     box_width = len(text) + 4  # Adjust the width based on the length of the text
     horizontal_line = '+' + '-' * (box_width - 2) + '+'
-    
-    print(horizontal_line)
-    print(f"| {text} |")
-    print(horizontal_line)
+    box_string = horizontal_line + '\n' + f"| {text} |\n" + horizontal_line
+    return box_string
 
 barrier = threading.Barrier(2)
 @logger.catch()
