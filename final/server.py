@@ -29,9 +29,9 @@ def handle_client(client_socket,clients,barrier):
         logger.info(f"CLIENT INFO:{player_scores}")
 
         # Wait for 2 players to join
-        barrier.wait()
         client_socket.send(b"Waiting for another player to join..")
-
+        barrier.wait()
+    
         # Send a starting game message
         client_socket.send(b"All players have joined. Starting game in\n")
         for i in range(3,0,-1):
@@ -65,8 +65,8 @@ def handle_client(client_socket,clients,barrier):
             
             # Wait for all players to finish before moving to the next question
             barrier.wait()
-            
-        client_socket.send(f"Your final score: {player_score[username]}".encode("utf-8"))
+
+        client_socket.send(f"Your final score: {player_score[username]}\n\n".encode("utf-8"))
         time.sleep(1)
         client_socket.send(b"Thanks for playing this game. Good bye! :) ")        
 
