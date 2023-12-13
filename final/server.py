@@ -1,6 +1,6 @@
 import socket
-from tabnanny import check
 import threading
+import threading.Barrier
 import time
 import sqlite3
 import random
@@ -20,7 +20,7 @@ def check_winner(username, player_scores):
     else:
         return None
     
-def handle_client(client_socket,clients):
+def handle_client(client_socket,clients,barrier):
     try:
         
         # Send a welcome message
@@ -40,6 +40,7 @@ def handle_client(client_socket,clients):
         logger.info(f"CLIENT INFO:{player_scores}")
 
         # Wait for 2 players to join
+        barrier.wait()
         while len(clients) <2:
             time.sleep(1)
 
@@ -72,6 +73,9 @@ def handle_client(client_socket,clients):
             time.sleep(1)
             client_socket.send(f"\033[93mYour score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
             time.sleep(1)
+            
+            # Wait for all players to finish before moving to the next question
+            barrier.wait()
 
         winner = check_winner(username,player_scores)
         if winner:
@@ -148,6 +152,7 @@ def main():
     logger.info(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
     
     clients = []
+    barrier = threading.Barrier(2)
 
     try:
         # Accept incoming connections
@@ -156,7 +161,11 @@ def main():
             print(f"Accepted connection from {address}")
 
             # Start a new thread to handle the client
-            threading.Thread(target=handle_client, args=(client,clients)).start()
+            threading.Thread(target=handle_client, args=(client,clients,barrier)).start()
+
+            # If two clients have connected, reset the barrier for the next round
+            if len(clients) == 2:
+                barrier.reset()
 
     except Exception as e:
         print(f"Error in main loop: {e}")
