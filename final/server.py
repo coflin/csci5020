@@ -29,7 +29,7 @@ def handle_client(client_socket,clients,barrier):
         logger.info(f"CLIENT INFO:{player_scores}")
 
         # Wait for 2 players to join
-        client_socket.send(b"Waiting for another player to join..")
+        client_socket.send(b"Waiting for another player to join..\n")
         barrier.wait()
     
         # Send a starting game message
