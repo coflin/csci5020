@@ -61,7 +61,7 @@ Players aim to guess the top 5 most popular answers to these survey questions.
                            
 \n\033[93m\033[1mGame Play \033[0m\033[0m \n
 Players will be presented with questions from the survey.\n
-They need to guess the top 5 answers in order of popularity.\n
+They need to guess the top 5 answers in order of popularity within 30 seconds.\n
 The order in which players guess does not matter as long as the answer is one among the top 5.
                            
 \n\033[93m\033[1mScoring \033[0m\033[0m \n
@@ -122,7 +122,7 @@ The player with the highest total points at the end of the game wins! Have fun!
                 if time.time() - start_time > time_limit:
                     client_socket.send(b"\033[91mTime's up! Moving to the next question.\033[0m\n")
                     break
-                
+
                 guesses.append(guess)
 
             logger.info(f"Client {username} answered: {guesses}")
