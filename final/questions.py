@@ -54,43 +54,53 @@ create_database()
 
 new_questions = [
 {
-    "prompt": "Name a food that people usually eat with their hands.",
+    "prompt": "Name something a movie hero will see in a haunted house.",
     "guesses": [
-        {"guess": "pizza", "score": 30},
-        {"guess": "hamburger", "score": 25},
-        {"guess": "sandwich", "score": 15},
-        {"guess": "chicken wings", "score": 12},
-        {"guess": "french fries", "score": 8},
+        {"guess": "ghosts", "score": 41},
+        {"guess": "spiders", "score": 14},
+        {"guess": "dead", "score": 13},
+        {"guess": "skeletons", "score": 6},
+        {"guess": "blood", "score": 5},
     ]
 },
 {
-    "prompt": "What's a type of dance move?",
+    "prompt": "Name a way an egg could be prepared that also describes your boss.",
     "guesses": [
-        {"guess": "twirl", "score": 30},
-        {"guess": "moonwalk", "score": 20},
-        {"guess": "spin", "score": 15},
-        {"guess": "dip", "score": 10},
-        {"guess": "shuffle", "score": 5}
+        {"guess": "scrambled", "score": 39},
+        {"guess": "fried", "score": 26},
+        {"guess": "sunny-side up", "score": 14},
+        {"guess": "runny", "score": 12},
+        {"guess": "over easy", "score": 9},
     ]
 },
 {
-    "prompt": "Name a funny noise.",
+    "prompt": "Name someone the dog complains about to the pet psychologist.",
     "guesses": [
-        {"guess": "snicker", "score": 30},
-        {"guess": "giggle", "score": 20},
-        {"guess": "snort", "score": 15},
-        {"guess": "chortle", "score": 10},
-        {"guess": "whoopee", "score": 5}
+        {"guess": "cat", "score": 35},
+        {"guess": "owner", "score": 30},
+        {"guess": "mailman", "score": 10},
+        {"guess": "kids", "score": 7},
+        {"guess": "vet", "score": 7},
     ]
 },
 {
-    "prompt": "Name a silly thing to do with spaghetti.",
+    "prompt": "Name a reason you cover your mouth.",
     "guesses": [
-        {"guess": "slurp", "score": 30},
-        {"guess": "twirl", "score": 20},
-        {"guess": "noodle dance", "score": 15},
-        {"guess": "spaghetti art", "score": 10},
-        {"guess": "spaghetti hair", "score": 5}
+        {"guess": "cough", "score": 69},
+        {"guess": "sneeze", "score": 50},
+        {"guess": "yawn", "score": 12},
+        {"guess": "yellow teeth", "score": 5},
+        {"guess": "shock", "score": 4},
+    ]
+},
+{
+    "prompt": "Name something you bought and theen suffered buyer's remorse.",
+    "guesses": [
+        {"guess": "car", "score": 48},
+        {"guess": "clothes", "score": 20},
+        {"guess": "house", "score": 7},
+        {"guess": "food", "score": 3},
+        {"guess": "pet", "score": 1},
     ]
 }
 ]
