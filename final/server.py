@@ -169,13 +169,12 @@ def get_random_question(used_questions):
         available_questions = questions_dict_list
 
     # Select a random question from available questions
-    question = random.choice(available_questions)
-
-    # Add the used question to the list
-    used_questions.append(question["prompt"])
-
+    for i in len(available_questions):
+        question = available_questions[i]
+        # Add the used question to the list
+        used_questions.append(question["prompt"])
+        return question
     conn.close()
-    return question
 
 def print_in_box(text):
     box_width = len(text) + 4  # Adjust the width based on the length of the text
