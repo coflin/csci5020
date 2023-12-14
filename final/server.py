@@ -183,9 +183,7 @@ def get_random_question(used_questions):
         available_questions = questions_dict_list
 
     # Select a random question from available questions
-    question = available_questions[len(used_questions) % len(available_questions)]
-
-    #question = random.choice(available_questions)
+    question = random.choice(available_questions)
 
     # Add the used question to the list
     used_questions.append(question["prompt"])
