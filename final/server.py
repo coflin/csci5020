@@ -5,17 +5,13 @@ import sqlite3
 import random
 from loguru import logger
 
-"""
-Same question to both parties sequentially. Possibly have 2 tables so that the questions don't repeat.
-"""
-
 logger.add("/var/log/family_feud_server.log")
 
-scores_lock = threading.Lock()
+# Global variable to keep track of the current question index
+current_question_index = 0
 
-def handle_client(client_socket,clients,barrier):
+def handle_client(client_socket, clients, barrier, questions):
     try:
-
         # Send a welcome message
         client_socket.send(b"""\033[93m
 __          __  _                            _        
@@ -44,25 +40,25 @@ __          __  _                            _
 \033[0m                          
  \n\033[92mAuthor: Sneha Irukuvajjula\033[0m   
 
-\n\033[93m\033[1mGame Setup \033[0m\033[0m \n
+\n\n \033[1m Game Setup \033[0m \n
 Two players are part of the game. A survey was conducted with around 100 people,\n 
 and the top 5 responses to various questions were collected.
                            
-\n\033[93m\033[1mObjective \033[0m\033[0m \n
+\n\n \033[1m Objective \033[0m \n
 Players aim to guess the top 5 most popular answers to these survey questions.
                            
-\n\033[93m\033[1mGame Play \033[0m\033[0m \n
+\n\n \033[1m Game Play \033[0m \n
 Players will be presented with questions from the survey.\n
 They need to guess the top 5 answers in order of popularity.\n
 The order in which players guess does not matter as long as the answer is one among the top 5.
                            
-\n\033[93m\033[1mScoring \033[0m\033[0m \n
+\n\n \033[1m Scoring \033[0m \n
 Points are awarded based on the popularity of the guessed answers.\n
 The most popular answer earns the highest points, followed by decreasing points for the subsequent answers.
                            
-\n\033[93m\033[1mWinning \033[0m\033[0m \n
+\n\n \033[1m Winning \033[0m \n
 The player with the highest total points at the end of the game wins! Have fun!
-\n\033[93m\033[1mLet's play Sneha's Family Feud!\033[0m\033[0m
+\n \033[1mLet's play Sneha's Family Feud!\033[0m
 """)
 
         time.sleep(1)
@@ -86,62 +82,80 @@ The player with the highest total points at the end of the game wins! Have fun!
     
         # Send a starting game message
         client_socket.send(b"All players have joined. Starting game in\n")
-        for i in range(3,0,-1):
+        for i in range(3, 0, -1):
             time.sleep(1)
             client_socket.send(f"{i}..\n".encode("utf-8"))
 
-        # Get a random question and send it to the client
-        for question_number in range(1,6):
-            question = get_random_question(used_questions)
-            client_socket.send(f"\n\n\033[37m\033[1mQuestion {question_number}: {question['prompt']}\033[0m\033[0m".encode("utf-8"))
-                    
-            # Simulate receiving the client's response
-            time.sleep(1)
-            for i in range(1,6):
-                client_socket.send(f"\n\033[93mGuess {i}:\033[0m ".encode("utf-8"))
-                guess = client_socket.recv(1024).decode("utf-8")
-                guesses.append(guess)
+        # Get a sequential question and send it to the client
+        for question_number in range(1, 6):
+            question = get_next_question(questions_dict_list)
+            if question:
+                client_socket.send(
+                    f"\n\n\033[37m\033[1mQuestion {question_number}: {question['prompt']}\033[0m\033[0m".encode("utf-8")
+                )
+                # Simulate receiving the client's response
+                time.sleep(1)
+                for i in range(1, 6):
+                    client_socket.send(f"\033[93mGuess {i}:\033[0m ".encode("utf-8"))
+                    guess = client_socket.recv(1024).decode("utf-8")
+                    guesses.append(guess)
 
-            logger.info(f"Client {username} answered: {guesses}")
-            logger.info(f"{player_scores}")
+                logger.info(f"Client {username} answered: {guesses}")
+                logger.info(f"{player_scores}")
 
-            question_score = calculate_score(question,guesses)
-            with scores_lock:
-                for player_score in player_scores:
-                    if username == list(player_score.keys())[0]:
-                        player_score[username] += question_score
-            client_socket.send(f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8"))
-            time.sleep(1)
-            client_socket.send(f"\033[93mYour total score so far: {player_score[username]}\033[0m\n\n".encode("utf-8"))
-            time.sleep(1)
-            
-            # Wait for all players to finish before moving to the next question
-            barrier.wait()
+                question_score = calculate_score(question, guesses)
+                with scores_lock:
+                    for player_score in player_scores:
+                        if username == list(player_score.keys())[0]:
+                            player_score[username] += question_score
+                client_socket.send(
+                    f"\033[92mYour score for this question is: {question_score}\033[0m\n".encode("utf-8")
+                )
+                time.sleep(1)
+                client_socket.send(
+                    f"\033[93mYour score so far: {player_score[username]}\033[0m\n\n".encode("utf-8")
+                )
+                time.sleep(1)
+
+                # Wait for all players to finish before moving to the next question
+                barrier.wait()
 
         final_score = print_in_box(f"Your final score: {player_score[username]}")
-                     
+
         client_socket.send(f"{final_score}\n\n".encode("utf-8"))
         time.sleep(1)
-        client_socket.send(b"Thanks for playing this game. Good bye! :) ")        
+        client_socket.send(b"Thanks for playing this game. Good bye! :) ")
 
     except Exception as e:
         import traceback
         traceback.print_exc()
-        logger.error(f"Error handling client: {e}")    
+        logger.error(f"Error handling client: {e}")
 
     finally:
         # Close the client socket
         client_socket.close()
 
-def calculate_score(question,guesses):
+def calculate_score(question, guesses):
     score = 0
     for guess in guesses:
-        for i in range(1,6):
+        for i in range(1, 6):
             if guess.strip().lower() == question[f'guess{i}']:
                 logger.info(question[f'guess{i}'])
                 score += question[f'guess{i}_score']
     logger.info(f"SCORE: {score}")
     return score
+
+def get_sequential_question(questions, index):
+    if index < len(questions):
+        return questions[index]
+    else:
+        return None
+
+def get_next_question(questions):
+    global current_question_index
+    question = get_sequential_question(questions, current_question_index)
+    current_question_index += 1
+    return question
 
 def get_random_question(used_questions):
     """Gets and returns a random question that has not been used before"""
@@ -180,10 +194,11 @@ def get_random_question(used_questions):
 def print_in_box(text):
     box_width = len(text) + 4  # Adjust the width based on the length of the text
     horizontal_line = '+' + '-' * (box_width - 2) + '+'
-    box_string = f'\033[1;92m{horizontal_line}\n| {text} |\n{horizontal_line}\033[0m'    
+    box_string = f'\033[1;92m{horizontal_line}\n| {text} |\n{horizontal_line}\033[0m'
     return box_string
 
 barrier = threading.Barrier(2)
+
 @logger.catch()
 def main():
     # Create a server socket
@@ -198,9 +213,8 @@ def main():
     # Listen for incoming connections
     server_socket.listen(2)
     logger.info(f"Server listening on {SERVER_IP}:{SERVER_PORT}")
-    
+
     clients = []
-    
 
     try:
         # Accept incoming connections
@@ -209,7 +223,7 @@ def main():
             print(f"Accepted connection from {address}")
 
             # Start a new thread to handle the client
-            threading.Thread(target=handle_client, args=(client,clients,barrier)).start()
+            threading.Thread(target=handle_client, args=(client, clients, barrier, questions_dict_list)).start()
 
             # If two clients have connected, reset the barrier for the next round
             if len(clients) == 2:
