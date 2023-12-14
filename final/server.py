@@ -92,7 +92,7 @@ The player with the highest total points at the end of the game wins! Have fun!
 
         # Get a random question and send it to the client
         for question_number in range(1,6):
-            question = get_random_question(used_questions)
+            question = get_next_question(used_questions)
             client_socket.send(f"\n\n\033[37m\033[1mQuestion {question_number}: {question['prompt']}\033[0m\033[0m".encode("utf-8"))
                     
             # Simulate receiving the client's response
@@ -143,7 +143,7 @@ def calculate_score(question,guesses):
     logger.info(f"SCORE: {score}")
     return score
 
-def get_random_question(used_questions):
+def get_next_question(used_questions):
     """Gets and returns a random question that has not been used before"""
     conn = sqlite3.connect("questions.db")
     cursor = conn.cursor()
