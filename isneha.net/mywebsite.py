@@ -19,7 +19,7 @@ def resume():
 
 @app.route("/python")
 def python_projects():
-    return render_template("python-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",LinkedinProjectRoute="/python/linkedin-job-scraper",PnmapProjectRoute="/python/pnmap",WebsiteProjectRoute="/python/website")
+    return render_template("python-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",LinkedinProjectRoute="/python/linkedin-job-scraper",PnmapProjectRoute="/python/pnmap",WebsiteProjectRoute="/python/website",FamilyFeudProject="/python/family-feud")
 
 @app.route("/linux")
 def linux_projects():
@@ -42,6 +42,10 @@ def pnmap():
 @app.route("/python/website")
 def website():
     return render_template("website.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
+@app.route("/python/family-feud")
+def familyfeud():
+     return render_template("family-feud.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")   
 
 #Linux Projects
 @app.route("/linux/dhcp")
