@@ -118,12 +118,11 @@ The player with the highest total points at the end of the game wins! Have fun!
             for i in range(1, 6):
                 client_socket.send(f"\n\033[93mGuess {i}:\033[0m ".encode("utf-8"))
                 guess = client_socket.recv(1024).decode("utf-8")
-
+                guesses.append(guess)
                 if time.time() - start_time > time_limit:
                     client_socket.send(b"\033[91mTime's up! Moving to the next question.\033[0m\n")
                     break
 
-                guesses.append(guess)
 
             logger.info(f"Client {username} answered: {guesses}")
             logger.info(f"{player_scores}")
