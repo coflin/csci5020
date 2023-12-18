@@ -4,7 +4,6 @@
 Assignment 17: URL to my personal website: https://isneha.net
 """
 
-
 from flask import Flask, render_template
 
 app=Flask(__name__)
@@ -23,7 +22,7 @@ def python_projects():
 
 @app.route("/linux")
 def linux_projects():
-    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",DHCPProjectRoute="/linux/dhcp",LVMProjectRoute="/linux/lvm")
+    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",,DunderMifflinProjectRoute="/linux/dunder-mifflin",DHCPProjectRoute="/linux/dhcp",LVMProjectRoute="/linux/lvm")
 
 @app.route("/networking")
 def networking_projects():
@@ -48,6 +47,11 @@ def familyfeud():
      return render_template("family-feud.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")   
 
 #Linux Projects
+
+@app.route("/linux/dunder-mifflin")
+def dundermifflin():
+    return render_template("dundermifflin.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+
 @app.route("/linux/dhcp")
 def dhcp():
     return render_template("dhcp.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
@@ -56,10 +60,11 @@ def dhcp():
 def lvm():
     return render_template("lvm.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
+# Networking Projects
+
 @app.route("/networking/gns3")
 def gns3():
     return render_template("gns3.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
 
 if __name__ == "__main__":
     app.debug = True
