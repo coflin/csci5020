@@ -22,7 +22,7 @@ def python_projects():
 
 @app.route("/linux")
 def linux_projects():
-    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",,DunderMifflinProjectRoute="/linux/dunder-mifflin",DHCPProjectRoute="/linux/dhcp",LVMProjectRoute="/linux/lvm")
+    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",DunderMifflinProjectRoute="/linux/dunder-mifflin",DHCPProjectRoute="/linux/dhcp",LVMProjectRoute="/linux/lvm")
 
 @app.route("/networking")
 def networking_projects():
