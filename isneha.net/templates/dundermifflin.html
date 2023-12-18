@@ -58,12 +58,13 @@
                     server. The articles on how I configured them can be found <a href="https://isneha.net/linux">here</a>.
                     <br><br>
                     <b>Machine A 100.64.0.26 (Rocky 9.2)</b>
-                    <br>This is the gateway machine and acts as a router to connect the various networks (WAN, LAN and DMZ).
+                    <br>This is the gateway machine and acts as a router to connect the various networks (WAN, LAN and 
+                    DMZ). This is also a DHCP Server. You can find how I configured this as a DHCP server <a href="https://isneha.net/linux/dhcp">here</a>.
                     <br><br>
                     <b>Machine E 10.21.32.2 (Rocky 9.2)</b>
-                    <br>This is the file server machine on the internal network. The machine is not directly accessible to the 
-                    outside world and can only be reached by pivoting through Machine A. It contains the home directories of all 
-                    the users that can be accessed by other machines on the LAN which we don't show explicitly.
+                    <br>This is the file server machine on the internal network. You can find how I configured the file server <a href="https://isneha.net/linux/lvm">here</a>.
+                    The machine is not directly accessible to the outside world and can only be reached by pivoting through Machine A. 
+                    It contains the home directories of all the users that can be accessed by other machines on the LAN which we don't show explicitly.
                     <br><br>
                     <b>Machine B 100.64.26.2 (Rocky 9.2)</b>
                     <br>This is a DNS Server. The article on how I configured this will be up soon.
