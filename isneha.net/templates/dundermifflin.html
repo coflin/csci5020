@@ -39,14 +39,28 @@
         <center>
             <div class="projects-div">
                 <h1 style="margin-left: 3%;color:#bd5d38;"> The Dunder Mifflin Company </h1>
-                <h5> The Dunder Mifflin Network</h5> 
-                <p> This is a scenario of a company named Dunder Mifflin. This is the fictional paper company from the TV show 'The Office'. I am using the names of the characters from the show as my users, and I am the System Administrator and a network of virtual machines to represent the hypothetical computer network of the company.
-                </p>
-                <img class="python-image" src="/static/assets/dundermifflin.png">
                 <br/>
-
-                <a href="https://github.com/coflin/csci5020/tree/main/assignment16" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
-                <br/><br/><br/><br/>
+                <h5> The Dunder Mifflin Network</h5> 
+                <p> This is a scenario of a company named Dunder Mifflin. This is the fictional paper company from the 
+                    TV show 'The Office'. I am using the names of the characters from the show as my users, and I am 
+                    the System Administrator and a network of virtual machines to represent the hypothetical computer 
+                    network of the company.
+                </p>
+                <br>
+                <img class="python-image" src="/static/assets/dundermifflin.png">
+                <br>
+                <p>
+                    The figure above shows the Dunder-Mifflin network. The network consists of six production machines that are initially named Machine A through Machine F.
+                    The network consists of a connection to the ISP (WAN), a Demilitarized Zone (DMZ) network and an internal network (LAN).
+                    I will configure the machines to perform specific tasks such as being a web server, DNS server and a file server. The articles on how I configured them can be found <a href="https://isneha.net/linux">here.</a>
+                    <br>
+                    <b>Machine A 100.64.0.26 (Rocky 9.2)</b>
+                    <br>This is the gateway machine and acts as a router to connect the various networks (WAN, LAN and DMZ).
+                    <br>
+                    <b>Machine E 10.21.32.2 (Rocky 9.2)</b>
+                    <br>This is the file server machine on the internal network. The machine is not directly accessible to the outside world and can only be reached by pivoting through Machine A. It contains the home directories of all the users that can be accessed by other machines on the LAN which we don't show explicitly.
+                </p>
+                <br/>
             </div>
         </center>
     
