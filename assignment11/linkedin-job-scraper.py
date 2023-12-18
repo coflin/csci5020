@@ -5,7 +5,6 @@ This code performs web scraping of LinkedIn job listings, checks for new
 job listings, stores them in an SQLite database (job_listing.db), and sends email 
 notifications when new jobs are found. The task function is the core of this script, 
 and it's executed every 24 hours, as defined in the main function.
-TODO: Put in AWS and run it everyday
 """
 
 
