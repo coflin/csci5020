@@ -94,8 +94,10 @@
                 to the database to retrieve and manage questions during gameplay.
                 
                 <br/><br/><b>Multi Threading</b>
-                <br/>Each connected client is handled in a separate thread, allowing the server to manage multiple 
-                connections concurrently.
+                <br/>Every connected client is managed in its individual thread, enabling the server to handle multiple 
+                connections concurrently. Additionally, the implementation incorporates a barrier feature in multi-threading. 
+                When a thread is executed, it pauses to allow all other threads to complete their execution. This ensures 
+                effective synchronization, particularly in managing the flow of questions during gameplay.
                 
                 <br/><br/><b>Question Selection</b>
                 <br/>Questions are selected from the database. The server ensures questions are not reused until the 
