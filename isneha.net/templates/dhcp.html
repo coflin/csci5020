@@ -99,11 +99,10 @@
                 <br/>
                 <h5>DHCP Server Setup</h5>
                 <p>Install ISC DHCP on Machine A.</p>
-                <br/>
                 <div class="dundermifflin-code">
                     yum install dhcp-server
                 </div>
-                </p>Next, I changed the hostname for Machine A manually, by editing the /etc/hostname file.</p>
+                <p>Next, I changed the hostname for Machine A manually, by editing the /etc/hostname file.</p>
                 <div class="dundermifflin-code">
                     [root@machinea ~]# cat /etc/hostname
                     <br/>router.dundermifflin.com
@@ -124,13 +123,15 @@
                     <br/>Firmware Version: VMW71.00V.21100432.B64.2301110304
                 </div>
 
+                <br/>
                 <p>
                     Now, let's configure the DHCP server.
                     <br/>
                     Before I start configuring, there are a few things to note. There are some configs which should be common 
                     between all the machines aka "global" and some that are specific to the machine. For example, all machines
                     should have the same DNS, NTP servers and lease time. However, the gateway is different for DMZ and 
-                    LAN machines. Keeping this in mind, moving on to the configuration. <br/>
+                    LAN machines. Keeping this in mind, moving on to the configuration. 
+                    <br/><br/>
                     I'm setting the DHCP lease time to be 10 minutes, which means, all the DHCP Clients would 
                     update configuration from DHCP server every 10 minutes.
                     In /etc/dhcp/dhcpd.conf file:
