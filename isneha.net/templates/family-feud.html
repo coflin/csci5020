@@ -64,11 +64,52 @@
                 <p>
                     Before we start coding, the first step is to understand the game play.
                     <br><br>
-                    <img src="/static/assets/gameplay.png"
+                    <img class = "python-image" src="/static/assets/gameplay.png">
                     <br>
                 </p>
 
+                <br/><br/><h5>The Challenge</h5>
+                2 players need to get the same question <u>exactly at the same time</u>.
+                <br/> 
+                I could write a python code, build the game logic and have 2 clients run the python code at the same time. 
+                However, it leaves to the possibility of human errors. Further, I don't want to give clients the power to 
+                control the code.
 
+                <br/><br/><h5>Architecture</h5>
+                To address the challenges above, I decided to go with a client-server architecture.
+
+                <br/><br/>
+                <img class="python-image" src="/static/assets/familyfeud-architecture.drawio">
+
+                <br/><br/><b>Server Setup</b>
+                <br/>The server runs as a system service named "family_feud.service" on an AWS EC2 instance. It listens 
+                    for incoming connections on port 5020.
+
+                <br/><br/><b>Communication</b>
+                <br/>I'm using sockets for communication between the server and clients. Clients connect to the server 
+                via telnet.
+                
+                <br/><br/><b>Database Integration</b>
+                <br/>A MySQL database stores questions, answers, and corresponding score values. The server connects 
+                to the database to retrieve and manage questions during gameplay.
+                
+                <br/><br/><b>Multi Threading</b>
+                <br/>Each connected client is handled in a separate thread, allowing the server to manage multiple 
+                connections concurrently.
+                
+                <br/><br/><b>Question Selection</b>
+                <br/>Questions are selected from the database. The server ensures questions are not reused until the 
+                entire set has been exhausted. Each question is stored as a dictionary in the database. The guesses and the scores
+                are stored as a list of dictionaries. Here's how it is retrieved:
+                <br/><img class="python-image" src="/static/assets/dictionary.png">
+                
+                <br/><br/><b>Scoring Mechanism</b>
+                The scoring mechanism is based on the player's guesses compared to the survey's top answers. 
+                Retrieves the points from the SQL database.
+
+                <br/><br/><b>Continuous Integration and Deployment</b>
+                The server code is set up as a service, ensuring it remains "always-on". Automatic updates are pulled 
+                from my Git repository every minute using a cron job, keeping the game up-to-date.
 
                 <br/>
                 <a href="https://github.com/coflin/csci5020/tree/main/final" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
