@@ -98,10 +98,48 @@
 
                 <br/>
                 <h5>DHCP Server Setup</h5>
-                Install ISC DHCP on Machine A.
+                <p>Install ISC DHCP on Machine A.</p>
+                <br/>
                 <div class="dundermifflin-code">
-                    This is a simple text box with a background color of #bd5d38.
+                    yum install dhcp-server
                 </div>
+                </p>Next, I changed the hostname for Machine A manually, by editing the /etc/hostname file.</p>
+                <div class="dundermifflin-code">
+                    [root@machinea ~]# cat /etc/hostname
+                    <br/>router.dundermifflin.com
+                    <br/>[root@machinea ~]#
+                    <br/>[root@machinea ~]# hostnamectl 
+                    <br/>Static hostname: router.dundermifflin.com
+                    <br/>Icon name: computer-vm
+                    <br/>Chassis: vm 🖴
+                    <br/>Machine ID: dab5052ba9464481a04710cb8fd86e43
+                    <br/>Boot ID: 81decf11f01446c3b36c5de25ed44cd7
+                    <br/>Virtualization: vmware
+                    <br/>Operating System: Rocky Linux 9.2 (Blue Onyx)       
+                    <br/>CPE OS Name: cpe:/o:rocky:rocky:9::baseos
+                    <br/>Kernel: Linux 5.14.0-284.25.1.el9_2.x86_64
+                    <br/>Architecture: x86-64
+                    <br/>Hardware Vendor: VMware, Inc.
+                    <br/>Hardware Model: VMware7,1
+                    <br/>Firmware Version: VMW71.00V.21100432.B64.2301110304
+                </div>
+
+                <p>
+                    Now, let's configure the DHCP server.
+                    <br/>
+                    Before I start configuring, there are a few things to note. There are some configs which should be common 
+                    between all the machines aka "global" and some that are specific to the machine. For example, all machines
+                    should have the same DNS, NTP servers and lease time. However, the gateway is different for DMZ and 
+                    LAN machines. Keeping this in mind, moving on to the configuration. <br/>
+                    I'm setting the DHCP lease time to be 10 minutes, which means, all the DHCP Clients would 
+                    update configuration from DHCP server every 10 minutes.
+                    In /etc/dhcp/dhcpd.conf file:
+                </p>
+                <div class="dundermifflin-code">
+                    default-lease-time 600;
+                    max-lease-time 600;
+                </div>
+                <p>The lease-time is in seconds. </p>
 
 
                 <br/>
