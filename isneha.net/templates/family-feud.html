@@ -79,7 +79,7 @@
                 To address the challenges above, I decided to go with a client-server architecture.
 
                 <br/><br/>
-                <img class="python-image" src="/static/assets/familyfeud-architecture.png">
+                <img class="small-image" src="/static/assets/familyfeud-architecture.png">
 
                 <br/><br/><b>Server Setup</b>
                 <br/>The server runs as a system service named "family_feud.service" on an AWS EC2 instance. It listens 
@@ -101,7 +101,7 @@
                 <br/>Questions are selected from the database. The server ensures questions are not reused until the 
                 entire set has been exhausted. Each question is stored as a dictionary in the database. The guesses and the scores
                 are stored as a list of dictionaries. Here's how it is retrieved:
-                <br/><img class="python-image" src="/static/assets/dictionary.png">
+                <br/><img class="small-image" src="/static/assets/dictionary.png">
                 
                 <br/><br/><b>Scoring Mechanism</b>
                 The scoring mechanism is based on the player's guesses compared to the survey's top answers. 

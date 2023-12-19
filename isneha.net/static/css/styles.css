@@ -11165,6 +11165,11 @@ html {
   width:100%;
 }
 
+.small-image{
+  height:auto;
+  width:50%;
+}
+
 .myButton {
   float:left;
 	background-color:var(--bs-gray-700);
