@@ -11269,7 +11269,7 @@ html {
   }
 
 .dundermifflin-code {
-  background-color: #bd5d38;
+  background-color: var(--bs-gray-700);
   color: white; /* Set text color to white for better readability */
   padding: 10px;
   border: 1px solid #bd5d38; /* Add border for a defined look */
