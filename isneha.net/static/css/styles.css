@@ -11268,9 +11268,9 @@ html {
     background-color: #f2f2f2;
   }
 
-.dundermifflin-pre {
-    background-color: #bd5d38;
-    padding: 10px;
-    border: 1px solid #bd5d38;
-    white-space: pre-wrap;
-}
+.dundermifflin-code {
+  background-color: #bd5d38;
+  color: white; /* Set text color to white for better readability */
+  padding: 10px;
+  border: 1px solid #bd5d38; /* Add border for a defined look */
+  border-radius: 5px; /* Optional: Add rounded corners for a softer appearance */}
