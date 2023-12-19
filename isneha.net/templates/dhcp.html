@@ -143,9 +143,9 @@
                 </p>
                 <div class="dundermifflin-code">
                     default-lease-time 600;      #the lease-time is in seconds
-                    max-lease-time 600;
-                    option domain-name-servers 128.138.240.1, 128.138.130.30;     #Temporary DNS Servers
-                    option ntp-servers 132.163.97.1, 132.163.96.1;       # Temporary NTP Servers
+                    <br>max-lease-time 600;
+                    <br/>option domain-name-servers 128.138.240.1, 128.138.130.30;     #Temporary DNS Servers
+                    <br/>option ntp-servers 132.163.97.1, 132.163.96.1;       # Temporary NTP Servers
                 </div>
                 
                 <br/>
@@ -158,15 +158,15 @@
                 </p>
                 <div class="dundermifflin-code">
                     #LAN
-                    subnet 10.21.32.0 netmask 255.255.255.0 {
-                      range 10.21.32.100 10.21.32.199;
-                      option routers 10.21.32.1;
+                    <br>subnet 10.21.32.0 netmask 255.255.255.0 {
+                        <br>  range 10.21.32.100 10.21.32.199;
+                        <br> option routers 10.21.32.1;
                     }
                     
                     #DMZ
-                    subnet 100.64.26.0 netmask 255.255.255.0 {
-                      range 100.64.26.100 100.64.26.199;
-                      option routers 100.64.26.1;
+                    <br>subnet 100.64.26.0 netmask 255.255.255.0 {
+                        <br>  range 100.64.26.100 100.64.26.199;
+                        <br> option routers 100.64.26.1;
                     }
                 </div>
 
