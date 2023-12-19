@@ -75,6 +75,8 @@
                 However, it leaves to the possibility of human errors. Further, I don't want to give clients the power to 
                 control the code.
                 </p>
+
+
                 <br/><br/><h5>Architecture</h5>
                 <p>To address the challenges above, I decided to go with a client-server architecture.
 
@@ -114,6 +116,22 @@
                 from my Git repository every minute using a cron job, keeping the game up-to-date.
                 </p>
 
+                <br/><br/><h5>Coding</h5>
+                <p>Alright! Now that we have the architecture, let's talk code now.
+                <br/><br/><b>Libraries used</b>
+                </p>
+
+                <br/><br/><img class="python-image" src="/static/assets/modules.png">
+
+                <br/><br/>
+                <p>
+                    <i>socket</i>: Provides low-level networking operations, and it is used here to create server and client sockets for communication over the network.
+                    <br/><i>threading</i>: Used to handle multiple clients simultaneously, ensuring that the server can interact with multiple players without blocking.
+                    <br/><i>sqlite3</i>: Used here for interacting with an SQLite database named questions.db. The database contains questions and their corresponding answers for the Family Feud game.
+                    <br/><i>loguru</i>: For storing log information in a file in the game server.
+                </p>
+
+                
                 <br/>
                 <a href="https://github.com/coflin/csci5020/tree/main/final" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
                 <br/><br/><br/><br/>
