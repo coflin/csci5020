@@ -103,7 +103,7 @@
                     yum install dhcp-server
                 </div>
                 <br/>
-                <p>Next, I changed the hostname for Machine A manually, by editing the /etc/hostname file.</p>
+                <p>Next, I changed the hostname for Machine A manually, by editing the <b>/etc/hostname file</b>.</p>
                 <div class="dundermifflin-code">
                     [root@machinea ~]# cat /etc/hostname
                     <br/>router.dundermifflin.com
@@ -131,17 +131,46 @@
                     Before I start configuring, there are a few things to note. There are some configs which should be common 
                     between all the machines aka "global" and some that are specific to the machine. For example, all machines
                     should have the same DNS, NTP servers and lease time. However, the gateway is different for DMZ and 
-                    LAN machines. Keeping this in mind, moving on to the configuration. 
+                    LAN machines. Keeping this in mind, let's move on to the configuration. 
                     <br/><br/>
                     I'm setting the DHCP lease time to be 10 minutes, which means, all the DHCP Clients would 
                     update configuration from DHCP server every 10 minutes.
-                    In /etc/dhcp/dhcpd.conf file:
+                    For now, I am setting 128.138.240.1, 128.138.130.30 as the DNS servers. I will change this to Machine B 
+                    and Machine F once I configure B & F as DNS servers.
+                    I'm also setting NTP servers to be 132.163.97.1, 132.163.96.1 for now. I will change this to Machine A once
+                    I configure Machine A as an NTP server.
+                    <br/><b>/etc/dhcp/dhcpd.conf</b>:
                 </p>
                 <div class="dundermifflin-code">
-                    default-lease-time 600;
+                    default-lease-time 600;      #the lease-time is in seconds
                     max-lease-time 600;
+                    option domain-name-servers 128.138.240.1, 128.138.130.30;     #Temporary DNS Servers
+                    option ntp-servers 132.163.97.1, 132.163.96.1;       # Temporary NTP Servers
                 </div>
-                <p>The lease-time is in seconds. </p>
+                
+                <br/>
+                <p>Let's get those LAN and DMZ subnets up and running! Currently, I'm configuring 100 usable IP addresses for 
+                    each subnet, but we can always expand as the organization grows.
+                    Additionally, I am designating Machine A as the default gateway since it serves as the router for 
+                    traffic between these machines.
+                    Specifically, the LAN subnet is linked to Machine A with the IP address 10.21.32.1, while the 
+                    DMZ subnet is connected to Machine A using the IP address 100.64.26.1.
+                </p>
+                <div class="dundermifflin-code">
+                    #LAN
+                    subnet 10.21.32.0 netmask 255.255.255.0 {
+                      range 10.21.32.100 10.21.32.199;
+                      option routers 10.21.32.1;
+                    }
+                    
+                    #DMZ
+                    subnet 100.64.26.0 netmask 255.255.255.0 {
+                      range 100.64.26.100 100.64.26.199;
+                      option routers 100.64.26.1;
+                    }
+                </div>
+
+
 
 
                 <br/>
