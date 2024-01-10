@@ -170,8 +170,20 @@
                         <br> }
                 </div>
 
+                <p>
+                    I'm now setting the DHCP server to first send an ICMP echo request to the IP address it is currently 
+                trying to dynamically allocate and wait 100 ms for a reply. This is just an added safety mechanism I'm
+                implementing so that the DHCP server does not allocate an IP address that is currently in use. 
+                If a response is heard, the server must not respond and the lease time mustbe abandoned for another 10 minutes.
+                </p>
+                <div class="dundermifflin-code">
+                    ping-check true;        # Enable ping check globally
+                    <br>ping-timeout-ms 100;      # Set the ping timeout to 100 milliseconds
+                    <br>abandon-lease-time 600;     # Set the abandon-lease-time to 10 minutes (600 seconds)
+                </div>
 
 
+                
 
                 <br/>
                 <a href="https://github.com/coflin/csci5113/tree/main/lab9" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
