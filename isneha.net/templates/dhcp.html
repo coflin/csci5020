@@ -221,24 +221,23 @@
                     <br>method=auto
                 </div>
 
-
+                <br/><br/>
                 <h6>Updating Hostnames on Clients</h6>
                 <p>1. <b>Remove the "/etc/hostname" file to ensure dynamically assigned hostnames are used:</b> This file typically contains the static hostname of the system. By removing it, the system will use the hostname assigned by the DHCP server.</p>
                 <p>2. <b>Comment out the line in "/etc/dhcp/dhclient.conf" that sets the host-name:</b> This line instructs the DHCP client to send its current hostname to the DHCP server. By commenting it out, the client will not send its hostname, allowing the DHCP server to assign one dynamically.</p>
-                <br/>
                 <div class="dundermifflin-code">
                     #send host-name = gethostname();
                 </div>
 
-
+                <br/><br/>
                 <h6>NTP Servers and DNS Configuration on Clients</h6>
                 <p><b>For NTP servers:</b> Comment out the line in "/etc/chrony/chrony.conf" to pick up NTP servers from DHCP:</p>
                 <p>The "2.pool.ntp.org" line typically specifies a default NTP server. By commenting it out, the client will use the NTP servers provided by the DHCP server instead.</p>
-                <br/>
                 <div class="dundermifflin-code">
                     2.pool.ntp.org
                 </div>
 
+                <br/><br/>
                 <p>The "/etc/resolv.conf" file contains DNS resolver configuration. NetworkManager automatically updates this file with DNS server information obtained from DHCP, ensuring that the client uses the correct DNS servers specified by the DHCP server.</p>                
         
                 <h5>Conclusion</h5>
