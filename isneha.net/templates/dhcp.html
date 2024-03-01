@@ -190,23 +190,64 @@
                 <p>For Debian:</p>
                 <p>1. <b>Use the "systemctl status networking" service to manage interfaces:</b> This command allows you to check the status of the networking service on Debian systems. It's essential for managing network interfaces and their configurations.</p>
                 <p>2. <b>Update the "/etc/network/interfaces" file to use DHCP configuration:</b> The "/etc/network/interfaces" file contains network interface configurations on Debian systems. By changing the configuration from static to DHCP, the interface will now obtain its network settings dynamically from the DHCP server.</p>
+                <br/>
+                <p>From:</p>
+                <div class="dundermifflin-code">
+                    allow-hotplug ens192 
+                    <br>iface ens192 inet static 
+                    <br>address 100.64.42.6 netmask 255.255.255.0 gateway 100.64.42.1
+                </div>
+                <p>To:</p>
+                <div class="dundermifflin-code">
+                    allow-hotplug ens192
+                    <br>iface ens192 inet dhcp
+                </div>
+                <br/>
+
                 
                 <p>For Redhat:</p>
                 <p>1. <b>Use "systemctl status NetworkManager" to manage interfaces:</b> Similar to Debian, this command checks the status of the NetworkManager service on Redhat systems. NetworkManager is a daemon that manages network connections and devices.</p>
                 <p>2. <b>Update the "/etc/NetworkManager/system-connections/ens192.nmconnection" file to use automatic configuration:</b> This file contains configuration settings for the specified network connection. By changing the method to "auto," the interface will automatically obtain its network settings via DHCP.</p>
-                
+                <br/>
+                <p>From:</p>
+                <div class="dundermifflin-code">
+                    [ipv4]
+                    <br>method=manual
+                    <br>address1=100.64.42.6/24,100.64.42.1
+                </div>
+                <br/>
+                <p>To:</p>
+                <div class="dundermifflin-code">
+                    [ipv4]
+                    <br>method=auto
+                </div>
+
+
                 <h6>Updating Hostnames on Clients</h6>
                 <p>1. <b>Remove the "/etc/hostname" file to ensure dynamically assigned hostnames are used:</b> This file typically contains the static hostname of the system. By removing it, the system will use the hostname assigned by the DHCP server.</p>
                 <p>2. <b>Comment out the line in "/etc/dhcp/dhclient.conf" that sets the host-name:</b> This line instructs the DHCP client to send its current hostname to the DHCP server. By commenting it out, the client will not send its hostname, allowing the DHCP server to assign one dynamically.</p>
-                
+                <br/>
+                <div class="dundermifflin-code">
+                    #send host-name = gethostname();
+                </div>
+
+
                 <h6>NTP Servers and DNS Configuration on Clients</h6>
                 <p><b>For NTP servers:</b> Comment out the line in "/etc/chrony/chrony.conf" to pick up NTP servers from DHCP:</p>
                 <p>The "2.pool.ntp.org" line typically specifies a default NTP server. By commenting it out, the client will use the NTP servers provided by the DHCP server instead.</p>
-                
-                <p><b>For DNS servers:</b> NetworkManager automatically manages "/etc/resolv.conf":</p>
+                <br/>
+                <div class="dundermifflin-code">
+                    2.pool.ntp.org
+                </div>
+
                 <p>The "/etc/resolv.conf" file contains DNS resolver configuration. NetworkManager automatically updates this file with DNS server information obtained from DHCP, ensuring that the client uses the correct DNS servers specified by the DHCP server.</p>                
         
-
+                <h5>Conclusion</h5>
+                <br/>
+                <p>In the realm of network infrastructure, simplicity reigns supreme. By setting up an ISC DHCP server on Machine A and configuring clients accordingly, we've taken a significant step towards efficient network management.</p>
+                <p>With DHCP, the process of assigning IP addresses, DNS servers, and other network parameters becomes a breeze. By automating these tasks, we free up valuable time and resources for other endeavors.</p>
+                <p>As we wrap up our journey through DHCP configuration, let's appreciate the beauty of automation and the elegance of simplicity. Here's to networks that run smoothly and effortlessly, allowing us to focus on what truly matters.</p>
+                
                 
 
                 <br/>
