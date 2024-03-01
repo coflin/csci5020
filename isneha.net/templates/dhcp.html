@@ -181,7 +181,58 @@
                     <br>ping-timeout-ms 100;      # Set the ping timeout to 100 milliseconds
                     <br>abandon-lease-time 600;     # Set the abandon-lease-time to 10 minutes (600 seconds)
                 </div>
+                <h5>Client Configuration</h5>
+                <p>Now, let's configure Machines B-F to obtain their network configuration and hostname from Machine A using DHCP.</p>
+                <br/>
 
+                <h6>Interface and DHCP Configuration on Clients</h6>
+                <p>For Debian:</p>
+                <p>1. Use the "<b>systemctl status networking</b>" service to manage interfaces.</p>
+                <p>2. Update the "<b>/etc/network/interfaces</b>" file to use DHCP configuration</p>
+                <p>From:</p>
+                <div class="dundermifflin-code">
+                    allow-hotplug ens192 
+                    <br>iface ens192 inet static 
+                    <br>address 100.64.42.6 netmask 255.255.255.0 gateway 100.64.42.1
+                </div>
+                <p>To:</p>
+                <div class="dundermifflin-code">
+                    allow-hotplug ens192
+                    <br>iface ens192 inet dhcp
+                </div>
+                
+                <p>For Redhat:</p>
+                <p>1. Use "<b>systemctl status NetworkManager</b>" to manage interfaces.</p>
+                <p>2. Update the "<b>/etc/NetworkManager/system-connections/ens192.nmconnection</b>" file to use automatic configuration.</p>
+                <p>From:</p>
+                <div class="dundermifflin-code">
+                    [ipv4]
+                    <br>method=manual
+                    <br>address1=100.64.42.6/24,100.64.42.1
+                </div>
+                <p>To:</p>
+                <div class="dundermifflin-code">
+                    [ipv4]
+                    <br>method=auto
+                </div>
+                
+                <h6>Updating Hostnames on Clients</h6>
+                <p>1. Remove the "<b>/etc/hostname</b>" file to ensure dynamically assigned hostnames are used.</p>
+                <p>2. Comment out the line in "<b>/etc/dhcp/dhclient.conf</b>" that sets the host-name.</p>
+                <div class="dundermifflin-code">
+                    #send host-name = gethostname();
+                </div>
+                
+                <h6>NTP Servers and DNS Configuration on Clients</h6>
+                <p>For NTP servers:</p>
+                <p>Comment out this line in "<b>/etc/chrony/chrony.conf</b>" to pick up NTP servers from DHCP:</p>
+                <div class="dundermifflin-code">
+                    #2.pool.ntp.org
+                </div>
+                
+                <p>For DNS servers:</p>
+                <p>NetworkManager automatically manages "<b>/etc/resolv.conf</b>".</p>
+                
 
                 
 
