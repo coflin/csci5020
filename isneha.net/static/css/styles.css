@@ -11160,6 +11160,36 @@ html {
   text-align: center;
 }
 
+
+
+  @media (min-width: 576px) {
+    .iframe-container {
+      max-width: 540px;
+    }
+  }
+  @media (min-width: 768px) {
+    .iframe-container {
+      max-width: 720px;
+    }
+  }
+  @media (min-width: 992px) {
+    .iframe-container {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .iframe-container {
+      max-width: 1140px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .iframe-container {
+      max-width: 1320px;
+    }
+  }
+
+
+
 .python-image{
   height:auto;
   width:100%;
