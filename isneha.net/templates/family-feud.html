@@ -252,12 +252,12 @@
 
 
         <br/><br/><h5>Score calculation</h5>
-        <iframe
         <iframe>
         src="https://carbon.now.sh/embed?bg=rgba%28189%2C93%2C56%2C1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=def%2520calculate_score%28question%252C%2520guesses%29%253A%250A%2520%2520%2520%2520%2522%2522%2522%250A%2520%2520%2520%2520Calculates%2520the%2520score%2520for%2520a%2520given%2520question%2520and%2520set%2520of%2520guesses.%250A%250A%2520%2520%2520%2520Args%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520question%2520%28dict%29%253A%2520The%2520question%2520data%2520from%2520the%2520database.%250A%2520%2520%2520%2520%2520%2520%2520%2520guesses%2520%28list%29%253A%2520List%2520of%2520guesses%2520provided%2520by%2520the%2520player.%250A%250A%2520%2520%2520%2520Returns%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520int%253A%2520The%2520calculated%2520score%2520for%2520the%2520question.%250A%2520%2520%2520%2520%2522%2522%2522%250A%2520%2520%2520%2520score%2520%253D%25200%250A%2520%2520%2520%2520for%2520guess%2520in%2520guesses%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520for%2520i%2520in%2520range%281%252C%25206%29%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520if%2520guess.strip%28%29.lower%28%29%2520%253D%253D%2520question%255Bf%2522guess%257Bi%257D%2522%255D%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520logger.info%28question%255Bf%2522guess%257Bi%257D%2522%255D%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520score%2520%252B%253D%2520question%255Bf%2522guess%257Bi%257D_score%2522%255D%250A%2520%2520%2520%2520logger.info%28f%2522SCORE%253A%2520%257Bscore%257D%2522%29%250A%2520%2520%2520%2520return%2520score"
-        style="width: 698px; height: 540px; border:0; transform: scale(1); overflow:hidden;"
+        style="width: 1024px; height: 473px; border:0; transform: scale(1); overflow:hidden;"
         sandbox="allow-scripts allow-same-origin">
       </iframe>
+      
 
         <p>
         <br/><b>Input Parameters:</b>
