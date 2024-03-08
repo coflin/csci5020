@@ -11166,7 +11166,7 @@ html {
     .iframe-container {
       width: 100%;
       text-align: left;
-      height:800px;
+      height:auto;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
@@ -11174,9 +11174,9 @@ html {
   }
   @media (min-width: 768px) {
     .iframe-container {
-      width: 100%;
+      width: 80%;
       text-align: left;
-      height:800px;
+      height:auto;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
@@ -11184,9 +11184,9 @@ html {
   }
   @media (min-width: 992px) {
     .iframe-container {
-      width: 100%;
+      width: 80%;
       text-align: left;
-      height:800px;
+      height:auto;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
@@ -11197,7 +11197,7 @@ html {
     .iframe-container {
       width: 80%;
       text-align: left;
-      height:800px;
+      height:auto;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
@@ -11207,7 +11207,7 @@ html {
     .iframe-container {
       width: 80%;
       text-align: left;
-      height:800px;
+      height:auto;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
