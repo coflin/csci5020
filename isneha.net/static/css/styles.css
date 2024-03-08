@@ -11164,31 +11164,29 @@ html {
 
   @media (min-width: 576px) {
     .iframe-container {
-      max-width: 540px;
+      width: 80%;
       text-align: left;
-      height:500px;
+      height:800px;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
-
     }
   }
   @media (min-width: 768px) {
     .iframe-container {
-      max-width: 720px;
+      width: 80%;
       text-align: left;
-      height:500px;
+      height:800px;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
-
     }
   }
   @media (min-width: 992px) {
     .iframe-container {
-      max-width: 960px;
+      width: 80%;
       text-align: left;
-      height:500px;
+      height:800px;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
@@ -11207,13 +11205,12 @@ html {
   }
   @media (min-width: 1400px) {
     .iframe-container {
-      max-width: 1320px;
+      width: 80%;
       text-align: left;
-      height:500px;
+      height:800px;
       transform: scale(1); 
       overflow: hidden;
       border: 0;
-
     }
   }
 
