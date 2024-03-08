@@ -122,8 +122,6 @@
                 <p>Alright! Now that we have the architecture, let's talk code now.
                 <br/><br/><b>Libraries used</b>
                 </p>
-
-                <br/>
                 <iframe
                 src="https://carbon.now.sh/embed?bg=rgba%28189%2C93%2C56%2C1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=import%2520socket%250Aimport%2520threading%250Aimport%2520time%250Aimport%2520sqlite3%250Afrom%2520loguru%2520import%2520logger"
                 style="width: 361px; height: 279px; border:0; transform: scale(1); overflow:hidden;"
@@ -147,12 +145,19 @@
       
 		    <p>This is to synchronize access to shared resources, ensuring thread-safe operations, particularly when updating player scores.</p>
 		
-		<br/><br/><h5>Handling Communication with a Client:</h5>
-		<p><code>handle_client</code>: Function responsible for managing communication with a connected client.
+		<br/><br/><h5>Handling Communication with multiple clients</h5>
+        <iframe
+        src="https://carbon.now.sh/embed?bg=rgba%28189%2C93%2C56%2C1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%250Adef%2520handle_client%28client_socket%252C%2520clients%252C%2520barrier%29%253A%250A%2520%2520%2520%2520%2522%2522%2522%250A%2520%2520%2520%2520Handles%2520communication%2520with%2520a%2520connected%2520client.%250A%250A%2520%2520%2520%2520Args%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520client_socket%2520%28socket.socket%29%253A%2520The%2520socket%2520object%2520for%2520the%2520client.%250A%2520%2520%2520%2520%2520%2520%2520%2520clients%2520%28list%29%253A%2520List%2520of%2520connected%2520clients.%250A%2520%2520%2520%2520%2520%2520%2520%2520barrier%2520%28threading.Barrier%29%253A%2520Synchronization%2520barrier.%250A%250A%2520%2520%2520%2520Returns%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520None%250A%2520%2520%2520%2520%2522%2522%2522%250A%2520%2520%2520%2520try%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520Send%2520a%2520welcome%2520message%250A%2520%2520%2520%2520%2520%2520%2520%2520client_socket.send%28%2522%2522%2522Welcome%2520message%2522%2522%2522%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%250A%2520%2520%2520%2520%2520%2520%2520%2520time.sleep%281%29%250A%2520%2520%2520%2520%2520%2520%2520%2520client_socket.send%28b%2522%255Cn%255Cn%2520Enter%2520your%2520name%253A%2520%2522%29%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520used_questions%2520%253D%2520%255B%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520guesses%2520%253D%2520%255B%255D%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520Receive%2520and%2520print%2520the%2520client%27s%2520name%250A%2520%2520%2520%2520%2520%2520%2520%2520username%2520%253D%2520client_socket.recv%281024%29.decode%28%2522utf-8%2522%29.strip%28%29%250A%2520%2520%2520%2520%2520%2520%2520%2520logger.info%28f%2522Client%2520%257Busername%257D%2520connected.%2522%29%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520Add%2520the%2520client%2520to%2520the%2520list%250A%2520%2520%2520%2520%2520%2520%2520%2520clients.append%28%28client_socket%252C%2520username%29%29%250A%2520%2520%2520%2520%2520%2520%2520%2520player_scores%2520%253D%2520%255B%257Busername%253A%25200%257D%2520for%2520_%252C%2520username%2520in%2520clients%255D%250A%2520%2520%2520%2520%2520%2520%2520%2520logger.info%28f%2522CLIENT%2520INFO%253A%257Bplayer_scores%257D%2522%29%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520Wait%2520for%25202%2520players%2520to%2520join%250A%2520%2520%2520%2520%2520%2520%2520%2520client_socket.send%28b%2522Waiting%2520for%2520another%2520player%2520to%2520join..%255Cn%2522%29%250A%2520%2520%2520%2520%2520%2520%2520%2520barrier.wait%28%29%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520Send%2520a%2520starting%2520game%2520message%250A%2520%2520%2520%2520%2520%2520%2520%2520client_socket.send%28b%2522All%2520players%2520have%2520joined.%2520Starting%2520game%2520in%255Cn%2522%29%250A%2520%2520%2520%2520%2520%2520%2520%2520for%2520i%2520in%2520range%283%252C%25200%252C%2520-1%29%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520time.sleep%281%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520client_socket.send%28f%2522%257Bi%257D..%255Cn%2522.encode%28%2522utf-8%2522%29%29"
+        style="width: 774px; height: 949px; border:0; transform: scale(1); overflow:hidden;"
+        sandbox="allow-scripts allow-same-origin">
+      </iframe>      
+
+
+		<p><i>handle_client</i>: Function responsible for managing communication with a connected client.
 		    <br/>Arguments:
-		    <code>client_socket</code>: The socket object representing the client's connection.
-		    <code>clients</code>: List of connected clients.
-		    <code>barrier</code>: Synchronization barrier for coordinating game flow between players.
+		    <i>client_socket</i>: The socket object representing the client's connection.
+		    <i>clients</i>: List of connected clients.
+		    <i>barrier</i>: Synchronization barrier for coordinating game flow between players.
 		    <br/>Inside the function:
 		    <ul>
 		        <li>Sends a welcome message to the client and prompts for the client's name.</li>
