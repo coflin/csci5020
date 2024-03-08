@@ -133,6 +133,29 @@
                     <br/><i>loguru</i>: For storing log information in a file in the game server.
                 </p>
 
+		<br/><br/><h5>Defining a Lock for Synchronization</h5>
+			<iframe
+	  src="https://carbon.now.sh/embed?bg=rgba%2874%2C74%2C74%2C1%29&t=vscode&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%2523%2520Use%2520threading.Lock%2520to%2520synchronize%2520access%2520to%2520shared%2520resources%250Ascores_lock%2520%253D%2520threading.Lock%28%29"
+	  style="width: 673px; height: 223px; border:0; transform: scale(1); overflow:hidden;"
+	  sandbox="allow-scripts allow-same-origin">
+	</iframe>
+		    <p>This is to synchronize access to shared resources, ensuring thread-safe operations, particularly when updating player scores.</p>
+		
+		<br/><br/><h5>Handling Communication with a Client:</h5>
+		<p><code>handle_client</code>: Function responsible for managing communication with a connected client.
+		    <br/>Arguments:
+		    <code>client_socket</code>: The socket object representing the client's connection.
+		    <code>clients</code>: List of connected clients.
+		    <code>barrier</code>: Synchronization barrier for coordinating game flow between players.
+		    <br/>Inside the function:
+		    <ul>
+		        <li>Sends a welcome message to the client and prompts for the client's name.</li>
+		        <li>Receives and logs the client's name, then adds the client to the list of connected clients.</li>
+		        <li>Waits for another player to join using a synchronization barrier.</li>
+		        <li>Sends a starting game message to both players.</li>
+		    </ul>
+		    This function handles the initial setup and ongoing communication with a single connected client. It forms the core logic for managing gameplay between the server and clients.
+		</p>
 
                 <br/>
                 <a href="https://github.com/coflin/csci5020/tree/main/final" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
