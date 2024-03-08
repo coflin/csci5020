@@ -188,24 +188,24 @@
         <br/>The question is sent to the client along with the question number.
         <br/>The server then waits for the client's response.
 
-        <br/><b>Receiving and Processing Client's Guesses</b>
+        <br/><br/><b>Receiving and Processing Client's Guesses</b>
         <br/>For each question, the server simulates receiving the client's guesses for up to five attempts.
         <br/>The server waits for the client's guess, allowing up to 30 seconds for each guess.
         <br/>If the client doesn't respond within the time limit, a message is sent indicating that time's up, and the server moves to the next question.
 
-        <br/><b>Scoring and Feedback</b>
+        <br/><br/><b>Scoring and Feedback</b>
         <br/>After receiving the client's guesses, the server calculates the score for the question using the calculate_score() function.
         <br/>The server updates the player's score accordingly.
         <br/>Feedback is sent to the client regarding their score for the current question and their total score so far.
 
-        <br/><b>Synchronization and Progression</b>
+        <br/><br/><b>Synchronization and Progression</b>
         <br/>After processing a question, the server waits for all players to finish before moving to the next question. This is achieved using the synchronization barrier.
 
-        <br/><b>Final Score and Farewell</b>
+        <br/><br/><b>Final Score and Farewell</b>
         <br/>Once all questions have been answered, the server sends the client their final score.
         <br/>A farewell message is sent to the client, indicating the end of the game.
 
-        <br/><b>Error Handling and Cleanup</b>
+        <br/><br/><b>Error Handling and Cleanup</b>
         <br/>The code is wrapped in a try-except block to handle any exceptions that may occur during gameplay.
         <br/>If an error occurs, the traceback is printed, and an error message is logged.
         <br/>Finally, the client socket is closed to release the connection resources.
