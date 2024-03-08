@@ -219,34 +219,34 @@
         sandbox="allow-scripts allow-same-origin">
         </iframe>
         <p>
-        <b>Input Parameter:</b>
+            <br/><b>Input Parameter:</b>
             <br/>used_questions: A list containing prompts of questions that have already been used.
     
-        <br/><b>Database Connection</b> 
+            <br/><br/><b>Database Connection</b> 
         <br/>The function establishes a connection to the SQLite database file named "questions.db".
     
-        <br/><b>SQL Query Execution</b> 
+        <br/><br/><b>SQL Query Execution</b> 
         <br/>An SQL query is executed to retrieve all questions from the "questions" table in the database.
     
-        <br/><b>Conversion to Dictionaries</b> 
+        <br/><br/><b>Conversion to Dictionaries</b> 
         <br/>The fetched rows (questions) are converted to dictionaries for easier access. Each dictionary represents a single question.
     
-        <br/><b>Filtering Available Questions</b> 
+        <br/><br/><b>Filtering Available Questions</b> 
         <br/>The function filters out questions that have already been used by comparing their prompts with the used_questions list.
     
-        <br/><b>Handling Exhausted Questions</b> 
+        <br/><br/><b>Handling Exhausted Questions</b> 
         <br/>If all questions have been used, the used_questions list is cleared to reset it, and all questions become available again.
     
-        <br/><b>Selecting the Next Question</b> 
+        <br/><br/><b>Selecting the Next Question</b> 
         <br/>The next question is selected from the available questions list using modular arithmetic to cycle through the questions.
     
-        <br/><b>Updating Used Questions</b> 
+        <br/><br/><b>Updating Used Questions</b> 
         <br/>The prompt of the selected question is added to the used_questions list to mark it as used.
     
-        <br/><b>Database Connection Closure</b> 
+        <br/><br/><b>Database Connection Closure</b> 
         <br/>Once the question is retrieved, the database connection is closed to release resources.
     
-        <br/><b>Return Value</b> 
+        <br/><br/><b>Return Value</b> 
         <br/>The selected question is returned to the caller for further processing.
 
 
