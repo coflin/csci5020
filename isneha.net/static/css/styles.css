@@ -11165,26 +11165,33 @@ html {
   @media (min-width: 576px) {
     .iframe-container {
       max-width: 540px;
+      text-align: left;
     }
   }
   @media (min-width: 768px) {
     .iframe-container {
       max-width: 720px;
+      text-align: left;
+
     }
   }
   @media (min-width: 992px) {
     .iframe-container {
       max-width: 960px;
+      text-align: left;
     }
   }
   @media (min-width: 1200px) {
     .iframe-container {
-      max-width: 1140px;
+      max-width: 100%;
+      text-align: left;
     }
   }
   @media (min-width: 1400px) {
     .iframe-container {
       max-width: 1320px;
+      text-align: left;
+
     }
   }
 
