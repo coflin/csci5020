@@ -158,13 +158,15 @@
 		    <i>client_socket</i>: The socket object representing the client's connection.
 		    <i>clients</i>: List of connected clients.
 		    <i>barrier</i>: Synchronization barrier for coordinating game flow between players.
-		    <br/>Inside the function:
-		    <ul>
-		        <li>Sends a welcome message to the client and prompts for the client's name.</li>
-		        <li>Receives and logs the client's name, then adds the client to the list of connected clients.</li>
-		        <li>Waits for another player to join using a synchronization barrier.</li>
-		        <li>Sends a starting game message to both players.</li>
-		    </ul>
+            <br/>
+		    Sends a welcome message to the client and prompts for the client's name.
+		    <br/>
+            Receives and logs the client's name, then adds the client to the list of connected clients.
+		    <br/>
+            Waits for another player to join using a synchronization barrier.
+		    <br/>
+            Sends a starting game message to both players.
+		    <br/>
 		    This function handles the initial setup and ongoing communication with a single connected client. It forms the core logic for managing gameplay between the server and clients.
 		</p>
 
