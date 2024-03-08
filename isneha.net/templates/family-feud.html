@@ -288,6 +288,43 @@
         </p>
 
 
+        <br/><br/><h5>Stitching everything together</h5>
+        <iframe class = "iframe-container"
+        src="https://carbon.now.sh/embed?bg=rgba%28189%2C93%2C56%2C1%29&t=seti&wt=none&l=python&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%2540logger.catch%28%29%250Adef%2520main%28%29%253A%250A%2520%2520%2520%2520%2523%2520Create%2520a%2520server%2520socket%250A%2520%2520%2520%2520server_socket%2520%253D%2520socket.socket%28socket.AF_INET%252C%2520socket.SOCK_STREAM%29%250A%250A%2520%2520%2520%2520SERVER_IP%2520%253D%2520%25220.0.0.0%2522%250A%2520%2520%2520%2520SERVER_PORT%2520%253D%25205020%250A%250A%2520%2520%2520%2520%2523%2520Bind%2520the%2520server%2520socket%2520to%2520the%2520IP%2520and%2520port%250A%2520%2520%2520%2520server_socket.bind%28%28SERVER_IP%252C%2520SERVER_PORT%29%29%250A%250A%2520%2520%2520%2520%2523%2520Listen%2520for%2520incoming%2520connections%250A%2520%2520%2520%2520server_socket.listen%282%29%250A%2520%2520%2520%2520logger.info%28f%2522Server%2520listening%2520on%2520%257BSERVER_IP%257D%253A%257BSERVER_PORT%257D%2522%29%250A%250A%2520%2520%2520%2520clients%2520%253D%2520%255B%255D%250A%250A%2520%2520%2520%2520try%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520Accept%2520incoming%2520connections%250A%2520%2520%2520%2520%2520%2520%2520%2520while%2520True%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520client%252C%2520address%2520%253D%2520server_socket.accept%28%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520print%28f%2522Accepted%2520connection%2520from%2520%257Baddress%257D%2522%29%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520Start%2520a%2520new%2520thread%2520to%2520handle%2520the%2520client%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520threading.Thread%28%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520target%253Dhandle_client%252C%2520args%253D%28client%252C%2520clients%252C%2520barrier%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%29.start%28%29%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2523%2520If%2520two%2520clients%2520have%2520connected%252C%2520reset%2520the%2520barrier%2520for%2520the%2520next%2520round%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520if%2520len%28clients%29%2520%253D%253D%25202%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520barrier.reset%28%29%250A%250A%2520%2520%2520%2520except%2520Exception%2520as%2520e%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520print%28f%2522Error%2520in%2520main%2520loop%253A%2520%257Be%257D%2522%29%250A%250A%2520%2520%2520%2520finally%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520server_socket.close%28%29strip%28%29.lower%28%29%2520%253D%253D%2520question%255Bf%2522guess%257Bi%257D%2522%255D%253A%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520logger.info%28question%255Bf%2522guess%257Bi%257D%2522%255D%29%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520score%2520%252B%253D%2520question%255Bf%2522guess%257Bi%257D_score%2522%255D%250A%2520%2520%2520%2520logger.info%28f%2522SCORE%253A%2520%257Bscore%257D%2522%29%250A%2520%2520%2520%2520return%2520score"
+        sandbox="allow-scripts allow-same-origin">
+        </iframe>
+
+        <p>
+            This main() function serves as the entry point of the program. Let's break down its components:
+
+            <br/><br/><b>@logger.catch()</b>
+                <br/>This is a decorator from the loguru library used to catch exceptions and log them. Any exceptions that occur within the main() function will be logged automatically.
+
+            <br/><br/><b>Server Socket Creation</b>
+                <br/>server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM): Creates a server socket using the TCP/IP protocol (socket.SOCK_STREAM) and IPv4 addressing (socket.AF_INET).
+                <br/>SERVER_IP = "0.0.0.0" and SERVER_PORT = 5020: Specifies the IP address and port number on which the server will listen for incoming connections.
+
+            <br/><br/><b>Binding and Listening</b>
+                <br/>server_socket.bind((SERVER_IP, SERVER_PORT)): Binds the server socket to the specified IP address and port.
+                <br/>server_socket.listen(2): Starts listening for incoming connections. The 2 argument specifies the maximum number of queued connections.
+
+            <br/><br/><b>Logging</b>
+                <br/>logger.info(f"Server listening on {SERVER_IP}:{SERVER_PORT}"): Logs a message indicating that the server is listening on the specified IP address and port.
+
+            <br/><br/><b>Handling Incoming Connections</b>
+                <br/>The program enters a loop to continuously accept incoming client connections using server_socket.accept().
+                <br/>Upon accepting a connection, it prints a message indicating the connection's source address.
+                <br/>It then starts a new thread using threading.Thread() to handle the client, passing the handle_client function as the target. It also passes the client socket, list of clients, and synchronization barrier as arguments to the handle_client function.
+                <br/>If two clients have connected (as indicated by the length of the clients list), it resets the synchronization barrier for the next round of the game.
+
+            <br/><br/><b>Exception Handling</b>
+                <br/>The try block catches any exceptions that might occur during execution, such as errors in accepting connections or handling clients. If an exception occurs, it prints an error message.
+                <br/>The finally block ensures that the server socket is closed regardless of whether an exception occurred. This is important for cleaning up resources and releasing the port.
+
+            <br/><br/>Overall, this main() function sets up the server, listens for incoming connections, and spawns threads to handle each client connection concurrently, allowing for multiplayer functionality in the game.
+        </p>
+
+
 
 
                 <br/>
