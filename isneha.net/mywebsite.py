@@ -62,8 +62,8 @@ def lvm():
 
 # Networking Projects
 
-@app.route("/networking/network-autmation")
-def gns3():
+@app.route("/networking/network-automation")
+def network_automation():
     return render_template("network-automation.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
 
 if __name__ == "__main__":
