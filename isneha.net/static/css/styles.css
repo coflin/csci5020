@@ -11226,6 +11226,11 @@ html {
   width:50%;
 }
 
+.medium-image{
+  height:auto;
+  width:80%
+}
+
 .myButton {
   float:left;
 	background-color:var(--bs-gray-700);
