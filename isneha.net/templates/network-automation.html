@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Sneha Irukuvajjula</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="/static/assets/sneha-favicon-32x32.png" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/static/css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href={{ MainPageRoute }}>Sneha</a>
+                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={{ ProjectRoute }}>My Work</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href={{ AboutRoute }}>About</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href= {{ ResumeRoute }}>Resume</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br/><br/><br/><br/><br/>
+
+        <center>
+            <div class="projects-div">
+                <h1 style="margin-left: 3%;color:#bd5d38;"> Network Automation </h1>
+                <br/>
+                <p>
+                    <br/><i>Automate your network. Because ain't nobody got time to manually configure every 
+                        network device. We've got memes to browse, people!</i>
+                </p>
+
+                <br/><br/><h5>What is Network Automation?</h5>
+                <p>
+                    Have you ever found yourself buried under a mountain of repetitive network configuration tasks, 
+                    wishing there was a better way? Network automation is like having a helpful robot that takes care of 
+                    repetitive tasks in your computer network. Instead of doing everything by hand, like setting up connections 
+                    or fixing problems, this robot does it for you quickly and accurately. With network automation, you can focus on the 
+                    important stuff while the robot handles the rest, making your network more efficient and reliable.
+                </p>
+
+                <br/><br/><h5>But why automate your network when, say, configuring a VLAN can be done with just a two-line command?</h5>
+                <p>
+                    In today's fast-paced world of networking, where time is money and mistakes can be costly, automation is 
+                    like having a superhero on your team. Instead of spending hours typing commands and hoping for the best, 
+                    automation swoops in to save the day. 
+                    <br/>Now you may ask, <b>why write a code that'll take longer to write than 
+                    configuring, say a VLAN on a switch manually? Isn't this much faster?</b>
+
+                    <img class="medium-image" src = "/static/assets/no_automation.png"/>
+
+                    <br/><br/>Yes, you're correct! Configuring a VLAN on one switch manually is 100% faster than writing a code to configure it.
+                    However, what if you were to configure a VLAN on 100 switches? Or 1000 switches? Or a million switches?
+                    Network automation offers far-reaching benefits beyond convenience. It transforms network management by ensuring 
+                    consistency, reducing human error, and enabling efficient scaling of operations. In essence, while a two-line command 
+                    might suffice for a single VLAN, automation empowers organizations to unlock the full 
+                    potential of their networks, enabling agility, resilience, and innovation.
+                    <br/><br/>
+                    <img class="medium-image" src = "/static/assets/save time.png"/>
+                </p>
+
+                <br/><br/><h5>So do I automate everything?</h5>
+                    <p>
+                        <b>Automate when you can, script when you must.</b>
+                        <br/>
+                        Automate when you can: Utilize available tooling to simplify network automation tasks. Instead 
+                        of starting from scratch, prioritize leveraging versatile tools, like Ansible, Puppet, Chef, etc. 
+                        The aim is to automate approximately 80% of network tasks.
+                        <br/><br/>
+                        <img class = "small-image" src = "/static/assets/automateverything.jpeg"/>
+                        <br/><br/>
+                        Script when you must: Resort to scripting when existing automation tools become inadequate or overly complex for 
+                        specific operations. Scripting involves creating custom modules or enhancing existing ones within tools. 
+                        This doesn't demand extensive programming skills.
+                    </p>
+
+                <br/><br/><h5>Well, does this mean network automation's aim is to replace humans with machines? What about my job?</h5>
+                <p>
+            
+                    Automating your network isn't about replacing people with machines; it's about 
+                    empowering you and your team to tackle more strategic initiatives and drive business growth.
+                    <br/>
+                    Automation takes care of repetitive and mundane tasks, allowing network engineers like us to 
+                    focus on higher-value activities that require human creativity, problem-solving, and critical 
+                    thinking skills.
+                    <br/><br/>
+                    <img class="medium-image" src = "/static/assets/Robot-Workers.png"/>
+                    <br/><br/>
+                    Our role as a network engineer remains crucial in designing, implementing, and maintaining 
+                    network infrastructure. While automation streamlines certain aspects of network management, 
+                    it doesn't eliminate the need for human oversight and decision-making. In fact, automation 
+                    often enhances job opportunities by increasing the efficiency and scalability of network operations.
+                    <br/><br/>
+                    Moreover, network automation can have a significant impact on both capital expenditure (CapEx) and operational 
+                    expenditure (OpEx). By automating routine tasks, organizations can reduce the need for manual labor and the 
+                    associated labor costs, leading to OpEx savings.
+                    <br/> 
+                    <img class="small-image" src = "/static/assets/capex-opex.webp">
+                    <br/>
+                    However, it's essential to consider the broader picture. 
+                    While automation may lead to workforce reductions in some areas, it often creates new job opportunities in others. 
+                    For example, as organizations implement automation in network management, they may require skilled professionals 
+                    to design, implement, and maintain the automated systems. Additionally, automation can free up human resources to 
+                    focus on more strategic and complex tasks that require creativity, problem-solving skills, and domain expertise.
+                    Additionally, automation can improve resource utilization and 
+                    optimize infrastructure deployment, resulting in lower CapEx expenses over time.
+                </p>
+
+                <br/><br/><h5>My experience with network automation</h5>
+                <p>
+                    During my work experience, much of the network configuration was performed manually, leading to significant 
+                    operational overhead. Many network engineers hesitate to automate due to the time and effort required to set 
+                    up automation infrastructure. Additionally, many network engineers hesitate to automate due to either a lack 
+                    of expertise in automation techniques or the perceived effort required to shift from manual to automated processes. 
+                    However, my perspective shifted during my master's degree when I explored network automation.
+                    <br/><br/>
+                    <img class = "small-image" src = "/static/assets/industry.jpeg"/>
+                    <br/><br/>
+                    I realized its potential for streamlining tasks and boosting efficiency. For example, I developed a script to 
+                    automate BGP, OSPF, and DHCP configuration on multiple routers, simplifying the process and saving time. 
+                    Additionally, I created modular components for tasks like router connectivity and SSH access, enhancing the 
+                    functionality of my automation scripts. These experiences demonstrated the power of network automation in 
+                    optimizing operational workflows.
+                </p>
+
+
+
+                <br/><br/><h5>Okay, I'm convinced. But how do I automate my network now?</h5>
+                <p>
+                    You've come to the right place! In the upcoming articles, I will write about <b>what</b> to automate
+                    and how to setup a basic infrastructure. I'll be using GNS3 and Python to automate
+                    the infrastructure. It's quick and easy to follow. 
+                    Trust me, with this, you won't ever have to touch the CLI (<i>or maybe a little</i>). Stay tuned and 
+                    happy automating!
+                </p>
+                
+                <br/>
+                <a href="https://github.com/coflin/csci5020/tree/main/assignment14" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
+                <br/><br/><br/><br/>
+            </div>
+        </center>
+    
+        <!-- Copyright Section-->
+        <div class="copyright py-4 text-center text-white">
+            <div class="container"><small>Copyright &copy; Sneha Irukuvajjula 2023</small></div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/static/js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+   
+    </body>
+</html>
