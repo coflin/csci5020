@@ -1,0 +1,46 @@
+#!/usr/bin/bash                                                                                                                                            
+                                                                                                                                                           
+#Script that restart isneha.net (mywebsite) service if there's any change found in the /home/ubuntu/mywebsite/csci5020/isneha.net/ directory               
+                                                                                                                                                           
+#Directory to monitor                                                                                                                                      
+DIRECTORY="/home/ubuntu/mywebsite/csci5020/isneha.net"                                                                                                     
+IGNORE_FILE="mywebsite.sock"                                                                                                                               
+
+# Restart service function
+restart_service() {
+    sudo systemctl restart mywebsite.service
+}
+
+# Initialize variables for previous event
+prev_directory=""
+prev_event=""
+prev_file=""
+was_restart=false  # Flag to track if the previous event was a service restart
+
+# Monitor directory for changes and restart service
+inotifywait -m -e modify,create,delete -r "$DIRECTORY" |
+while read -r directory event file; do 
+
+    # Check if the current event is the same as the previous one
+    if [[ "$file" == "$IGNORE_FILE" ]]; then
+        echo "Change detected in $file. Ignoring."
+
+    elif [[ "$file" == "$prev_file" && "$was_restart" == false ]]; then
+        echo "Duplicate event detected. Skipping restart."
+
+    else
+        echo "Change detected in $file. Restarting service..."
+        restart_service
+    fi
+
+    # Update variables for previous event
+    prev_directory="$directory"
+    prev_file="$file"
+    # Check if the current event is a restart of the service
+    if [[ "$file" == "$IGNORE_FILE" && "$event" == "MODIFY" ]]; then
+        was_restart=true                                                     
+    else               
+        was_restart=false
+    fi
+done                                                                         
+
