@@ -1,71 +1,91 @@
 #!/usr/bin/python
 
 """
-Assignment 17: URL to my personal website: https://isneha.net
+URL to my personal website: https://isneha.net
 """
 
 from flask import Flask, render_template
 
-app=Flask(__name__)
+app = Flask(__name__)
 
-@app.route("/")
-def staticpage():
-    return render_template("index.html",ResumeRoute="/resume",PythonProjectRoute="/python",LinuxProjectRoute="/linux",NetworkingProjectRoute="/networking",WebsiteProjectRoute="/python/website")
+# Define the route dictionaries
+route_data = {
+    "/": {
+        "template": "index.html",
+        "args": {
+            "ResumeRoute": "/resume",
+            "PythonProjectRoute": "/python",
+            "LinuxProjectRoute": "/linux",
+            "NetworkingProjectRoute": "/networking",
+            "WebsiteProjectRoute": "/python/website"
+        }
+    },
+    "/resume": {
+        "template": "resume.html",
+        "args": {"HomepageRoute": "/"}
+    },
+    "/python": {
+        "template": "python-projects.html",
+        "args": {
+            "MainPageRoute": "/",
+            "ResumeRoute": "/resume",
+            "ProjectRoute": "/#my-work",
+            "AboutRoute": "/#about",
+            "LinkedinProjectRoute": "/python/linkedin-job-scraper",
+            "PnmapProjectRoute": "/python/pnmap",
+            "WebsiteProjectRoute": "/python/website",
+            "FamilyFeudProjectRoute": "/python/family-feud"
+        }
+    },
+    "/linux": {
+        "template": "linux-projects.html",
+        "args": {
+            "MainPageRoute": "/",
+            "ResumeRoute": "/resume",
+            "ProjectRoute": "/#my-work",
+            "AboutRoute": "/#about",
+            "DunderMifflinProjectRoute": "/linux/dunder-mifflin",
+            "DHCPProjectRoute": "/linux/dhcp",
+            "LVMProjectRoute": "/linux/lvm"
+        }
+    },
+    "/networking": {
+        "template": "networking-projects.html",
+        "args": {
+            "MainPageRoute": "/",
+            "ResumeRoute": "/resume",
+            "ProjectRoute": "/#my-work",
+            "AboutRoute": "/#about",
+            "NetworkAutomationProjectRoute": "/networking/network-automation"
+        }
+    }
+}
 
-@app.route("/resume")
-def resume():
-    return render_template("resume.html",HomepageRoute="/")
+# Define the individual project routes
+project_routes = {
+    "/python/linkedin-job-scraper": "linkedin-job-scraper.html",
+    "/python/pnmap": "pnmap.html",
+    "/python/website": "website.html",
+    "/python/family-feud": "family-feud.html",
+    "/linux/dunder-mifflin": "dundermifflin.html",
+    "/linux/dhcp": "dhcp.html",
+    "/linux/lvm": "lvm.html",
+    "/networking/network-automation": "network-automation.html"
+}
 
-@app.route("/python")
-def python_projects():
-    return render_template("python-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",LinkedinProjectRoute="/python/linkedin-job-scraper",PnmapProjectRoute="/python/pnmap",WebsiteProjectRoute="/python/website",FamilyFeudProjectRoute="/python/family-feud")
+# General render template function
+def render_custom_template(route):
+    data = route_data.get(route, {})
+    return render_template(data["template"], **data.get("args", {}))
 
-@app.route("/linux")
-def linux_projects():
-    return render_template("linux-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",DunderMifflinProjectRoute="/linux/dunder-mifflin",DHCPProjectRoute="/linux/dhcp",LVMProjectRoute="/linux/lvm")
+# Set up the main routes
+for route in route_data:
+    app.add_url_rule(route, route, (lambda r=route: render_custom_template(r)))
 
-@app.route("/networking")
-def networking_projects():
-    return render_template("networking-projects.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about",NetworkAutomationProjectRoute="/networking/network-automation")
-
-
-#Python Projects
-@app.route("/python/linkedin-job-scraper")
-def linkedin_job_scraper():
-    return render_template("linkedin-job-scraper.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
-@app.route("/python/pnmap")
-def pnmap():
-    return render_template("pnmap.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
-@app.route("/python/website")
-def website():
-    return render_template("website.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
-@app.route("/python/family-feud")
-def familyfeud():
-     return render_template("family-feud.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")   
-
-#Linux Projects
-
-@app.route("/linux/dunder-mifflin")
-def dundermifflin():
-    return render_template("dundermifflin.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
-@app.route("/linux/dhcp")
-def dhcp():
-    return render_template("dhcp.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
-@app.route("/linux/lvm")
-def lvm():
-    return render_template("lvm.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
-
-# Networking Projects
-
-@app.route("/networking/network-automation")
-def network_automation():
-    return render_template("network-automation.html",MainPageRoute="/",ResumeRoute="/resume",ProjectRoute="/#my-work",AboutRoute="/#about")
+# Set up the project routes
+for route, template in project_routes.items():
+    app.add_url_rule(route, route, (lambda t=template: render_template(t, MainPageRoute="/", ResumeRoute="/resume", ProjectRoute="/#my-work", AboutRoute="/#about")))
 
 if __name__ == "__main__":
     app.debug = True
-    app.run("127.0.0.1",port=80)
+    app.run("127.0.0.1", port=80)
