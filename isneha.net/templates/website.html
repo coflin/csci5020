@@ -55,8 +55,8 @@
                     <b></b>
                     <br/><br/><b>Backend</b>
                     <br/>
-                    To handle the backend of my website, I chose a combination of Flask, Gunicorn, and Nginx. Here's how each component fits into the design:
-                    <br/>
+                    To handle the backend of my website, I chose a combination of Flask, Gunicorn, and Nginx.
+                    <br/><br/>
                     I used <b>Flask</b> to manage routing for my HTML pages. Flask is a lightweight and flexible web framework that makes it easy to set up routes and handle requests. However, Flask by itself isn't optimized for handling multiple concurrent sessions efficiently.
                     <br/>
                     Enter <b>Gunicorn.</b> To address Flask's limitation in handling concurrent sessions, I integrated Gunicorn as my WSGI HTTP server. Gunicorn spins up multiple workers, enabling multi-threading and allowing the application to handle multiple requests simultaneously. This setup ensures that my website remains responsive and can serve multiple users at once.
