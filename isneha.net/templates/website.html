@@ -64,10 +64,13 @@
                     Finally, I used <b>Nginx</b> as a reverse proxy server. Nginx sits in front of Gunicorn and handles incoming requests, distributing them to the Gunicorn workers. It also provides load balancing and can serve static files directly, improving the overall performance and scalability of the website.
                     <br/>
                     <br/>
-                    To deploy everything, I put my HTML and Python configuration files on an AWS EC2 instance and started the Nginx service. Boom! It’s all up and running on the EC2 instance. I bought my domain, isneha.net, through Route 53 and set up DNS routing.
+                    To get this dynamic trio working together, I deployed my HTML and Python configuration files on an AWS EC2 instance and fired up the Nginx service. Boom! My website was live. I bought my domain, isneha.net, through Route 53 and set up DNS routing.
                     <br/>
                     <br/>
                     For SSL, I used a third-party tool called <b>Let’s Encrypt</b>, which provides free SSL certificates. To ensure the certificate remains valid, I have a cron job running on the EC2 instance that renews the certificate every 90 days.
+                    <br/>
+                    <br/>
+                    Additionally, I maintain a Git repository for my website's code. I have a script that regularly checks for changes in the GitHub remote repository. If any changes are detected, the script pulls the latest configuration and restarts the website's service. This way, my site is always rocking the latest code without me lifting a finger. I will talk about this in detail in the upcoming sections.
                 </p>
                 <br/><br/>
                 <h5>Architecture</h5>
