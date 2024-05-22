@@ -49,8 +49,7 @@
                     <b>Frontend</b>
                     <br/>
                     When it came to building my website, I chose <b>Flask</b> as my web framework. Flask is lightweight and flexible, making it an excellent choice for creating a personal website. One of the key features of Flask is its use of <b>Jinja2</b> templating, which allows for dynamic HTML generation. This made it easy for me to create reusable templates and manage the layout of my web pages efficiently.
-                    <br/>
-                    <br/>
+                    <br/><br/>
                     For the frontend design, I turned to <b>Bootstrap</b>. I’ll be honest, I'm not a design expert. But Bootstrap's responsive design framework let me whip up a sleek and modern interface that looks great on any device. With its vast library of pre-designed components and utilities, styling the website became a breeze and saved me tons of time!
                     <b></b>
                     <br/><br/><b>Backend</b>
@@ -58,9 +57,9 @@
                     To handle the backend of my website, I chose a combination of Flask, Gunicorn, and Nginx.
                     <br/><br/>
                     I used <b>Flask</b> to manage routing for my HTML pages. Flask is a lightweight and flexible web framework that makes it easy to set up routes and handle requests. However, Flask by itself isn't optimized for handling multiple concurrent sessions efficiently.
-                    <br/>
+                    <br/><br/>
                     Enter <b>Gunicorn.</b> To address Flask's limitation in handling concurrent sessions, I integrated Gunicorn as my WSGI HTTP server. Gunicorn spins up multiple workers, enabling multi-threading and allowing the application to handle multiple requests simultaneously. This setup ensures that my website remains responsive and can serve multiple users at once.
-                    <br/>
+                    <br/><br/>
                     Finally, I used <b>Nginx</b> as a reverse proxy server. Nginx sits in front of Gunicorn and handles incoming requests, distributing them to the Gunicorn workers. It also provides load balancing and can serve static files directly, improving the overall performance and scalability of the website.
                     <br/>
                     <br/>
