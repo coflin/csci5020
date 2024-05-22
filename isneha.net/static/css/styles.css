@@ -11132,6 +11132,7 @@ html {
 .projects-div{
   width: 50%;
   text-align: left;
+  margin:0 auto;
 }
 
 .container p{
