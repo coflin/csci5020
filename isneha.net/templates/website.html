@@ -91,12 +91,18 @@
                     </iframe>
                     <br/><br/>
                     This section of my Flask application sets up the routing for different pages on my website. I use two dictionaries, route_data and project_routes, to map URL paths to their respective HTML templates and the arguments needed for rendering those templates.
-                    <br/>
+                    <br/><br/>
                     The route_data dictionary contains the main routes of my website. Each key represents a URL path (<i>e.g., "/", "/resume", "/python"</i>), and each value is a dictionary with two keys: template and args. The template key specifies which HTML file to render, while the args key provides a dictionary of additional arguments to pass to the template. For example, the root path "/" renders the <i><b>"index.html"</b></i> template and includes routes to various project sections like resume, Python projects, Linux projects, networking projects, and a specific Python website project.
-                    <br/>
+                    <br/><br/>
                     Similarly, the project_routes dictionary handles specific project pages, mapping URL paths directly to their respective HTML templates. Each entry here is a straightforward mapping, such as the path <b><i>"/python/linkedin-job-scraper"</i></b> rendering the <b><i>"linkedin-job-scraper.html"</i></b> template.
-                    <br/>
+                    <br/><br/>
                     By organizing the routes in this way, I can manage and update my website's structure more efficiently, keeping my code clean and maintainable.
+                    <br/><br/>
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28189%2C93%2C56%2C1%29&t=blackboard&wt=none&l=python&width=680&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=true&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=def%2520render_custom_template%28route%29%253A%250A%2520%2520%2520%2520data%2520%253D%2520route_data.get%28route%252C%2520%257B%257D%29%250A%2520%2520%2520%2520return%2520render_template%28data%255B%2522template%2522%255D%252C%2520**data.get%28%2522args%2522%252C%2520%257B%257D%29%29"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
 
                 </p>
 
