@@ -11180,7 +11180,6 @@ html {
       transform: scale(1); 
       overflow: hidden;
       border: 0;
-      margin:0 auto;
     }
   }
   @media (min-width: 992px) {
@@ -11191,7 +11190,6 @@ html {
       transform: scale(1); 
       overflow: hidden;
       border: 0;
-
     }
   }
   @media (min-width: 1200px) {
