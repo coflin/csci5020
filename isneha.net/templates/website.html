@@ -89,11 +89,11 @@
                   </iframe>
                                       
                   <br/><br/>
-                    This section of my Flask application sets up the routing for different pages on my website. I use two dictionaries, route_data and project_routes, to map URL paths to their respective HTML templates and the arguments needed for rendering those templates.
+                    This section of my Flask application sets up the routing for different pages on my website. I use two dictionaries, <i>route_data</i> and <i>project_routes</i>, to map URL paths to their respective HTML templates and the arguments needed for rendering those templates.
                     <br/><br/>
-                    The route_data dictionary contains the main routes of my website. Each key represents a URL path (<i>e.g., "/", "/resume", "/python"</i>), and each value is a dictionary with two keys: template and args. The template key specifies which HTML file to render, while the args key provides a dictionary of additional arguments to pass to the template. For example, the root path "/" renders the <i><b>"index.html"</b></i> template and includes routes to various project sections like resume, Python projects, Linux projects, networking projects, and a specific Python website project.
+                    The route_data dictionary contains the main routes of my website. Each key represents a URL path (<i>e.g., "/", "/resume", "/python"</i>), and each value is a dictionary with two keys: template and args. The template key specifies which HTML file to render, while the args key provides a dictionary of additional arguments to pass to the template. For example, the root path <i><b>"/"</b></i> renders the <i><b>"index.html"</b></i> template and includes routes to various project sections like resume, Python projects, Linux projects, networking projects, and a specific Python website project.
                     <br/><br/>
-                    Similarly, the project_routes dictionary handles specific project pages, mapping URL paths directly to their respective HTML templates. Each entry here is a straightforward mapping, such as the path <b><i>"/python/linkedin-job-scraper"</i></b> rendering the <b><i>"linkedin-job-scraper.html"</i></b> template.
+                    Similarly, the <i>project_routes</i> dictionary handles specific project pages, mapping URL paths directly to their respective HTML templates. Each entry here is a straightforward mapping, such as the path <b><i>"/python/linkedin-job-scraper"</i></b> rendering the <b><i>"linkedin-job-scraper.html"</i></b> template.
                     <br/><br/>
                     By organizing the routes in this way, I can manage and update my website's structure more efficiently, keeping my code clean and maintainable.
                     <br/><br/>
@@ -103,7 +103,7 @@
                         sandbox="allow-scripts allow-same-origin">
                     </iframe>
                     <br/><br/>
-                    The <i>render_custom_template</i> function is a helper function designed to streamline the process of rendering templates based on the <i>route_data</i> dictionary. It takes a route as an argument, retrieves the corresponding template and arguments from the route_data dictionary, and then uses Flask’s render_template function to render the HTML page with the appropriate arguments.  
+                    The <i>render_custom_template</i> function is a helper function designed to streamline the process of rendering templates based on the <i>route_data</i> dictionary. It takes a route as an argument, retrieves the corresponding template and arguments from the <i>route_data</i> dictionary, and then uses Flask’s render_template function to render the HTML page with the appropriate arguments.  
                     <br/><br/>
                     <iframe
                         class="iframe-container"
@@ -115,7 +115,9 @@
                     This loop iterates over each key (<i>which represents a route</i>) in the <i>route_data</i> dictionary. For each route, it uses the app.add_url_rule method to add a new URL rule to the Flask application. This method requires three arguments:
                     <br/>
                     <b>route:</b> The URL path (<i>e.g., "/resume"</i>).
+                    <br/>
                     <b>endpoint:</b> The endpoint name, which is the same as the route in this case.
+                    <br/>
                     <b>view_func:</b> The view function that will handle requests to this URL.
                     <br/>
                     The lambda function ensures that the correct route is passed to the <i>render_custom_template</i>
