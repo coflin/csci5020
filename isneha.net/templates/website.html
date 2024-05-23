@@ -103,7 +103,21 @@
                         sandbox="allow-scripts allow-same-origin">
                     </iframe>
                     <br/><br/>
-                    The render_custom_template function is a helper function designed to streamline the process of rendering templates based on the route_data dictionary. It takes a route as an argument, retrieves the corresponding template and arguments from the route_data dictionary, and then uses Flask’s render_template function to render the HTML page with the appropriate arguments.        
+                    The render_custom_template function is a helper function designed to streamline the process of rendering templates based on the route_data dictionary. It takes a route as an argument, retrieves the corresponding template and arguments from the route_data dictionary, and then uses Flask’s render_template function to render the HTML page with the appropriate arguments.  
+                    <br/><br/>
+                    
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=true&fl=20&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=for%2520route%2520in%2520route_data%253A%250A%2520%2520%2520%2520app.add_url_rule%28route%252C%2520route%252C%2520%28lambda%2520r%253Droute%253A%2520render_custom_template%28r%29%29%29"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                    This loop iterates over each key (which represents a route) in the route_data dictionary. For each route, it uses the app.add_url_rule method to add a new URL rule to the Flask application. This method requires three arguments:
+
+                    route: The URL path (e.g., "/resume").
+                    endpoint: The endpoint name, which is the same as the route in this case.
+                    view_func: The view function that will handle requests to this URL.
+
+                    The lambda function (lambda r=route: render_custom_template(r)) ensures that the correct route is passed to the render_custom_template function. This setup allows Flask to dynamically create routes based on the entries in the route_data dictionary, making the code more maintainable and scalable.
                 </p>
             
 
