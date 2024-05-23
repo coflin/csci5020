@@ -11164,7 +11164,7 @@ html {
 
   @media (min-width: 576px) {
     .iframe-container {
-      width: 80%;
+      width: 100%;
       text-align: left;
       height:auto;
       transform: scale(1); 
@@ -11174,7 +11174,7 @@ html {
   }
   @media (min-width: 768px) {
     .iframe-container {
-      width: 80%;
+      width: 100%;
       text-align: left;
       height:auto;
       transform: scale(1); 
