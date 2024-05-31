@@ -157,16 +157,15 @@
                         src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=83&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=pip3%2520install%2520flask%2520gunicorn%2520wheel"
                         sandbox="allow-scripts allow-same-origin">
                     </iframe>
-                    <br/><br/>
+                    <br/>
 
                     Next, I pasted the Python code mentioned above to my EC2 instance and ran it. Initially, it was running on the development server, but to move it to production, I needed to use a WSGI server and a reverse proxy to handle concurrent requests, as Flask is not meant to be used standalone.
+                    
                     <br/>
                     In this setup:
-                    <ul>
-                        <li> Flask manages the routes. </li>
-                        <li> Gunicorn, our WSGI server, handles threading and dynamic resource allocation. </li>
-                        <li> Nginx proxies requests back to users, handles static resources, SSL, and more.</li>
-                    </ul>
+                    <br/> 1. Flask manages the routes.
+                    <br/> 2. Gunicorn, our WSGI server, handles threading and dynamic resource allocation.
+                    <br/> 3. Nginx proxies requests back to users, handles static resources, SSL, and more.
 
                     <br/><br/>
                     Since our Flask application is set up, the next step is to configure Gunicorn. Gunicorn creates threads and targets a file that starts the app instead of directly calling the Flask app itself. Here's how I did it:
