@@ -145,7 +145,60 @@
                 <br/><br/>
                 <h5>Deploying to AWS</h5>
                 <p>
+                    First things first, I set up my AWS account using the free tier and bought the domain isneha.net through AWS Route 53. I chose AWS because it's reliable, scalable, and has a ton of services that can grow with my needs.
+                    <br/><br/>
+                    Next, I spun up an AWS EC2 instance using the t2.micro type, which is free for up to 750 hours per month. This instance provides 1 CPU and 1 GB of RAM, which is more than sufficient for hosting my personal website. I configured the instance to allow SSH, HTTP, and HTTPS traffic. 
+                    <br/><br/>
+
+                    To set up my Flask application on the EC2 instance, I first needed to install Flask and Gunicorn. After SSHing into the instance, I set up a virtual environment, installed Flask and Gunicorn, and then configured Gunicorn to serve my Flask application.                
+                    <br/><br/>
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=83&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=pip3%2520install%2520flask%2520gunicorn%2520wheel"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                    <br/><br/>
+
+                    Next, I pasted the Python code mentioned above to my EC2 instance and ran it. Initially, it was running on the development server, but to move it to production, I needed to use a WSGI server and a reverse proxy to handle concurrent requests, as Flask is not meant to be used standalone.
+                    <br/>
+                    In this setup:
+                    <ul>
+                        <li> Flask manages the routes. </li>
+                        <li> Gunicorn, our WSGI server, handles threading and dynamic resource allocation. </li>
+                        <li> Nginx proxies requests back to users, handles static resources, SSL, and more.</li>
+                    </ul>
+
+                    <br/><br/>
+                    Since our Flask application is set up, the next step is to configure Gunicorn. Gunicorn creates threads and targets a file that starts the app instead of directly calling the Flask app itself. Here's how I did it:
+
+                    <br/><br/>
+                    I created a wsgi.py file with the following lines:
                     
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=true&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=from%2520mywebsite%2520import%2520app%250A%250Aif%2520__name__%2520%253D%253D%2520%2522__main__%2522%253A%250A%2520%2520%2520%2520app.run%28%29"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+
+                    <br/><br/>
+                    And in my Flask app, mywebsite.py, I added:
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=true&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=if%2520__name__%2520%253D%253D%2520%2522__main__%2522%253A%250A%2520%2520%2520%2520app.debug%2520%253D%2520True%250A%2520%2520%2520%2520app.run%28%2522127.0.0.1%2522%252C%2520port%253D80%29"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+
+                    <br/><br/>
+                    To run Gunicorn, I used the command:
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=%252Fusr%252Flocal%252Fbin%252Fgunicorn%2520--workers%25204%2520--bind%2520unix%253Amywebsite.sock%2520-m%2520007%2520wsgi%253Aapp"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+
+                    <br/><br/>
+                    This command starts Gunicorn with 4 worker processes, binds it to a Unix socket (<i>mywebsite.sock</i>), and sets the file mode to 007. The website will load again, but this time it is being served through Gunicorn and is multithreaded.
+
                 </p>
 
 
