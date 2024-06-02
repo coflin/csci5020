@@ -262,7 +262,79 @@
                     And that's it! I can now access my website using isneha.net and www.isneha.net!
                 </p>
 
+                <br/><br/>
+                <h5>What was any of this for?</h5>
+                <p>
+                    The whole point of adding nginx was to not have my flask app directly run on port 80, executed by root. If someone exploited my website, they would be root! That's bad! 
+                    <br/>
+                    <br/>
+                    Now, when you send a GET request to my website, my nginx server which is listening on port 80, forwards the request to an instance of 1 of the 4 threads or "workers" that gunicorn spun up which each talk to a socket file.
+                    <br/><br/>
+                    Gunicorn virtualized the port 80 used in the actual flask app and turned it into a .socket file. Then, it load balances 4 threads worth of availability to it.
+                    <br/><br/>
+                </p>
 
+                <br/><br/>
+                <h5>SSL</h5>
+                <p>
+                    Enabling SSL is just 1 command away! I am using a 3rd party tool called <b>"Let's Encrypt".</b>
+                    <br/>
+                    I first installed the app and installed the certificate using these commands. 
+
+                    <br/><br/>
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=sudo%2520apt%2520install%2520python3-certbot-nginx%250Asudo%2520certbot%2520-nginx"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                    <br/><br/>
+
+                    <b>Note: If you install certificates using Let's Encrypt, it expires within 90 days. So, I have a cron job that renews the certificate for me every 90 days</b>
+
+                    <br/><br/>
+                    <img src="/static/assets/cron.png" class="project-image"/>
+                    <br/><br/>
+
+                </p>
+
+                <h5>How do I maintain this website?</h5>
+                <p>
+                    If you are thinking, well isn't this too complex to maintain? Also, how do I make changes to this website?
+                    <br/>
+                    Well, it's pretty simple, honestly. I put all my code, config, html, css, js files on github. 
+                    I have a cron job that performs a git pull every second from my github repository on my EC2 instance.
+
+                    <br/><br/>
+                    <img src="/static/assets/gitpull.png" class="project-image"/>
+                    <br/><br/>
+
+                    Now, my EC2 instance config files are always in sync with my github repository. So I have centralized management system.
+                    <br/> 
+                    <br/>
+                    To apply these updates live on my website, I need to restart the website service that manages the Gunicorn instances. I created a bash script that monitors changes in the local repository on my EC2 instance, and if any changes are detected, it restarts the service immediately.
+
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=%2523%21%252Fusr%252Fbin%252Fbash%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250A%2523Script%2520that%2520restart%2520isneha.net%2520%28mywebsite%29%2520service%2520if%2520there%27s%2520any%2520change%2520found%2520in%2520the%2520%252Fhome%252Fubuntu%252Fmywebsite%252Fcsci5020%252Fisneha.net%252F%2520directory%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250A%2523Directory%2520to%2520monitor%250ADIRECTORY%253D%2522%252Fhome%252Fubuntu%252Fmywebsite%252Fcsci5020%252Fisneha.net%2522%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250AIGNORE_FILE%253D%2522mywebsite.sock%2522%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250A%250A%2523%2520Restart%2520service%2520function%250Arestart_service%28%29%2520%257B%250A%2520%2520%2520%2520sudo%2520systemctl%2520restart%2520mywebsite.service%250A%257D%250A%250A%2523%2520Initialize%2520variables%2520for%2520previous%2520event%250Aprev_directory%253D%2522%2522%250Aprev_event%253D%2522%2522%250Aprev_file%253D%2522%2522%250Awas_restart%253Dfalse%2520%2520%2523%2520Flag%2520to%2520track%2520if%2520the%2520previous%2520event%2520was%2520a%2520service%2520restart%250A%250A%2523%2520Monitor%2520directory%2520for%2520changes%2520and%2520restart%2520service%250Ainotifywait%2520-m%2520-e%2520modify%252Ccreate%252Cdelete%2520-r%2520%2522%2524DIRECTORY%2522%2520%257C%250Awhile%2520read%2520-r%2520directory%2520event%2520file%253B%2520do%2520%2520%250A%250A%2520%2520%2520%2520%2523%2520Check%2520if%2520the%2520current%2520event%2520is%2520the%2520same%2520as%2520the%2520previous%2520one%250A%2520%2520%2520%2520if%2520%255B%255B%2520%2522%2524file%2522%2520%253D%253D%2520%2522%2524IGNORE_FILE%2522%2520%255D%255D%253B%2520then%250A%2520%2520%2520%2520%2520%2520%2520%2520echo%2520%2522Change%2520detected%2520in%2520%2524file.%2520Ignoring.%2522%250A%250A%2520%2520%2520%2520elif%2520%255B%255B%2520%2522%2524file%2522%2520%253D%253D%2520%2522%2524prev_file%2522%2520%2526%2526%2520%2522%2524was_restart%2522%2520%253D%253D%2520false%2520%255D%255D%253B%2520then%250A%2520%2520%2520%2520%2520%2520%2520%2520echo%2520%2522Duplicate%2520event%2520detected.%2520Skipping%2520restart.%2522%250A%250A%2520%2520%2520%2520else%250A%2520%2520%2520%2520%2520%2520%2520%2520echo%2520%2522Change%2520detected%2520in%2520%2524file.%2520Restarting%2520service...%2522%250A%2520%2520%2520%2520%2520%2520%2520%2520restart_service%250A%2520%2520%2520%2520fi%250A%250A%2520%2520%2520%2520%2523%2520Update%2520variables%2520for%2520previous%2520event%250A%2520%2520%2520%2520prev_directory%253D%2522%2524directory%2522%250A%2520%2520%2520%2520prev_file%253D%2522%2524file%2522%250A%2520%2520%2520%2520%2523%2520Check%2520if%2520the%2520current%2520event%2520is%2520a%2520restart%2520of%2520the%2520service%250A%2520%2520%2520%2520if%2520%255B%255B%2520%2522%2524file%2522%2520%253D%253D%2520%2522%2524IGNORE_FILE%2522%2520%2526%2526%2520%2522%2524event%2522%2520%253D%253D%2520%2522MODIFY%2522%2520%255D%255D%253B%2520then%250A%2520%2520%2520%2520%2520%2520%2520%2520was_restart%253Dtrue%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250A%2520%2520%2520%2520else%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%250A%2520%2520%2520%2520%2520%2520%2520%2520was_restart%253Dfalse%250A%2520%2520%2520%2520fi%250Adone"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                    
+                    Finally, I created a systemd service so that this runs in the background 24x7 and enabled it. 
+
+                    <br/><br/>
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=%255BUnit%255D%250ADescription%253DRuns%2520restartwebsite%2520script%2520that%2520restart%2520mywebsite%2520service%2520when%2520a%2520change%2520is%2520found%250AAfter%253Dnetwork.target%250A%250A%255BService%255D%250AUser%253Dubuntu%250AGroup%253Dubuntu%250AExecStart%253D%252Fbin%252Fbash%2520%252Fhome%252Fubuntu%252Fmywebsite%252Fcsci5020%252Frestartwebsite%250A%250A%255BInstall%255D%250AWantedBy%253Dmulti-user.target"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+
+                    <br/><br/>
+                    Now, whenever I need to make changes, such as writing this article, I simply push them to my GitHub repository and let my scripts handle the rest!         
+                               
+                    <br/><br/>
+                    And that's it! That's how I deployed a public-facing, multi-threaded web app over a local reverse proxy server.
+                
+                </p>
 
                 <a href="https://github.com/coflin/csci5020/tree/main/isneha.net" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
                 <br/><br/><br/><br/>
