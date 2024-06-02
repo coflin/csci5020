@@ -210,7 +210,7 @@
                         src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=%255BUnit%255D%250ADescription%253DGunicorn%2520instance%2520for%2520my%2520website%2520%28isneha.net%29%250AAfter%253Dnetwork.target%250A%250A%255BService%255D%250AUser%253Dubuntu%250AGroup%253Dwww-data%250ARestart%253Dalways%250AWorkingDirectory%253Dthe%252Fpath%252Fto%252Fmy%252Fdirectory%252Fisneha.net%250AEnvironment%253D%2522PATH%253Dthe%252Fpath%252Fto%252Fmy%252Fdirectory%252Fisneha.net%2522%250AExecStart%253D%252Fusr%252Flocal%252Fbin%252Fgunicorn%2520--workers%25204%2520--bind%2520unix%253Amywebsite.sock%2520-m%2520007%2520wsgi%253Aapp%250A%250A%255BInstall%255D%250AWantedBy%253Dmulti-user.target"
                         sandbox="allow-scripts allow-same-origin">
                     </iframe>
-                    
+                    <br/><br/>
                     <b>Nginx</b>
                     <p>
                         First, I installed nginx. In /etc/nginx/sites-available/mywebsite file:
@@ -238,7 +238,7 @@
 
                         Restarted the nginx server and bingo! My website was up and running!
                 </p>
-                
+
                 <h5>Tying DNS to my little EC2 instance</h5>
                 <p>
                     This one is easy. I bought the isneha.net domain on AWS Route 53. 
