@@ -149,8 +149,11 @@
                     <br/><br/>
                     Next, I spun up an AWS EC2 instance using the t2.micro type, which is free for up to 750 hours per month. This instance provides 1 CPU and 1 GB of RAM, which is more than sufficient for hosting my personal website. I configured the instance to allow SSH, HTTP, and HTTPS traffic. 
                     <br/><br/>
+                    
+                    <b>Gunicorn</b>
+                    <br/><br/>
+                    To set up my Flask application on the EC2 instance, I first needed to install Flask and Gunicorn. After SSHing into the instance, I set up a virtual environment, installed Flask and Gunicorn, and then configured Gunicorn to serve my Flask application.      
 
-                    To set up my Flask application on the EC2 instance, I first needed to install Flask and Gunicorn. After SSHing into the instance, I set up a virtual environment, installed Flask and Gunicorn, and then configured Gunicorn to serve my Flask application.                
                     <br/><br/>
                     <iframe
                         class="iframe-container"
@@ -198,7 +201,66 @@
                     <br/><br/>
                     This command starts Gunicorn with 4 worker processes, binds it to a Unix socket (<i>mywebsite.sock</i>), and sets the file mode to 007. The website will load again, but this time it is being served through Gunicorn and is multithreaded.
 
+                    <br/><br/>
+                    Since we want this gunicorn to be running and serving our app 24x7, I created a systemd service.
+
+                    <br/><br/>
+                    <iframe
+                        class="iframe-container"
+                        src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=%255BUnit%255D%250ADescription%253DGunicorn%2520instance%2520for%2520my%2520website%2520%28isneha.net%29%250AAfter%253Dnetwork.target%250A%250A%255BService%255D%250AUser%253Dubuntu%250AGroup%253Dwww-data%250ARestart%253Dalways%250AWorkingDirectory%253Dthe%252Fpath%252Fto%252Fmy%252Fdirectory%252Fisneha.net%250AEnvironment%253D%2522PATH%253Dthe%252Fpath%252Fto%252Fmy%252Fdirectory%252Fisneha.net%2522%250AExecStart%253D%252Fusr%252Flocal%252Fbin%252Fgunicorn%2520--workers%25204%2520--bind%2520unix%253Amywebsite.sock%2520-m%2520007%2520wsgi%253Aapp%250A%250A%255BInstall%255D%250AWantedBy%253Dmulti-user.target"
+                        sandbox="allow-scripts allow-same-origin">
+                    </iframe>
+                    
+                    <b>Nginx</b>
+                    <p>
+                        First, I installed nginx. In /etc/nginx/sites-available/mywebsite file:
+
+                        <br/><br/>
+                        <iframe
+                            class="iframe-container"
+                            src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=server%2520%257B%250A%2520%2520%2509%2509listen%252080%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520server_name%2520isneha.net%253B%250A%250A%2520%2520%2520%2520%2520%2520%2520%2520location%2520%252F%2520%257B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520include%2520proxy_params%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520proxy_pass%2520http%253A%252F%252Funix%253A%252Fhome%252Fubuntu%252Fmywebsite%252Fcsci5020%252Fisneha.net%252Fmywebsite.sock%253B%250A%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%257D%250A%2509%257D"
+                            sandbox="allow-scripts allow-same-origin">
+                      </iframe>
+                        <br/><br/>
+
+                        I am telling it to run on port 80, the requests to forward. I also am specifying the local
+                        socket that I previously made in the service.
+                        <br/>
+                        Then, I linked this config file in the sites-available folder to the sites-enabled folder to begin serving my website.
+
+                        <br/><br/>
+                        <iframe
+                            class="iframe-container"
+                            src="https://carbon.now.sh/embed?bg=rgba%28255%2C255%2C255%2C1%29&t=seti&wt=none&l=python&width=940&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=0px&ph=0px&ln=false&fl=1&fm=Hack&fs=14px&lh=187%25&si=false&es=2x&wm=false&code=sudo%2520ln%2520-s%2520%252Fetc%252Fnginx%252Fsites-available%252Fmywebsite%2520%252Fetc%252Fnginx%252Fsites-enabled"
+                            sandbox="allow-scripts allow-same-origin">
+                        </iframe>
+                        <br/><br/>
+
+                        Restarted the nginx server and bingo! My website was up and running!
                 </p>
+                
+                <h5>Tying DNS to my little EC2 instance</h5>
+                <p>
+                    This one is easy. I bought the isneha.net domain on AWS Route 53. 
+                    <br/>
+
+                    Then, I created 2 records in my hosted zone.
+                    <br/>
+                    1. An A record that points to my EC2 instance's public IP address.
+
+                    <br/><br/>
+                    <img src="/static/assets/aws_dns_1.png" class="project-image"/>
+                    <br/><br/>
+
+                    2. An A record with an alias of www.isneha.net pointing to isneha.net
+
+                    <br/><br/>     
+                    <img src="/static/assets/aws_dns_2.png" class="project-image"/>
+                    <br/><br/>
+                    
+                    And that's it! I can now access my website using isneha.net and www.isneha.net!
+                </p>
+
 
 
                 <a href="https://github.com/coflin/csci5020/tree/main/isneha.net" class="myButton">View Project on GitHub &nbsp;&nbsp;<i class="fab fa-fw fa-github" style="padding:5px;"></i></a>
