@@ -1,6 +1,6 @@
 #!/usr/bin/bash                                                                                                                                            
                                                                                                                                                            
-#Script that restart isneha.net (mywebsite) service if there's any change found in the /home/ubuntu/mywebsite/csci5020/isneha.net/ directory               
+#Script that restarts isneha.net (mywebsite) service if there's any change found in the /home/ubuntu/mywebsite/csci5020/isneha.net/ directory               
                                                                                                                                                            
 #Directory to monitor                                                                                                                                      
 DIRECTORY="/home/ubuntu/mywebsite/csci5020/isneha.net"                                                                                                     
