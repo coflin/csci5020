@@ -11292,10 +11292,10 @@ html {
   }
 
   .logo-image {
-    width:1%;
-    height:1%;
-    margin-right: 0;
+    width:10px;
+    height:10px;
   }
+
   .text-details {
     flex: 1;
     text-align: left;
