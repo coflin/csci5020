@@ -11346,3 +11346,19 @@ html {
   padding: 10px;
   border: 1px solid; /* Add border for a defined look */
   border-radius: 8px; /* Optional: Add rounded corners for a softer appearance */}
+
+  /* Custom CSS for reducing whitespace */
+.experience-item {
+  margin-bottom: 1.5rem;
+}
+.experience-item .company-logo {
+  margin-bottom: 0.5rem;
+}
+.experience-item .details {
+  margin-top: 0.5rem;
+}
+@media (max-width: 767.98px) {
+  .experience-item .details {
+      margin-top: 1rem;
+  }
+}
