@@ -11293,7 +11293,8 @@ html {
 
   .logo-image {
     width:10%;
-    height:auto;
+    height:10%;
+    margin-right: 0;
   }
   .text-details {
     flex: 1;
