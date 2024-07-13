@@ -3692,6 +3692,12 @@ textarea.form-control-lg {
   margin-right: 2%;
 }
 
+.logo-image {
+  width:10px;
+  height:10px;
+}
+
+
 .text-details {
   flex: 1; 
   text-align: left;
