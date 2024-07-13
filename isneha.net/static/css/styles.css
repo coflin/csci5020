@@ -11291,6 +11291,10 @@ html {
     margin-right: 0;
   }
 
+  .logo-image {
+    width:10%;
+    height:auto;
+  }
   .text-details {
     flex: 1;
     text-align: left;
